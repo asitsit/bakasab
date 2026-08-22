@@ -36,11 +36,15 @@ const repeated = phrase.repeat(6);
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
+    width: 100%;
+    min-width: 0;
   }
 
   .cta-marquee {
     display: flex;
     overflow: hidden;
+    width: 100%;
+    min-width: 0;
   }
 
   .cta-row {
@@ -52,6 +56,7 @@ const repeated = phrase.repeat(6);
     font-size: clamp(2.5rem, 7vw, 6rem);
     font-weight: 800;
     letter-spacing: -0.02em;
+    text-transform: uppercase;
     white-space: nowrap;
     padding-right: 0.4em;
   }

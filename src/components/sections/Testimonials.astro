@@ -80,8 +80,8 @@ const initials = (name) =>
               <figcaption>
                 <span class="testimonial-avatar" style={`background:${q.accent}`}>{initials(q.name)}</span>
                 <span class="testimonial-who">
-                  <span class="testimonial-name">{q.name}</span>
-                  <span class="testimonial-role">{q.role} · {q.company}</span>
+                  <span class="testimonial-name">{q.name.split(' ')[0]}</span>
+                  <span class="testimonial-role">{q.role}</span>
                 </span>
               </figcaption>
             </figure>

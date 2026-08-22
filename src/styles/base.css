@@ -163,6 +163,9 @@ h1, h2, h3, h4, h5 {
   font-weight: 400;
   font-size: 0.8em;
   opacity: 0.8;
+  /* File paths have no spaces to break on — without this, a long path
+     forces its grid/flex column (and the whole mobile viewport) wider. */
+  overflow-wrap: anywhere;
 }
 
 .visually-hidden {
