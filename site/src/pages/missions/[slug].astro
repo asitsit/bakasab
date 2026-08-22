@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SimpleCta from '../../components/SimpleCta.astro';
+import { missions } from '../../data/missions.js';
+
+export function getStaticPaths() {
+  return missions.map((m, i) => ({
+    params: { slug: m.slug },
+    props: { mission: m, index: i },
+  }));
+}
+
+const { mission, index } = Astro.props;
+const prev = missions[index - 1];
+const next = missions[index + 1];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Accueil', item: new URL('/', Astro.site).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Missions', item: new URL('/missions', Astro.site).toString() },
+    { '@type': 'ListItem', position: 3, name: mission.client, item: new URL(`/missions/${mission.slug}`, Astro.site).toString() },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${mission.client} — Étude de cas BAKASAB`}
+  description={mission.summary}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <section class="mission-hero">
+    <div class="container">
+      <a href="/missions" class="mission-back">← Toutes les missions</a>
+      <p class="eyebrow" data-reveal>{mission.type}</p>
+      <h1 data-reveal-text>{mission.client}</h1>
+      <p class="mission-format" data-reveal>{mission.format}</p>
+    </div>
+  </section>
+
+  <section class="mission-media-section">
+    <div class="container">
+      <div class="mission-media" style={`background: linear-gradient(150deg, ${mission.accent}, color-mix(in srgb, ${mission.accent} 35%, var(--cream)))`} data-reveal>
+        <span>
+          [Photo — {mission.client}, moment fort en action]
+          <span class="placeholder-filename">→ à uploader : src/assets/{mission.image}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-body section">
+    <div class="container mission-body-grid">
+      <div class="mission-block" data-reveal>
+        <h2>Le contexte</h2>
+        <p>{mission.context}</p>
+      </div>
+      <div class="mission-block" data-reveal>
+        <h2>Notre approche</h2>
+        <p set:html={mission.approach} />
+      </div>
+      <div class="mission-block" data-reveal>
+        <h2>Le résultat</h2>
+        <p set:html={mission.result} />
+      </div>
+    </div>
+  </section>
+
+  <nav class="mission-nav container" aria-label="Navigation entre missions">
+    {prev ? (
+      <a href={`/missions/${prev.slug}`}>← {prev.client}</a>
+    ) : <span />}
+    {next ? (
+      <a href={`/missions/${next.slug}`}>{next.client} →</a>
+    ) : <span />}
+  </nav>
+
+  <SimpleCta title="Un projet similaire en tête ?" buttonLabel="Discutons-en" />
+</BaseLayout>
+
+<style>
+  .mission-hero {
+    padding-top: 130px;
+    padding-bottom: var(--space-2xl);
+    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
+    color: var(--cream);
+  }
+
+  .mission-hero .eyebrow {
+    color: var(--cream);
+    opacity: 0.85;
+  }
+
+  .mission-back {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin-bottom: var(--space-lg);
+  }
+
+  .mission-back:hover {
+    opacity: 1;
+  }
+
+  .mission-hero h1 {
+    font-size: var(--text-h2);
+    margin-block: var(--space-md) var(--space-sm);
+    max-width: 22ch;
+    color: var(--cream);
+  }
+
+  .mission-format {
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .mission-media {
+    height: clamp(280px, 44vw, 560px);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .mission-media span {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+
+  .mission-body-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .mission-block h2 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: var(--space-sm);
+  }
+
+  .mission-block p {
+    opacity: 0.8;
+    line-height: var(--lh-relaxed);
+  }
+
+  .mission-nav {
+    display: flex;
+    justify-content: space-between;
+    padding-block: var(--space-xl);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    font-weight: 700;
+  }
+
+  .mission-nav a:hover {
+    color: var(--orange);
+  }
+
+  @media (max-width: 767px) {
+    .mission-body-grid {
+      grid-template-columns: 1fr;
+    }
+    .mission-nav {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+</style>

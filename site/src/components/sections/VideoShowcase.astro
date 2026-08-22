@@ -1,0 +1,69 @@
+---
+---
+
+<section class="showreel section">
+  <div class="container">
+    <div class="showreel-frame" data-reveal>
+      <span class="showreel-caption">
+        [Photo/Vidéo — plan large d'un temps fort BAKASAB en pleine énergie, public engagé]
+        <span class="placeholder-filename">→ à uploader : src/assets/hero/showreel.jpg</span>
+      </span>
+      <button class="showreel-play" aria-label="Voir la vidéo">
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 9.27C20.33 10.04 20.33 11.96 19 12.73L3.5 21.66C2.17 22.43 0.5 21.47 0.5 19.93L0.5 2.07C0.5 0.53 2.17 -0.43 3.5 0.34L19 9.27Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .showreel-frame {
+    position: relative;
+    height: clamp(360px, 60vw, 640px);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, var(--ink) 0%, var(--bordeaux-dim) 55%, var(--orange-dim) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .showreel-caption {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    max-width: 42ch;
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+
+  .showreel-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--cream);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s var(--ease-out), background-color 0.3s;
+  }
+
+  .showreel-play:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: var(--orange);
+    color: var(--cream);
+  }
+
+  @media (max-width: 600px) {
+    .showreel-play {
+      width: 72px;
+      height: 72px;
+    }
+  }
+</style>

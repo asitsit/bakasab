@@ -1,0 +1,137 @@
+---
+import { missions } from '../../data/missions.js';
+
+const works = missions.map((m) => ({
+  client: m.client,
+  text: m.summary,
+  tag: m.tag,
+  href: `/missions/${m.slug}`,
+  accent: m.accent,
+  image: m.image,
+}));
+---
+
+<section class="works">
+  <div class="container works-header">
+    <div>
+      <p class="eyebrow" data-reveal>Sélection de missions</p>
+      <h2 data-reveal-text>Des cas concrets, pas des promesses.</h2>
+    </div>
+    <a href="/missions" class="btn btn-outline" data-reveal>Toutes les missions</a>
+  </div>
+
+  <div class="works-track" data-stack-track>
+    {works.map((work, i) => (
+      <article class="work-card" data-stack-card style={`--accent:${work.accent}; z-index:${works.length - i};`}>
+        <div class="container work-card-inner">
+          <div class="work-card-media" aria-hidden="true">
+            <span class="placeholder-caption">
+              [Photo — {work.client}, moment fort en action]
+              <span class="placeholder-filename">→ à uploader : src/assets/{work.image}</span>
+            </span>
+          </div>
+          <div class="work-card-copy">
+            <span class="work-card-tag">{work.tag}</span>
+            <h3>{work.client}</h3>
+            <p>{work.text}</p>
+            <a href={work.href} class="btn btn-outline">En savoir plus</a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .works-header {
+    padding-top: var(--section-pad);
+    padding-bottom: var(--space-2xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .works-header h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .works-track {
+    position: relative;
+    height: 100vh;
+  }
+
+  .work-card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    background: var(--cream);
+  }
+
+  .work-card-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    width: 100%;
+  }
+
+  .work-card-media {
+    height: 50vh;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(150deg, var(--accent), color-mix(in srgb, var(--accent) 40%, var(--cream)));
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .work-card-media span {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+
+  .work-card-tag {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .work-card-copy h3 {
+    font-size: var(--text-h3);
+    margin-bottom: var(--space-md);
+  }
+
+  .work-card-copy p {
+    max-width: 42ch;
+    opacity: 0.75;
+    margin-bottom: var(--space-lg);
+  }
+
+  @media (max-width: 900px) {
+    .works-track {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+    }
+    .work-card {
+      position: relative;
+      inset: auto;
+    }
+    .work-card-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

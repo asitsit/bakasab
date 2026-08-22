@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ProFun from '../components/sections/ProFun.astro';
+import MethodList from '../components/sections/MethodList.astro';
+import Team from '../components/sections/Team.astro';
+import Faq from '../components/Faq.astro';
+import SimpleCta from '../components/SimpleCta.astro';
+import { org } from '../data/organization.js';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: org.founder.name,
+  jobTitle: org.founder.role,
+  worksFor: {
+    '@type': 'Organization',
+    name: org.name,
+  },
+  alumniOf: ['Centrale Lyon', 'emlyon business school'],
+};
+
+const faqItems = [
+  {
+    q: "Qu'est-ce que BAKASAB ?",
+    a: "BAKASAB est une agence d'expériences qui conçoit, anime et digitalise les temps forts collectifs des entreprises&nbsp;: séminaires, conventions, teambuildings et formations sur mesure. Fondé par Alexandre Sitbon, BAKASAB s'appuie sur un réseau d'experts en facilitation, design et technologie pour accompagner des groupes de 15 à 3500 personnes, en France et à l'international.",
+  },
+  {
+    q: "En quoi BAKASAB est différent d'une agence événementielle classique ?",
+    a: "Contrairement à une agence événementielle traditionnelle centrée sur la logistique (lieu, traiteur, technique), BAKASAB se concentre sur la conception et l'animation de l'expérience elle-même. BAKASAB combine trois expertises rarement réunies chez un même prestataire&nbsp;: la facilitation d'événements collectifs, la digitalisation des temps forts et la formation sur mesure — avec un seul interlocuteur du cadrage à la restitution.",
+  },
+  {
+    q: 'Avec quels types d\'entreprises travaillez-vous ?',
+    a: 'BAKASAB travaille principalement avec de grandes entreprises et grands groupes (niveau CAC40 et équivalent), notamment dans l\'industrie, le luxe, la santé, l\'énergie et la construction, ainsi qu\'avec des grandes écoles. Parmi les organisations accompagnées&nbsp;: Danone, L\'Oréal, Safran, Vinci, Sanofi, RTE, Centrale Lyon, l\'EDHEC et Sciences Po.',
+  },
+  {
+    q: 'Dans quels secteurs intervenez-vous ?',
+    a: "BAKASAB intervient dans l'industrie, le luxe et la cosmétique, la santé et la pharmacie, l'énergie, le BTP et la construction, ainsi que dans l'enseignement supérieur (grandes écoles). L'agence s'adapte à des enjeux métiers variés grâce à un réseau d'experts multi-disciplinaires plutôt qu'une spécialisation sectorielle unique.",
+  },
+  {
+    q: 'Travaillez-vous à l\'international ?',
+    a: 'Oui, BAKASAB conçoit et anime des missions en France comme à l\'international, en présentiel, digital ou hybride. L\'agence a notamment accompagné des équipes RH dispersées à l\'échelle mondiale (mission Safran Carpe Diem, groupes de travail DRH monde sur 6 mois).',
+  },
+  {
+    q: 'Qui est Alexandre Sitbon, le fondateur de BAKASAB ?',
+    a: "Alexandre Sitbon est le fondateur de BAKASAB, diplômé de Centrale Lyon et de l'emlyon business school. Depuis plus de 5 ans, il conçoit et anime des séminaires, formations et événements pour des entreprises allant de la start-up au CAC40, après avoir organisé des événements rassemblant jusqu'à 3500 personnes avant même la création de BAKASAB.",
+  },
+  {
+    q: 'Où voir les réalisations de BAKASAB ?',
+    a: 'Les réalisations de BAKASAB sont présentées sur la page <a href="/missions">Missions</a>, incluant des études de cas détaillées comme la convention Vinci Building Solutions (360 participants) ou l\'accompagnement Safran Carpe Diem (groupes de travail DRH monde sur 6 mois).',
+  },
+  {
+    q: 'Quelles entreprises font confiance à BAKASAB ?',
+    a: "BAKASAB a accompagné des grands groupes tels que Danone, L'Oréal, Safran, Vinci, Sanofi et RTE, ainsi que des établissements d'enseignement supérieur comme Centrale Lyon, l'EDHEC et Sciences Po. Une sélection de témoignages nommés est disponible sur la page <a href=\"/missions\">Missions</a>.",
+  },
+  {
+    q: 'Comment contacter BAKASAB ?',
+    a: `BAKASAB est joignable par email à <a href="mailto:${org.email}">${org.email}</a>, ou via le <a href="/contact">formulaire de contact</a> du site. L'agence est basée au ${org.addressFull}, et répond généralement sous 48h ouvrées.`,
+  },
+];
+---
+
+<BaseLayout
+  title="À propos — BAKASAB, agence d'expériences pour les entreprises"
+  description="BAKASAB est une agence d'expériences fondée par Alexandre Sitbon : un réseau d'experts en facilitation, design et digital qui conçoit et anime les temps forts collectifs des entreprises."
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </Fragment>
+
+  <PageHero
+    eyebrow="Notre histoire"
+    title="Une agence, un réseau, une seule obsession."
+    subtitle="Faire que vos temps forts collectifs marquent vraiment les esprits — pas juste remplir un agenda."
+    intro="BAKASAB est une agence d'expériences qui conçoit, anime et digitalise les temps forts collectifs des entreprises&nbsp;: séminaires, conventions, teambuildings et formations sur mesure. Fondé par Alexandre Sitbon, BAKASAB s'appuie sur un réseau d'experts en facilitation, design et technologie pour accompagner des groupes de 15 à 3500 personnes, en France et à l'international."
+    gradient="bordeaux-beige"
+  />
+
+  <section class="section about-vision">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Notre vision</p>
+      <h2 data-reveal-text>
+        On ne vend pas un événement. On construit un moment que vos équipes racontent encore six
+        mois après.
+      </h2>
+      <p class="about-vision-text" data-reveal>
+        BAKASAB conçoit, anime et digitalise les temps forts collectifs des entreprises. Pas de
+        logistique pure, pas de formation catalogue&nbsp;: une agence d'expériences qui pense chaque
+        moment comme un levier d'engagement — du cadrage stratégique au dernier applaudissement.
+      </p>
+    </div>
+  </section>
+
+  <ProFun />
+  <MethodList />
+  <Team />
+
+  <Faq
+    eyebrow="L'agence, en questions"
+    title="Ce qu'on nous demande le plus souvent"
+    items={faqItems}
+  />
+
+  <SimpleCta
+    title="Envie de nous rencontrer avant de vous lancer ?"
+    buttonLabel="Discutons de votre projet"
+  />
+</BaseLayout>
+
+<style>
+  .about-vision h2 {
+    font-size: var(--text-h3);
+    margin-block: var(--space-md) var(--space-xl);
+    max-width: 24ch;
+    color: var(--bordeaux);
+  }
+
+  .about-vision-text {
+    font-size: var(--text-lg);
+    max-width: 62ch;
+    opacity: 0.8;
+  }
+</style>

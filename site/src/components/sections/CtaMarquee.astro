@@ -1,0 +1,89 @@
+---
+const phrase = 'Parlons de votre prochain temps fort — ';
+const repeated = phrase.repeat(6);
+---
+
+<section class="cta">
+  <div class="cta-marquee-stack">
+    <div class="cta-marquee" data-marquee data-marquee-speed="90">
+      <div class="cta-row" data-marquee-row><span>{repeated}</span></div>
+      <div class="cta-row" data-marquee-row aria-hidden="true"><span>{repeated}</span></div>
+    </div>
+    <div class="cta-marquee" data-marquee data-marquee-speed="90" data-marquee-direction="reverse">
+      <div class="cta-row cta-row-outline" data-marquee-row><span>{repeated}</span></div>
+      <div class="cta-row cta-row-outline" data-marquee-row aria-hidden="true"><span>{repeated}</span></div>
+    </div>
+
+    <a href="/contact" class="btn cta-btn" data-reveal>
+      Contactez-nous
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--bordeaux);
+    color: var(--cream);
+    padding-block: var(--space-3xl);
+    overflow: hidden;
+  }
+
+  .cta-marquee-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .cta-marquee {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .cta-row span {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    padding-right: 0.4em;
+  }
+
+  .cta-row-outline span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--cream);
+    opacity: 0.55;
+  }
+
+  .cta-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 20px 36px;
+    font-size: var(--text-md);
+  }
+
+  .cta-btn:hover {
+    background: var(--orange);
+    color: var(--cream);
+  }
+
+  @media (max-width: 600px) {
+    .cta-btn {
+      padding: 16px 26px;
+      font-size: var(--text-sm);
+      white-space: nowrap;
+    }
+  }
+</style>

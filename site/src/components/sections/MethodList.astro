@@ -1,0 +1,78 @@
+---
+const steps = [
+  { n: '01', title: 'Design', text: "On cadre l'événement ou l'atelier selon vos objectifs et vos contraintes." },
+  { n: '02', title: 'Préparation', text: 'Intervenants prêts, lien serré avec vos équipes opérationnelles.' },
+  { n: '03', title: 'Animation', text: 'Facilitation « Pro & Fun » pour un engagement réel des participants.' },
+  { n: '04', title: 'Restitution', text: 'Take-aways et suite concrète pour chaque moment collectif.' },
+];
+---
+
+<section class="method-list section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Notre méthode</p>
+    <h2 data-reveal-text>De bout en bout, sans flottement.</h2>
+
+    <ol class="method-items" data-reveal-parent>
+      {steps.map((step) => (
+        <li class="method-item" data-reveal data-reveal-group="method">
+          <span class="method-n">{step.n}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .method-list h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .method-items {
+    margin-top: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .method-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-lg);
+    padding-block: var(--space-lg);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  }
+
+  .method-item:last-child {
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  }
+
+  .method-n {
+    font-size: var(--text-h3);
+    font-weight: 800;
+    color: var(--orange);
+    flex-shrink: 0;
+    width: 3ch;
+  }
+
+  .method-item h3 {
+    font-size: var(--text-h4);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .method-item p {
+    opacity: 0.7;
+    max-width: 50ch;
+  }
+
+  @media (max-width: 600px) {
+    .method-item {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>

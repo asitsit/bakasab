@@ -1,0 +1,222 @@
+---
+import { org } from '../data/organization.js';
+
+const links = [
+  { label: 'Accueil', href: '/' },
+  { label: 'À propos', href: '/a-propos' },
+  { label: 'Missions', href: '/missions' },
+  { label: 'Services', href: '/services' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<footer class="footer">
+  <div class="footer-stripes" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="container footer-inner">
+    <p class="footer-wordmark">BAKASAB</p>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-label">Adresse</p>
+        <p>{org.address.street}<br />{org.address.postalCode} {org.address.city}</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">Contact</p>
+        <p>
+          <a href={`mailto:${org.email}`}>{org.email}</a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">Navigation</p>
+        <ul class="footer-nav">
+          {links.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">Newsletter</p>
+        <p class="footer-newsletter-copy">Restez informés de nos prochains temps forts.</p>
+        <form class="footer-newsletter-form">
+          <input type="email" placeholder="Email" required />
+          <button type="submit">→</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>// BAKASAB</span>
+      <span class="footer-bottom-right">
+        <a href="/mentions-legales">Mentions légales</a>
+        <span>© 2026 BAKASAB. Experience Creator.</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelector('.footer-newsletter-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+</script>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding-top: var(--space-xl);
+  }
+
+  .footer-stripes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .footer-stripes span {
+    display: block;
+    height: 1px;
+    background: var(--cream);
+  }
+
+  .footer-stripes span:nth-child(1) { opacity: 0.5; }
+  .footer-stripes span:nth-child(2) { opacity: 0.3; }
+  .footer-stripes span:nth-child(3) { opacity: 0.15; }
+
+  .footer-inner {
+    padding-bottom: var(--space-xl);
+  }
+
+  .footer-wordmark {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid color-mix(in srgb, var(--cream) 16%, transparent);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    padding-block: var(--space-2xl);
+  }
+
+  .footer-label {
+    font-weight: 600;
+    font-size: var(--text-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-col p {
+    line-height: var(--lh-relaxed);
+    opacity: 0.85;
+  }
+
+  .footer-col a:hover {
+    color: var(--orange);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .footer-nav a:hover {
+    color: var(--orange);
+  }
+
+  .footer-newsletter-copy {
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-newsletter-form {
+    display: flex;
+    border: 1px solid color-mix(in srgb, var(--cream) 30%, transparent);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+
+  .footer-newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: var(--cream);
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: var(--text-sm);
+  }
+
+  .footer-newsletter-form input::placeholder {
+    color: color-mix(in srgb, var(--cream) 55%, transparent);
+  }
+
+  .footer-newsletter-form button {
+    background: var(--orange);
+    color: var(--cream);
+    width: 44px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .footer-newsletter-form button:hover {
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-xl);
+    border-top: 1px solid color-mix(in srgb, var(--cream) 16%, transparent);
+    font-size: var(--text-xs);
+    opacity: 0.6;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .footer-bottom-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .footer-bottom-right a:hover {
+    color: var(--orange);
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2xs);
+    }
+    .footer-bottom-right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-2xs);
+    }
+  }
+</style>

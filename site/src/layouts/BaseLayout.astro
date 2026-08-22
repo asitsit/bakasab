@@ -1,0 +1,86 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader.astro';
+import { org } from '../data/organization.js';
+import '../styles/tokens.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: org.name,
+  legalName: org.legalName,
+  url: Astro.site?.toString(),
+  logo: new URL('/favicon.svg', Astro.site).toString(),
+  email: org.email,
+  foundingDate: org.foundingDate,
+  taxID: org.siren,
+  vatID: org.vat,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: org.address.street,
+    postalCode: org.address.postalCode,
+    addressLocality: org.address.city,
+    addressCountry: org.address.country,
+  },
+  founder: {
+    '@type': 'Person',
+    name: org.founder.name,
+    jobTitle: org.founder.role,
+  },
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="BAKASAB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <slot name="schema" />
+  </head>
+  <body>
+    <Preloader />
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script src="../scripts/lenis-init.js"></script>
+    <script src="../scripts/animations.js"></script>
+  </body>
+</html>

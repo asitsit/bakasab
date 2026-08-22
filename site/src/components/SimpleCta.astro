@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  buttonLabel: string;
+  href?: string;
+}
+
+const { title, buttonLabel, href = '/contact' } = Astro.props;
+---
+
+<section class="simple-cta section">
+  <div class="container simple-cta-inner">
+    <h2 data-reveal>{title}</h2>
+    <a href={href} class="btn btn-primary" data-reveal>{buttonLabel}</a>
+  </div>
+</section>
+
+<style>
+  .simple-cta-inner {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3xl) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-xl);
+  }
+
+  .simple-cta-inner h2 {
+    font-size: var(--text-h2);
+    max-width: 18ch;
+  }
+</style>

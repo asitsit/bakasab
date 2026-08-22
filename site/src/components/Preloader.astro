@@ -1,0 +1,130 @@
+---
+const word = 'BAKASAB';
+const letters = word.split('');
+const letterBaseDelay = 0.25;
+const letterStagger = 0.055;
+const letterDuration = 0.6;
+const holdDuration = 0.45;
+const lastLetterFinish = letterBaseDelay + (letters.length - 1) * letterStagger + letterDuration;
+const curtainDelay = lastLetterFinish + holdDuration;
+---
+
+<div class="preloader" id="preloader" style={`animation-delay:${curtainDelay}s`}>
+  <div class="preloader-inner">
+    <p class="preloader-eyebrow">Experience Creator</p>
+    <p class="preloader-logo" aria-label={word}>
+      {letters.map((letter, i) => (
+        <span class="preloader-letter-mask">
+          <span class="preloader-letter" style={`animation-delay:${letterBaseDelay + i * letterStagger}s`}>{letter}</span>
+        </span>
+      ))}
+    </p>
+  </div>
+</div>
+
+<style>
+  .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--ink);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    animation: preloader-curtain 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    animation-delay: 1.6s;
+  }
+
+  .preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .preloader-eyebrow {
+    font-weight: 600;
+    font-size: var(--text-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--orange);
+    opacity: 0;
+    transform: translateY(10px);
+    animation: preloader-fade-in 0.5s var(--ease-out) 0.05s forwards;
+  }
+
+  .preloader-logo {
+    display: flex;
+    font-size: clamp(2rem, 3vw + 1rem, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .preloader-letter-mask {
+    display: inline-block;
+    overflow: clip;
+  }
+
+  .preloader-letter {
+    display: inline-block;
+    transform: translateY(110%);
+    opacity: 0;
+    animation: preloader-letter-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes preloader-fade-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes preloader-letter-in {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes preloader-curtain {
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preloader {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      preloader.style.display = 'none';
+      return;
+    }
+
+    document.documentElement.style.overflow = 'hidden';
+
+    var done = false;
+    var finish = function () {
+      if (done) return;
+      done = true;
+      document.documentElement.style.overflow = '';
+      preloader.style.display = 'none';
+    };
+
+    preloader.addEventListener('animationend', finish);
+    // Safety net in case the animation event never fires.
+    window.setTimeout(finish, 3500);
+  })();
+</script>

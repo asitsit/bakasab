@@ -1,0 +1,185 @@
+---
+const steps = [
+  { n: '01', title: 'Design', text: "On cadre l'événement ou l'atelier selon vos objectifs et vos contraintes." },
+  { n: '02', title: 'Préparation', text: 'Intervenants prêts, lien serré avec vos équipes opérationnelles.' },
+  { n: '03', title: 'Animation', text: 'Facilitation « Pro & Fun » pour un engagement réel des participants.' },
+  { n: '04', title: 'Restitution', text: 'Take-aways et suite concrète pour chaque moment collectif.' },
+];
+---
+
+<section class="process">
+  <div class="container process-header">
+    <h2 data-reveal-text>De bout en bout, sans flottement.</h2>
+    <p class="process-subtitle" data-reveal>On vous accompagne du brief à la restitution.</p>
+  </div>
+
+  <div class="steps-track container" data-reveal-parent>
+    <div class="steps-line" aria-hidden="true"></div>
+
+    {steps.map((step) => (
+      <div class="step-col" data-reveal data-reveal-group="process">
+        <span class="step-marker" aria-hidden="true"></span>
+        <article class="step-card">
+          <span class="step-n">Step {step.n}</span>
+          <h3>{step.title}</h3>
+          <button class="step-toggle" aria-expanded="false">
+            <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="step-desc-wrap">
+            <div class="step-desc-inner">
+              <p>{step.text}</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 56px;
+    margin-inline: var(--pad-global);
+    width: calc(100% - 2 * var(--pad-global));
+    padding-block: var(--space-3xl);
+  }
+
+  .process-header {
+    text-align: center;
+  }
+
+  .process-header h2 {
+    font-size: var(--text-h2);
+    max-width: 20ch;
+    margin-inline: auto;
+  }
+
+  .process-subtitle {
+    margin-top: var(--space-md);
+    opacity: 0.65;
+    font-size: var(--text-lg);
+  }
+
+  .steps-track {
+    position: relative;
+    margin-top: var(--space-3xl);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .steps-line {
+    position: absolute;
+    top: 6px;
+    left: 10%;
+    right: 10%;
+    border-top: 1px dashed color-mix(in srgb, var(--cream) 30%, transparent);
+    z-index: 0;
+  }
+
+  .step-col {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+  }
+
+  .step-marker {
+    width: 13px;
+    height: 13px;
+    margin-bottom: var(--space-lg);
+    background: var(--orange);
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  }
+
+  .step-card {
+    width: 100%;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+    text-align: center;
+  }
+
+  .step-n {
+    display: block;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: var(--space-2xs);
+  }
+
+  .step-card h3 {
+    font-size: var(--text-h4);
+  }
+
+  .step-toggle {
+    margin-top: var(--space-md);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.35s var(--ease-out), background-color 0.3s;
+  }
+
+  .step-toggle:hover {
+    background: var(--orange);
+    color: var(--cream);
+  }
+
+  .step-toggle[aria-expanded='true'] {
+    transform: rotate(180deg);
+  }
+
+  .step-desc-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--ease-out);
+  }
+
+  .step-desc-wrap.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .step-desc-inner {
+    overflow: hidden;
+  }
+
+  .step-desc-inner p {
+    padding-top: var(--space-md);
+    font-size: var(--text-sm);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 700px) {
+    .steps-line {
+      display: none;
+    }
+    .step-col {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.step-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const wrap = btn.parentElement?.querySelector('.step-desc-wrap');
+      const isOpen = wrap?.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(Boolean(isOpen)));
+    });
+  });
+</script>

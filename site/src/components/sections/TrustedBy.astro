@@ -1,0 +1,58 @@
+---
+const logos = [
+  'DANONE', "L'ORÉAL", 'SAFRAN', 'VINCI', 'SANOFI', 'RTE',
+  'CENTRALE LYON', 'EDHEC', 'SCIENCES PO', 'BRISTOL MYERS SQUIBB', 'MANOMANO', 'IMT',
+];
+---
+
+<section class="trusted section">
+  <div class="container trusted-header">
+    <p class="eyebrow" data-reveal>Ils nous font confiance</p>
+    <h2 data-reveal-text>Des grands groupes qui n'ont pas droit à l'à-peu-près.</h2>
+  </div>
+
+  <div class="trusted-marquee" data-marquee data-marquee-speed="60">
+    <div class="trusted-row" data-marquee-row>
+      {logos.map((logo) => <span class="trusted-logo">{logo}</span>)}
+    </div>
+    <div class="trusted-row" data-marquee-row aria-hidden="true">
+      {logos.map((logo) => <span class="trusted-logo">{logo}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trusted-header {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .trusted-header h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 22ch;
+  }
+
+  .trusted-marquee {
+    display: flex;
+    overflow: hidden;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+
+  .trusted-row {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding-block: var(--space-lg);
+    padding-right: var(--space-2xl);
+  }
+
+  .trusted-logo {
+    font-size: clamp(1.25rem, 2.6vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    opacity: 0.45;
+  }
+</style>

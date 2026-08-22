@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="bakasab-styles.css">
+  <script src="_ds/modernist-cb1f2fba-5bf6-4fbd-a6c8-ba55dce22ab1/_ds_bundle.js"></script>
+  <meta name="design_doc_mode" content="canvas">
+  <style>
+    body { background: var(--color-bg); }
+    .grid-line { border-right: 2px solid var(--color-divider); }
+    @keyframes bakasab-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { display: inline-flex; animation: bakasab-marquee 22s linear infinite; }
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+    .cursor-dot { position: fixed; top: 0; left: 0; width: 14px; height: 14px; background: var(--color-accent-2); pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width 0.2s, height 0.2s, background 0.2s; mix-blend-mode: normal; }
+    .cursor-dot.is-hover { width: 34px; height: 34px; background: var(--color-accent); }
+    .btn-primary, .btn-secondary { will-change: transform; }
+    .faq-row { border-bottom: 1px solid var(--color-divider); cursor: pointer; }
+    .faq-row .faq-plus { transition: transform 0.25s ease; }
+    .faq-row.is-open .faq-plus { transform: rotate(45deg); }
+    .faq-answer { overflow: hidden; transition: max-height 0.3s ease; max-height: 0; }
+    .faq-row.is-open .faq-answer { max-height: 240px; }
+  </style>
+</helmet>
+
+<div class="cursor-dot" id="bakasab-cursor"></div>
+
+<section id="1a" style="max-width:1400px;margin:0 auto;padding:64px 40px 120px;">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--color-divider);padding-bottom:16px;margin-bottom:48px;">
+    <h1 style="margin:0;font-size:34px;">Bakasab — pistes couleur &amp; typo</h1>
+    <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text);opacity:0.55;">Piste 1</span>
+  </div>
+
+  <p style="max-width:640px;font-size:15px;opacity:0.75;margin-bottom:56px;">Base retenue : système Modernist (grille visible, Archivo, zéro arrondi, filets 2px) — retinté en bordeaux, votre couleur, avec une touche corail/orange comme accent secondaire. Trois pistes ci-dessous font varier l'intensité de cette base ; une direction approfondie suit en dessous.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--color-divider);margin-bottom:16px;">
+
+    <div class="grid-line" style="padding:32px;">
+      <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700);">Piste A — Bordeaux franc</span>
+      <h3 style="margin:20px 0 8px;font-size:24px;">Pro et direct</h3>
+      <p style="font-size:13px;opacity:0.7;margin-bottom:24px;">Archivo 800 sur les titres, bordeaux plein pour l'action, corail réservé aux petites touches.</p>
+      <div style="display:flex;gap:0;margin-bottom:20px;">
+        <div style="width:56px;height:56px;background:#8c1d34;"></div>
+        <div style="width:56px;height:56px;background:#201e1d;"></div>
+        <div style="width:56px;height:56px;background:#f2632b;"></div>
+        <div style="width:56px;height:56px;background:#f3f2f2;border:1px solid var(--color-divider);"></div>
+      </div>
+      <div style="font-family:Archivo, sans-serif;font-weight:800;font-size:20px;margin-bottom:4px;">Expériences collectives</div>
+      <div style="font-family:Archivo, sans-serif;font-weight:400;font-size:13px;opacity:0.7;">Séminaires, teambuildings, offsites.</div>
+    </div>
+
+    <div class="grid-line" style="padding:32px;">
+      <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700);">Piste B — Bordeaux + noir dominant</span>
+      <h3 style="margin:20px 0 8px;font-size:24px;">Plus sobre</h3>
+      <p style="font-size:13px;opacity:0.7;margin-bottom:24px;">Le noir porte la structure, le bordeaux marque les CTA, le corail disparaît presque.</p>
+      <div style="display:flex;gap:0;margin-bottom:20px;">
+        <div style="width:56px;height:56px;background:#201e1d;"></div>
+        <div style="width:56px;height:56px;background:#8c1d34;"></div>
+        <div style="width:56px;height:56px;background:#5c1020;"></div>
+        <div style="width:56px;height:56px;background:#f3f2f2;border:1px solid var(--color-divider);"></div>
+      </div>
+      <div style="font-family:Archivo, sans-serif;font-weight:800;font-size:20px;margin-bottom:4px;">Expériences digitales</div>
+      <div style="font-family:Archivo, sans-serif;font-weight:400;font-size:13px;opacity:0.7;">Digitalisation des temps forts.</div>
+    </div>
+
+    <div class="grid-line" style="padding:32px;">
+      <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700);">Piste C — Duo à parts égales</span>
+      <h3 style="margin:20px 0 8px;font-size:24px;">Le plus punchy</h3>
+      <p style="font-size:13px;opacity:0.7;margin-bottom:24px;">Bordeaux et corail se répondent à parts égales — le plus festif des trois, toujours sur la grille stricte.</p>
+      <div style="display:flex;gap:0;margin-bottom:20px;">
+        <div style="width:56px;height:56px;background:#8c1d34;"></div>
+        <div style="width:56px;height:56px;background:#f2632b;"></div>
+        <div style="width:56px;height:56px;background:#201e1d;"></div>
+        <div style="width:56px;height:56px;background:#f3f2f2;border:1px solid var(--color-divider);"></div>
+      </div>
+      <div style="font-family:Archivo, sans-serif;font-weight:800;font-size:20px;margin-bottom:4px;">Expériences apprenantes</div>
+      <div style="font-family:Archivo, sans-serif;font-weight:400;font-size:13px;opacity:0.7;">Formations sur-mesure.</div>
+    </div>
+
+  </div>
+
+  <p style="font-size:13px;opacity:0.6;margin:16px 0 0;">Direction retenue ci-dessous : <strong>Piste C</strong> — le duo bordeaux/corail à parts égales, le plus proche de "pro et punchy".</p>
+</section>
+
+<section style="max-width:1400px;margin:0 auto;padding:0 40px 120px;">
+  <div style="border-bottom:2px solid var(--color-divider);padding-bottom:16px;margin-bottom:0;display:flex;justify-content:space-between;align-items:baseline;">
+    <h2 style="margin:0;font-size:28px;">Direction approfondie</h2>
+    <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.55;">Piste C, développée</span>
+  </div>
+
+  <nav class="nav" style="border-bottom:2px solid var(--color-divider);">
+    <span class="nav-brand" style="letter-spacing:-0.02em;">BAKASAB</span>
+    <a href="#" aria-current="page">Expériences</a>
+    <a href="#">Réalisations</a>
+    <a href="#">Agence</a>
+    <a href="#" class="btn btn-primary" style="margin-left:16px;">Nous écrire</a>
+  </nav>
+
+  <div style="overflow:hidden;border-bottom:2px solid var(--color-divider);background:var(--color-accent);padding:8px 0;white-space:nowrap;">
+    <div class="marquee-track">
+      <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--color-bg);padding-right:40px;">Séminaires ✦ Teambuildings ✦ Soirées de marque ✦ Offsites ✦ Digitalisation ✦ Formations ✦</span>
+      <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--color-bg);padding-right:40px;">Séminaires ✦ Teambuildings ✦ Soirées de marque ✦ Offsites ✦ Digitalisation ✦ Formations ✦</span>
+    </div>
+  </div>
+
+  <section style="display:grid;grid-template-columns:1.15fr 1fr;gap:0;border-bottom:2px solid var(--color-divider);position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:linear-gradient(120deg, var(--color-accent-900) 0%, var(--color-accent-700) 35%, var(--color-accent-2-600) 75%, var(--color-accent-2-400) 100%);opacity:0.08;pointer-events:none;"></div>
+    <div data-reveal style="padding:64px 0 64px 0;border-right:2px solid var(--color-divider);padding-right:48px;position:relative;z-index:1;">
+      <span class="tag tag-accent-2" style="margin-bottom:20px;">Agence d'expériences</span>
+      <h1 style="font-size:64px;line-height:0.98;margin:16px 0 20px;letter-spacing:-0.02em;">Des moments d'entreprise qui <span style="color:var(--color-accent-700);">marquent</span>.</h1>
+      <p style="font-size:17px;opacity:0.75;max-width:520px;margin-bottom:32px;">Bakasab conçoit des expériences collectives, digitales et apprenantes pour les entreprises qui veulent que leurs équipes se souviennent — pas qu'elles cochent une case RH.</p>
+      <div style="display:flex;gap:12px;margin-bottom:40px;">
+        <a href="#" class="btn btn-primary" style="padding:16px 28px;font-size:15px;">Discuter d'un projet</a>
+        <a href="#" class="btn btn-secondary" style="padding:16px 28px;font-size:15px;">Voir nos réalisations</a>
+      </div>
+      <div style="display:flex;gap:40px;">
+        <div><div class="bakasab-count" data-count-to="180" data-suffix="+" style="font-family:Archivo, sans-serif;font-weight:800;font-size:32px;color:var(--color-accent-700);">0</div><div style="font-size:12px;opacity:0.6;">événements produits</div></div>
+        <div><div class="bakasab-count" data-count-to="24" data-suffix="" style="font-family:Archivo, sans-serif;font-weight:800;font-size:32px;color:var(--color-accent-700);">0</div><div style="font-size:12px;opacity:0.6;">pays couverts</div></div>
+        <div><div class="bakasab-count" data-count-to="96" data-suffix="%" style="font-family:Archivo, sans-serif;font-weight:800;font-size:32px;color:var(--color-accent-700);">0</div><div style="font-size:12px;opacity:0.6;">clients qui rappellent</div></div>
+      </div>
+    </div>
+    <div data-reveal style="padding:64px 0 64px 48px;position:relative;display:flex;align-items:center;">
+      <div style="position:absolute;width:60%;aspect-ratio:4/3;top:8%;right:2%;background:repeating-linear-gradient(135deg, var(--color-accent-200) 0px, var(--color-accent-200) 10px, var(--color-accent-100) 10px, var(--color-accent-100) 20px);border:2px solid var(--color-divider);transform:rotate(4deg);z-index:1;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:monospace;font-size:11px;opacity:0.55;transform:rotate(-4deg);">photo — soirée de marque</span>
+      </div>
+      <div style="position:relative;width:68%;aspect-ratio:3/4;margin-top:26%;background:repeating-linear-gradient(135deg, var(--color-neutral-200) 0px, var(--color-neutral-200) 10px, var(--color-neutral-100) 10px, var(--color-neutral-100) 20px);border:2px solid var(--color-divider);transform:rotate(-3deg);z-index:2;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);">
+        <span style="font-family:monospace;font-size:11px;opacity:0.55;transform:rotate(3deg);">photo — équipe en offsite</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:repeat(3,1fr);border-bottom:2px solid var(--color-divider);">
+    <div class="grid-line" data-reveal style="padding:40px;display:flex;flex-direction:column;gap:12px;transition:background 0.2s;" style-hover="background:var(--color-accent-100);">
+      <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:40px;color:var(--color-accent-300);line-height:1;">01</span>
+      <h3 style="font-size:22px;margin:8px 0 0;">Expériences collectives</h3>
+      <p style="font-size:14px;opacity:0.7;flex:1;">Séminaires, journées d'équipe, teambuildings, soirées, événements de marque et offsites, partout dans le monde.</p>
+      <a href="#" class="btn btn-ghost" style="padding-left:0;">En savoir plus →</a>
+    </div>
+    <div class="grid-line" data-reveal style="padding:40px;display:flex;flex-direction:column;gap:12px;">
+      <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:40px;color:var(--color-accent-2-400);line-height:1;">02</span>
+      <h3 style="font-size:22px;margin:8px 0 0;">Expériences digitales</h3>
+      <p style="font-size:14px;opacity:0.7;flex:1;">La digitalisation des temps forts de votre entreprise, pensée comme une expérience à part entière.</p>
+      <a href="#" class="btn btn-ghost" style="padding-left:0;">En savoir plus →</a>
+    </div>
+    <div data-reveal style="padding:40px;display:flex;flex-direction:column;gap:12px;">
+      <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:40px;color:var(--color-accent-300);line-height:1;">03</span>
+      <h3 style="font-size:22px;margin:8px 0 0;">Expériences apprenantes</h3>
+      <p style="font-size:14px;opacity:0.7;flex:1;">Des formations qui s'inscrivent dans la mémoire des équipes autant que dans leurs compétences.</p>
+      <a href="#" class="btn btn-ghost" style="padding-left:0;">En savoir plus →</a>
+    </div>
+  </section>
+
+  <section data-reveal style="background:var(--color-accent);color:var(--color-bg);padding:80px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;overflow:hidden;">
+    <div style="position:absolute;width:220px;height:220px;border-radius:50%;background:var(--color-accent-2);opacity:0.25;top:-80px;right:120px;"></div>
+    <h2 style="margin:0;font-size:40px;max-width:640px;color:var(--color-bg);position:relative;z-index:1;">On construit votre prochain temps fort, ensemble.</h2>
+    <a href="#" style="background:var(--color-accent-2);color:var(--color-bg);font-family:var(--font-heading);font-weight:800;font-size:15px;padding:16px 32px;text-decoration:none;white-space:nowrap;position:relative;z-index:1;">Parlons-en</a>
+  </section>
+
+  <section data-reveal style="padding:80px 0;border-bottom:2px solid var(--color-divider);display:grid;grid-template-columns:1fr 1.4fr;gap:64px;">
+    <div>
+      <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-accent-700);">FAQ</span>
+      <h2 style="font-size:32px;margin:16px 0 12px;">Questions fréquentes</h2>
+      <p style="font-size:14px;opacity:0.7;max-width:340px;">Trouvez la réponse à chacune de vos questions. Notre équipe reste disponible par écrit si besoin.</p>
+      <a href="#" class="btn btn-secondary" style="margin-top:24px;">Nous écrire</a>
+    </div>
+    <div>
+      <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="8">
+        <div class="{{ faq.rowClass }}" onClick="{{ faq.toggle }}" style="padding:20px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+            <h4 style="margin:0;font-size:16px;font-weight:800;font-family:Archivo, sans-serif;">{{ faq.q }}</h4>
+            <span class="faq-plus" style="font-size:22px;color:var(--color-accent-700);flex:none;">+</span>
+          </div>
+          <div class="faq-answer">
+            <p style="font-size:14px;opacity:0.72;margin:12px 0 0;max-width:520px;">{{ faq.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:40px 0 0;display:flex;gap:32px;flex-wrap:wrap;align-items:center;">
+    <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;">Palette</span>
+    <div style="display:flex;">
+      <div style="width:40px;height:40px;background:#8c1d34;"></div>
+      <div style="width:40px;height:40px;background:#f2632b;"></div>
+      <div style="width:40px;height:40px;background:#201e1d;"></div>
+      <div style="width:40px;height:40px;background:#f3f2f2;border:1px solid var(--color-divider);"></div>
+    </div>
+    <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;margin-left:24px;">Typo</span>
+    <span style="font-family:Archivo, sans-serif;font-weight:800;font-size:18px;">Archivo 800 / 600 / 400</span>
+  </section>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { openFaq: 0 };
+
+  faqData = [
+    { q: "Comment se déroule l'accompagnement Bakasab ?", a: "Brief, propositions d'expérience sous 10 jours, cadrage budgétaire, puis production complète jusqu'au jour J — un interlocuteur unique de bout en bout." },
+    { q: "Quels types d'événements réalisez-vous ?", a: "Séminaires, journées d'équipe, teambuildings, soirées de marque, offsites internationaux, ainsi que la digitalisation de vos temps forts et vos formations." },
+    { q: "Comment est calculé le prix d'un événement ?", a: "Selon le nombre de participants, la destination, la durée et le niveau de scénographie souhaité. Un devis détaillé est fourni avant toute validation." },
+    { q: "Quel est le délai moyen d'organisation ?", a: "Comptez 6 à 10 semaines pour un événement standard, davantage pour un offsite international ou une scénographie sur-mesure." },
+    { q: "Intervenez-vous à l'international ?", a: "Oui, nos équipes organisent des expériences dans plus de 24 pays, avec les mêmes standards de qualité qu'en France." },
+    { q: "Puis-je modifier une commande après signature ?", a: "Oui, dans la limite des délais fournisseurs — nous vous indiquons à chaque étape ce qui reste modifiable sans surcoût." },
+    { q: "Quelles sont vos conditions d'annulation ?", a: "Elles dépendent des prestataires engagés et sont précisées dans chaque devis avant signature, avec un barème dégressif selon le délai." },
+    { q: "Où voir vos réalisations ?", a: "Un book de réalisations vous est envoyé sur demande, avec références et témoignages clients par secteur." }
+  ];
+
+  componentDidMount() {
+    const cursor = document.getElementById('bakasab-cursor');
+    if (cursor) {
+      const move = (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; };
+      const over = (e) => { if (e.target.closest('a, button, .faq-row, [data-reveal]')) cursor.classList.add('is-hover'); };
+      const out = (e) => { if (e.target.closest('a, button, .faq-row, [data-reveal]')) cursor.classList.remove('is-hover'); };
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseover', over);
+      document.addEventListener('mouseout', out);
+      this._cursorCleanup = () => {
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseover', over);
+        document.removeEventListener('mouseout', out);
+      };
+    }
+
+    const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+    const counters = Array.from(document.querySelectorAll('.bakasab-count'));
+    const animateCount = (el) => {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      const to = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+      const suffix = el.getAttribute('data-suffix') || '';
+      const start = Date.now();
+      const dur = 1200;
+      const timer = setInterval(() => {
+        const p = Math.min(1, (Date.now() - start) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * to) + suffix;
+        if (p >= 1) clearInterval(timer);
+      }, 16);
+    };
+    const inView = (el) => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.9 && r.bottom > 0;
+    };
+    const checkScroll = () => {
+      revealEls.forEach((el) => { if (!el.classList.contains('is-visible') && inView(el)) el.classList.add('is-visible'); });
+      counters.forEach((el) => { if (!el.dataset.counted && inView(el)) animateCount(el); });
+    };
+    checkScroll();
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('resize', checkScroll);
+    this._scrollPoll = setInterval(checkScroll, 400);
+    this._safetyTimer = setTimeout(() => {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+      counters.forEach((el) => animateCount(el));
+    }, 2500);
+    this._checkScroll = checkScroll;
+
+    const magnetic = document.querySelectorAll('.btn-primary, .btn-secondary');
+    const onMove = (e) => {
+      const r = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.25;
+      const y = (e.clientY - r.top - r.height / 2) * 0.25;
+      e.currentTarget.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    const onLeave = (e) => { e.currentTarget.style.transform = ''; };
+    magnetic.forEach((el) => { el.addEventListener('mousemove', onMove); el.addEventListener('mouseleave', onLeave); });
+    this._magnetic = { magnetic, onMove, onLeave };
+  }
+
+  componentWillUnmount() {
+    if (this._cursorCleanup) this._cursorCleanup();
+    if (this._checkScroll) { window.removeEventListener('scroll', this._checkScroll); window.removeEventListener('resize', this._checkScroll); }
+    if (this._scrollPoll) clearInterval(this._scrollPoll);
+    if (this._safetyTimer) clearTimeout(this._safetyTimer);
+    if (this._magnetic) this._magnetic.magnetic.forEach((el) => {
+      el.removeEventListener('mousemove', this._magnetic.onMove);
+      el.removeEventListener('mouseleave', this._magnetic.onLeave);
+    });
+  }
+
+  renderVals() {
+    const faqs = this.faqData.map((f, i) => ({
+      q: f.q, a: f.a,
+      rowClass: 'faq-row' + (this.state.openFaq === i ? ' is-open' : ''),
+      toggle: () => this.setState((s) => ({ openFaq: s.openFaq === i ? null : i }))
+    }));
+    return { faqs };
+  }
+}
+</script>
+</body>
+</html>

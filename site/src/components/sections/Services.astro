@@ -1,0 +1,135 @@
+---
+const services = [
+  {
+    title: 'Expériences Collectives',
+    text: 'Séminaires, teambuildings, soirées, offsites — la mécanique d\'un collectif qui se retrouve.',
+    tags: ['Séminaires', 'Teambuildings', 'Soirées', 'Offsites'],
+    accent: 'var(--orange)',
+  },
+  {
+    title: 'Expériences Digitales',
+    text: "Hybridation, outils interactifs, animation digitale en direct pour toucher tous les sites à la fois.",
+    tags: ['Hybridation', 'Outils interactifs', 'Animation live'],
+    accent: 'var(--bordeaux)',
+  },
+  {
+    title: 'Expériences Apprenantes',
+    text: 'Formations sur mesure et montée en compétences, pensées pour rester en poste après la session.',
+    tags: ['Formation sur mesure', 'Montée en compétences', 'Coaching managers'],
+    accent: 'var(--ink)',
+  },
+];
+---
+
+<section class="services section">
+  <div class="container services-header">
+    <p class="eyebrow" data-reveal>Ce qu'on fait</p>
+    <h2 data-reveal-text>Trois métiers, un seul interlocuteur.</h2>
+  </div>
+
+  <div class="services-stack">
+    {services.map((service, i) => (
+      <article class="service-item" style={`--accent:${service.accent}; top:${100 + i * 24}px;`}>
+        <div class="container service-item-inner">
+          <div class="service-item-copy">
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+            <ul class="service-tags">
+              {service.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </div>
+          <div class="service-item-media" aria-hidden="true">
+            <span>[Visuel — {service.title.toLowerCase()}]</span>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .services-header {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .services-header h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .services-stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-item {
+    --accent: var(--orange);
+    position: sticky;
+    background: var(--cream);
+    border-top: 1px solid var(--ink);
+    padding-block: var(--space-2xl);
+  }
+
+  .service-item-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .service-item-copy h3 {
+    font-size: var(--text-h3);
+    color: var(--accent);
+    margin-bottom: var(--space-md);
+  }
+
+  .service-item-copy p {
+    max-width: 42ch;
+    opacity: 0.75;
+    margin-bottom: var(--space-md);
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .service-tags li {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  }
+
+  .service-item-media {
+    height: 42vh;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--accent) 18%, var(--cream));
+    border: 1.5px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .service-item-media span {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .service-item-inner {
+      grid-template-columns: 1fr;
+    }
+    .service-item {
+      position: relative;
+      top: 0 !important;
+    }
+  }
+</style>

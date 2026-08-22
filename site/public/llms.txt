@@ -1,0 +1,23 @@
+# BAKASAB
+
+> BAKASAB est une agence d'expériences qui conçoit, anime et digitalise les temps
+> forts collectifs des entreprises : séminaires, conventions, teambuildings
+> et formations sur mesure, pour des groupes de 15 à 3500 personnes, en France et
+> à l'international.
+
+## Pages clés
+
+- [Accueil](/) — présentation de l'agence et des 3 expériences
+- [À propos](/a-propos) — vision, méthode, équipe, fondateur
+- [Services](/services) — détail des 3 expériences (Collectives, Digitales, Apprenantes)
+- [Missions](/missions) — études de cas et références clients
+- [Contact](/contact) — coordonnées et formulaire
+
+## Faits clés
+
+- Fondé par Alexandre Sitbon (Centrale Lyon, emlyon business school)
+- Plus de 5 ans d'expérience avec des entreprises du CAC40
+- Missions gérées de 15 à 3500 participants
+- Clients notables : Danone, L'Oréal, Safran, Vinci, Sanofi, RTE
+- Basé à Boulogne-Billancourt, intervient en France et à l'international
+- SASU au capital de 1 000 € — SIREN 928 485 242, RCS Nanterre

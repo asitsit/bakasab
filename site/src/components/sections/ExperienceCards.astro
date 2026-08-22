@@ -1,0 +1,129 @@
+---
+const cards = [
+  {
+    n: '01',
+    title: 'Expériences Collectives',
+    text: "Séminaires, journées d'équipe, teambuildings, soirées, événements de marque et offsites — partout dans le monde.",
+    accent: 'var(--orange)',
+  },
+  {
+    n: '02',
+    title: 'Expériences Digitales',
+    text: "Digitalisation des temps forts de l'entreprise : hybridation, outils interactifs, animation digitale en direct.",
+    accent: 'var(--bordeaux)',
+  },
+  {
+    n: '03',
+    title: 'Expériences Apprenantes',
+    text: 'Formations sur mesure, montée en compétences des équipes et des managers, ancrées dans le réel.',
+    accent: 'var(--ink)',
+  },
+];
+---
+
+<section class="experiences">
+  <div class="container experiences-header">
+    <p class="eyebrow" data-reveal>Ce qui nous porte</p>
+    <h2 data-reveal-text>Trois façons de créer de l'engagement.</h2>
+  </div>
+
+  <div class="experiences-track" data-pin-track>
+    <div class="experiences-content" data-pin-content>
+      {cards.map((card) => (
+        <article class="experience-card" data-pin-card style={`--accent:${card.accent}`}>
+          <span class="experience-n">{card.n}</span>
+          <h3>{card.title}</h3>
+          <p>{card.text}</p>
+        </article>
+      ))}
+      <div class="experience-spacer" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experiences-header {
+    padding-top: var(--section-pad);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .experiences-header h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .experiences-track {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .experiences-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    height: 100%;
+    padding-inline: var(--pad-global);
+    width: max-content;
+  }
+
+  .experience-card {
+    --accent: var(--orange);
+    width: min(64vw, 720px);
+    height: 62vh;
+    flex-shrink: 0;
+    background: var(--accent);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-md);
+  }
+
+  .experience-n {
+    font-size: var(--text-h3);
+    font-weight: 800;
+    opacity: 0.4;
+    margin-bottom: auto;
+  }
+
+  .experience-card h3 {
+    font-size: var(--text-h3);
+  }
+
+  .experience-card p {
+    max-width: 40ch;
+    opacity: 0.9;
+    font-size: var(--text-lg);
+  }
+
+  .experience-spacer {
+    width: 20vw;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .experiences-track {
+      height: auto;
+      overflow: visible;
+    }
+    .experiences-content {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      padding-block: var(--space-lg);
+      gap: var(--space-lg);
+    }
+    .experience-card {
+      width: 100%;
+      height: auto;
+      min-height: 320px;
+    }
+    .experience-spacer {
+      display: none;
+    }
+  }
+</style>

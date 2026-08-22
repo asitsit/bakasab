@@ -1,0 +1,116 @@
+---
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  items: FaqItem[];
+}
+
+const { eyebrow = 'Questions fréquentes', title, items } = Astro.props;
+
+// The FAQPage schema is generated from the exact same `items` rendered below,
+// so the structured data can never drift from the visible text. Answers may
+// contain simple inline HTML (links for internal linking); the schema gets
+// the plain-text version of the same content.
+const stripHtml = (html: string) => html.replace(/<[^>]+>/g, '');
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: stripHtml(item.a),
+    },
+  })),
+};
+---
+
+<section class="faq section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <h2 data-reveal>{title}</h2>
+
+    <div class="faq-list" data-reveal-parent>
+      {items.map((item) => (
+        <details class="faq-item" data-reveal data-reveal-group="faq">
+          <summary>
+            <span>{item.q}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <p set:html={item.a} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<style>
+  .faq-list {
+    margin-top: var(--space-2xl);
+    max-width: 72ch;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+    padding-block: var(--space-md);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: var(--text-lg);
+    list-style: none;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    transition: transform 0.35s var(--ease-out), background-color 0.3s;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--orange);
+    color: var(--cream);
+  }
+
+  .faq-item p {
+    margin-top: var(--space-sm);
+    max-width: 60ch;
+    opacity: 0.75;
+    font-size: var(--text-md);
+    line-height: var(--lh-relaxed);
+  }
+
+  .faq-item p a {
+    color: var(--orange);
+    text-decoration: underline;
+    opacity: 1;
+  }
+</style>

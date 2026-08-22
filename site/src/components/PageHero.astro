@@ -1,0 +1,69 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  intro?: string;
+  gradient?: 'bordeaux-orange' | 'bordeaux-beige' | 'orange-beige';
+}
+
+const { eyebrow, title, subtitle, intro, gradient = 'bordeaux-orange' } = Astro.props;
+---
+
+<section class={`page-hero is-${gradient}`}>
+  <div class="container">
+    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <h1 data-reveal-text>{title}</h1>
+    {subtitle && <p class="page-hero-subtitle" data-reveal>{subtitle}</p>}
+    {intro && <p class="page-hero-intro" data-reveal>{intro}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-top: 130px;
+    padding-bottom: var(--space-3xl);
+    color: var(--cream);
+  }
+
+  .page-hero.is-bordeaux-orange {
+    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
+  }
+
+  .page-hero.is-bordeaux-beige {
+    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 28%, var(--cream-dim) 100%);
+  }
+
+  .page-hero.is-orange-beige {
+    background: linear-gradient(155deg, var(--orange) 0%, var(--orange-dim) 28%, var(--cream-dim) 100%);
+  }
+
+  .page-hero .eyebrow {
+    color: var(--cream);
+    opacity: 0.85;
+  }
+
+  .page-hero h1 {
+    font-size: var(--text-h2);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+    margin-block: var(--space-md) var(--space-lg);
+    max-width: 20ch;
+    color: var(--cream);
+  }
+
+  .page-hero-subtitle {
+    font-size: clamp(1.4rem, 0.9rem + 1.4vw, 2.1rem);
+    font-weight: 700;
+    line-height: var(--lh-snug);
+    max-width: 40ch;
+    opacity: 0.95;
+  }
+
+  .page-hero-intro {
+    margin-top: var(--space-lg);
+    font-size: var(--text-lg);
+    max-width: 62ch;
+    opacity: 0.85;
+  }
+</style>

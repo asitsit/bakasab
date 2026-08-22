@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SimpleCta from '../../components/SimpleCta.astro';
+import { missions } from '../../data/missions.js';
+
+const types = ['Tous', 'Expérience Collective', 'Expérience Digitale', 'Expérience Apprenante'];
+---
+
+<BaseLayout
+  title="Missions — Études de cas BAKASAB"
+  description="Conventions, groupes de travail DRH, kick-offs de formation : les missions BAKASAB menées pour Vinci, Safran et d'autres grands comptes, de 15 à 3500 participants."
+>
+  <PageHero
+    eyebrow="Nos références"
+    title="La preuve par le terrain."
+    subtitle="Des grands groupes qui n'ont pas droit à l'à-peu-près — et qui reviennent."
+  />
+
+  <section class="missions-intro section">
+    <div class="container">
+      <p class="missions-intro-text" data-reveal>
+        On a conçu et animé des conventions de 3500 personnes, des groupes de travail DRH sur 6
+        mois, des kick-offs de formation pour de nouveaux managers. Chaque mission ci-dessous est
+        une combinaison différente de nos trois expériences — collective, digitale, apprenante.
+      </p>
+
+      <div class="missions-filters" role="tablist" aria-label="Filtrer les missions">
+        {types.map((t, i) => (
+          <button
+            class="missions-filter"
+            class:list={{ 'is-active': i === 0 }}
+            data-filter={t === 'Tous' ? 'all' : t}
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      <div class="missions-grid">
+        {missions.map((m) => (
+          <a href={`/missions/${m.slug}`} class="mission-card" data-type={m.type}>
+            <div class="mission-card-media" style={`background: linear-gradient(150deg, ${m.accent}, color-mix(in srgb, ${m.accent} 35%, var(--cream)))`}>
+              <span class="mission-card-tag">{m.tag}</span>
+            </div>
+            <h2>{m.client}</h2>
+            <p>{m.summary}</p>
+            <span class="mission-card-link">En savoir plus →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SimpleCta title="Votre prochain temps fort mérite le même traitement." buttonLabel="Parlons-en" />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('.missions-filter');
+  const cards = document.querySelectorAll('.mission-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filter = btn.getAttribute('data-filter');
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.getAttribute('data-type') === filter;
+        card.style.display = match ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .missions-intro-text {
+    font-size: var(--text-lg);
+    max-width: 68ch;
+    opacity: 0.8;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .missions-filters {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .missions-filter {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    padding: 10px 20px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid color-mix(in srgb, var(--ink) 20%, transparent);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .missions-filter.is-active,
+  .missions-filter:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  .missions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .mission-card {
+    display: block;
+  }
+
+  .mission-card-media {
+    height: 240px;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+  }
+
+  .mission-card-tag {
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--cream);
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+  }
+
+  .mission-card h2 {
+    font-size: var(--text-h4);
+    margin-bottom: var(--space-xs);
+  }
+
+  .mission-card p {
+    opacity: 0.75;
+    max-width: 46ch;
+    margin-bottom: var(--space-sm);
+  }
+
+  .mission-card-link {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--orange);
+    transition: transform 0.3s var(--ease-out);
+    display: inline-block;
+  }
+
+  .mission-card:hover .mission-card-link {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 767px) {
+    .missions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

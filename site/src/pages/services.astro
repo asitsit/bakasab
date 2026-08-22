@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ServicesDetail from '../components/sections/ServicesDetail.astro';
+import Faq from '../components/Faq.astro';
+import SimpleCta from '../components/SimpleCta.astro';
+import { org } from '../data/organization.js';
+
+const services = [
+  {
+    name: 'Expériences Collectives',
+    description: "Séminaires, journées d'équipe, teambuildings, soirées, événements de marque et offsites, dans le monde entier.",
+  },
+  {
+    name: 'Expériences Digitales',
+    description: "Digitalisation des temps forts de l'entreprise : hybridation, outils interactifs, animation digitale live.",
+  },
+  {
+    name: 'Expériences Apprenantes',
+    description: 'Formations sur mesure, montée en compétences des équipes et des managers.',
+  },
+];
+
+const serviceSchemas = services.map((s) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: s.name,
+  name: s.name,
+  description: s.description,
+  provider: { '@type': 'Organization', name: org.name },
+  areaServed: 'FR',
+}));
+
+const faqItems = [
+  {
+    q: "Qu'est-ce qu'une « expérience collective » chez BAKASAB ?",
+    a: 'Une expérience collective BAKASAB désigne un temps fort qui rassemble physiquement ou en hybride une équipe ou une organisation&nbsp;: séminaire, journée d\'équipe, teambuilding, soirée d\'entreprise, événement de marque ou offsite. BAKASAB conçoit et anime ces moments pour des groupes de 15 à 3500 personnes, en France comme à l\'international.',
+  },
+  {
+    q: "Qu'est-ce qu'une « expérience digitale » chez BAKASAB ?",
+    a: "Une expérience digitale BAKASAB consiste à digitaliser les temps forts d'une entreprise&nbsp;: hybridation d'un événement existant, mise en place d'outils interactifs (type Klaxoon), ou animation 100% digitale en direct pour des équipes dispersées géographiquement. Elle permet d'engager des participants à distance sans perdre la dynamique d'un moment collectif.",
+  },
+  {
+    q: "Qu'est-ce qu'une « expérience apprenante » chez BAKASAB ?",
+    a: "Une expérience apprenante BAKASAB est une formation sur mesure — jamais issue d'un catalogue — conçue pour la montée en compétences d'équipes ou de managers. Cela inclut la formation managériale, l'initiation à l'IA générative et aux outils digitaux, ainsi que les kick-offs de formation pour de nouveaux managers.",
+  },
+  {
+    q: 'Peut-on combiner plusieurs types d\'expériences sur une même mission ?',
+    a: "Oui, et c'est la configuration la plus fréquente chez BAKASAB&nbsp;: une convention peut par exemple intégrer un volet formation, ou un séminaire présentiel peut être hybridé pour des équipes à distance. BAKASAB agit comme interlocuteur unique sur l'ensemble, plutôt que de faire intervenir plusieurs prestataires séparés.",
+  },
+  {
+    q: 'Quelle est la différence entre un séminaire et un teambuilding chez BAKASAB ?',
+    a: 'Un séminaire BAKASAB est généralement centré sur des objectifs stratégiques ou de transformation (convention, kick-off, réunion annuelle), tandis qu\'un teambuilding vise prioritairement la cohésion et l\'engagement d\'une équipe. BAKASAB conçoit les deux avec la même méthode Design → Préparation → Animation → Restitution.',
+  },
+  {
+    q: 'BAKASAB propose-t-il des formations à l\'intelligence artificielle générative ?',
+    a: 'Oui, BAKASAB propose des formats d\'initiation à l\'IA générative, animés notamment par le fondateur Alexandre Sitbon, formateur en management et outils digitaux. Ces formations s\'adressent aux équipes et managers d\'entreprises souhaitant intégrer ces outils dans leurs pratiques quotidiennes.',
+  },
+  {
+    q: 'Quels formats gérez-vous : présentiel, digital, hybride ?',
+    a: 'BAKASAB gère les trois formats — présentiel, digital et hybride — souvent au sein d\'une même mission. L\'agence a par exemple animé une convention en présentiel sur 360 participants (<a href="/missions/vinci-building-solutions">Vinci Building Solutions</a>) et un accompagnement hybride sur 6 mois pour des équipes internationales (<a href="/missions/safran-carpe-diem">Safran Carpe Diem</a>).',
+  },
+  {
+    q: 'Quel est le nombre de participants minimum et maximum géré par BAKASAB ?',
+    a: 'BAKASAB a conçu et animé des missions allant de 15 à 3500 participants. Le format et la méthode d\'animation s\'adaptent à la taille du groupe et à ses objectifs, du petit atelier de travail à la convention grand groupe multi-rounds.',
+  },
+  {
+    q: 'Comment se déroule une mission avec BAKASAB ?',
+    a: 'Une mission BAKASAB suit 4 étapes&nbsp;: Design (cadrage selon vos objectifs et contraintes), Préparation (intervenants et coordination avec vos équipes opérationnelles), Animation (facilitation le jour J), puis Restitution (take-aways et suite concrète). Un seul interlocuteur BAKASAB accompagne l\'ensemble du processus.',
+  },
+  {
+    q: 'Combien de temps à l\'avance faut-il réserver BAKASAB ?',
+    a: 'Le plus tôt possible&nbsp;: réserver BAKASAB en amont permet de sécuriser les bons intervenants, de bloquer le lieu souhaité et de disposer du temps nécessaire pour affiner le format avec vous. Il n\'y a pas de délai minimum strict, mais plus la réservation est anticipée, plus les options restent ouvertes — notamment pour les conventions et événements de grande ampleur.',
+  },
+  {
+    q: 'Qui anime réellement le jour J de l\'événement ?',
+    a: "L'animation est assurée par BAKASAB — le fondateur Alexandre Sitbon et/ou un membre du réseau d'experts BAKASAB sélectionné selon les besoins spécifiques de la mission (facilitation, technologie et IA, gestion de projet, design). Le ou les intervenants sont définis dès la phase de préparation, pas improvisés le jour même.",
+  },
+  {
+    q: 'BAKASAB propose-t-il une restitution après l\'événement ?',
+    a: "Oui, chaque mission BAKASAB se termine par une phase de restitution&nbsp;: take-aways formalisés et pistes concrètes de suite, pour que chaque temps fort ait un prolongement au-delà du jour J plutôt que de rester un moment isolé.",
+  },
+];
+---
+
+<BaseLayout
+  title="Séminaires, digital, formation — Services BAKASAB"
+  description="Les trois expériences BAKASAB : Expériences Collectives (séminaires, teambuildings), Expériences Digitales (hybridation, outils interactifs) et Expériences Apprenantes (formations sur mesure)."
+>
+  <Fragment slot="schema">
+    {serviceSchemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </Fragment>
+
+  <PageHero
+    eyebrow="Ce qu'on fait"
+    title="Trois expériences. Un seul partenaire."
+    subtitle="On combine les trois selon vos objectifs — c'est ça, la valeur BAKASAB : un seul interlocuteur pour concevoir l'ensemble."
+    gradient="orange-beige"
+  />
+
+  <ServicesDetail />
+
+  <section class="method-recap section">
+    <div class="container method-recap-inner">
+      <p class="method-recap-flow">Design → Préparation → Animation → Restitution</p>
+      <p class="method-recap-text">Un seul interlocuteur, du cadrage au débrief.</p>
+    </div>
+  </section>
+
+  <Faq
+    eyebrow="Nos expériences, en détail"
+    title="Vos questions sur nos services"
+    items={faqItems}
+  />
+
+  <SimpleCta title="Un projet en tête ?" buttonLabel="Parlons-en" />
+</BaseLayout>
+
+<style>
+  .method-recap-inner {
+    text-align: center;
+    padding-block: var(--space-lg);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+
+  .method-recap-flow {
+    font-size: var(--text-h4);
+    font-weight: 800;
+    color: var(--orange);
+  }
+
+  .method-recap-text {
+    margin-top: var(--space-xs);
+    opacity: 0.7;
+  }
+</style>

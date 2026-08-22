@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import alexandrePhoto from '../../assets/team/alexandre-sitbon.jpg';
+
+const slugify = (name) =>
+  name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/\s+/g, '-');
+
+const team = [
+  { name: 'Clémence Macary', role: 'Design & gestion de projets' },
+  { name: 'Ronan Broussier', role: 'Facilitation, technologie & IA' },
+  { name: 'Marine Bourgeaud', role: 'Gestion de projet & DISC' },
+  { name: 'Philip Boisvieux', role: 'Facilitation & projets collectifs' },
+].map((member) => ({ ...member, image: `team/${slugify(member.name)}.jpg` }));
+---
+
+<section class="team section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Notre équipe</p>
+    <h2 data-reveal-text>Un collectif, pas un carnet d'adresses.</h2>
+    <p class="team-intro" data-reveal>
+      BAKASAB est un réseau d'experts en formation, facilitation et design, engagés à créer des
+      expériences collaboratives qui marquent. Chaque mission est co-construite avec vous, en
+      mobilisant les bons profils selon vos enjeux&nbsp;— de 15 à 3500 participants, en présentiel,
+      en ligne ou en hybride.
+    </p>
+
+    <div class="founder" data-reveal>
+      <div class="founder-photo">
+        <Image src={alexandrePhoto} alt="Alexandre Sitbon, fondateur de BAKASAB" width={640} height={760} />
+      </div>
+      <div class="founder-copy">
+        <h3>Alexandre Sitbon</h3>
+        <p class="founder-role">Fondateur, Facilitation & innovation</p>
+        <p class="founder-bio">
+          Diplômé de Centrale Lyon et de l'emlyon business school, Alexandre organisait déjà des
+          événements rassemblant de 750 à 3500 personnes avant de créer BAKASAB. Depuis plus de 5
+          ans, il conçoit et anime séminaires, formations et événements pour des entreprises allant
+          de la start-up au CAC40, en France et à l'international. Formateur en management et
+          outils digitaux, il propose aussi des formats d'initiation à l'IA générative.
+        </p>
+        <blockquote>
+          « J'ai créé BAKASAB pour accompagner au mieux mes clients. C'est l'aboutissement de
+          plusieurs années de contact et de sélection au sein de mon réseau. »
+          <cite>— Alexandre Sitbon</cite>
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="team-grid" data-reveal-parent>
+      {team.map((member) => (
+        <div class="team-member" data-reveal data-reveal-group="team">
+          <div class="team-member-photo" aria-hidden="true">
+            <span class="placeholder-filename">→ à uploader :<br />src/assets/{member.image}</span>
+          </div>
+          <p class="team-member-name">{member.name}</p>
+          <p class="team-member-role">{member.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .team h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .team-intro {
+    margin-top: var(--space-lg);
+    font-size: var(--text-lg);
+    max-width: 62ch;
+    opacity: 0.8;
+  }
+
+  .founder {
+    margin-top: var(--space-3xl);
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .founder-photo {
+    height: clamp(280px, 30vw, 420px);
+    border-radius: var(--radius-lg);
+    background: var(--bordeaux);
+    overflow: hidden;
+  }
+
+  .founder-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .founder-copy h3 {
+    font-size: var(--text-h3);
+  }
+
+  .founder-role {
+    font-weight: 600;
+    color: var(--orange);
+    margin-top: var(--space-2xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .founder-bio {
+    opacity: 0.8;
+    max-width: 56ch;
+  }
+
+  .founder-copy blockquote {
+    margin-top: var(--space-lg);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--orange);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    font-style: italic;
+  }
+
+  .founder-copy cite {
+    display: block;
+    margin-top: var(--space-sm);
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    opacity: 0.6;
+  }
+
+  .team-grid {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .team-member-photo {
+    height: 170px;
+    border-radius: var(--radius-md);
+    background: var(--cream-dim);
+    border: 1.5px solid color-mix(in srgb, var(--ink) 14%, transparent);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-sm);
+  }
+
+  .team-member-photo .placeholder-filename {
+    color: color-mix(in srgb, var(--ink) 55%, transparent);
+  }
+
+  .team-member-name {
+    font-weight: 800;
+  }
+
+  .team-member-role {
+    font-size: var(--text-sm);
+    opacity: 0.65;
+  }
+
+  @media (max-width: 900px) {
+    .founder {
+      grid-template-columns: 1fr;
+    }
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { org } from '../data/organization.js';
+---
+
+<BaseLayout
+  title="Mentions légales — BAKASAB"
+  description="Mentions légales du site BAKASAB : éditeur, hébergement, propriété intellectuelle, données personnelles."
+>
+  <section class="legal section">
+    <div class="container legal-inner">
+      <p class="eyebrow">Informations légales</p>
+      <h1>Mentions légales</h1>
+
+      <div class="legal-block">
+        <h2>Éditeur du site</h2>
+        <p>
+          Le site est édité par la société <strong>{org.name}</strong>, {org.legalForm} au capital
+          social de {org.capital}, immatriculée au Registre du Commerce et des Sociétés de Nanterre
+          sous le numéro SIREN {org.siren} (SIRET {org.siret}), dont le siège social est situé au
+          {org.addressFull}.
+        </p>
+        <p>N° de TVA intracommunautaire&nbsp;: {org.vat}.</p>
+        <p>Code APE/NAF&nbsp;: {org.ape}.</p>
+        <p><strong>Directeur de la publication</strong>&nbsp;: {org.president}, Président de {org.name}.</p>
+        <p>
+          <strong>Contact</strong>&nbsp;: <a href={`mailto:${org.email}`}>{org.email}</a>.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Hébergement</h2>
+        <p class="legal-todo">[À compléter une fois l'hébergeur du site choisi — nom, adresse et contact de l'hébergeur sont une mention légale obligatoire en France.]</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus présents sur le site {org.name} (textes, visuels, logo, identité
+          de marque) est la propriété exclusive de {org.name}, sauf mention contraire. Toute
+          reproduction, représentation ou diffusion, totale ou partielle, sans autorisation
+          préalable est interdite.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Données personnelles (RGPD)</h2>
+        <p>
+          {org.name} applique les règles standard du RGPD&nbsp;: les données collectées via le
+          formulaire de contact ou lors d'une mission (nom, email, entreprise, données de
+          participants sur les outils digitaux utilisés) ne sont utilisées que pour répondre à la
+          demande ou exécuter la mission, ne sont jamais revendues à des tiers, et sont conservées
+          uniquement le temps nécessaire. Toute personne peut exercer ses droits d'accès, de
+          rectification ou de suppression en écrivant à <a href={`mailto:${org.email}`}>{org.email}</a>.
+        </p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Cookies</h2>
+        <p class="legal-todo">[À compléter selon les outils analytics/tracking effectivement utilisés sur le site — bandeau de consentement cookies obligatoire si des cookies non essentiels sont posés.]</p>
+      </div>
+
+      <div class="legal-block">
+        <h2>Droit applicable</h2>
+        <p>
+          Le présent site et les présentes mentions légales sont soumis au droit français. Tout
+          litige relatif à leur interprétation ou leur exécution relève de la compétence des
+          tribunaux du ressort de Nanterre.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-inner {
+    padding-top: 90px;
+    max-width: 72ch;
+  }
+
+  .legal-inner h1 {
+    font-size: var(--text-h2);
+    margin-block: var(--space-md) var(--space-2xl);
+  }
+
+  .legal-block {
+    margin-bottom: var(--space-xl);
+  }
+
+  .legal-block h2 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: var(--space-sm);
+  }
+
+  .legal-block p {
+    opacity: 0.8;
+    line-height: var(--lh-relaxed);
+    margin-bottom: var(--space-xs);
+  }
+
+  .legal-block a {
+    color: var(--bordeaux);
+  }
+
+  .legal-todo {
+    background: color-mix(in srgb, var(--orange) 12%, transparent);
+    border: 1px dashed var(--orange);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    font-style: italic;
+  }
+</style>

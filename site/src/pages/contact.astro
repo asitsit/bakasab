@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import { org } from '../data/organization.js';
+
+const faqItems = [
+  {
+    q: 'Comment sont calculés les tarifs de BAKASAB ?',
+    a: 'Le budget d\'une mission BAKASAB dépend du format choisi (journée, soirée, séminaire, offsite…), du nombre de participants, des prestations incluses (transport, hébergement, restauration, activités) et du temps de travail des équipes BAKASAB. Chaque mission fait l\'objet d\'un devis sur mesure établi après un premier échange de cadrage — il n\'existe pas de grille tarifaire fixe, le format s\'adaptant à chaque organisation.',
+  },
+  {
+    q: 'Puis-je modifier une mission BAKASAB après signature ?',
+    a: 'Oui, dans la limite de ce que permet le calendrier de préparation. BAKASAB précise dès le cadrage initial ce qui reste ajustable (contenu, format, intervenants) et ce qui ne l\'est plus une fois la logistique engagée, pour éviter toute ambiguïté en cours de projet.',
+  },
+  {
+    q: "Quelles sont les conditions d'annulation de BAKASAB ?",
+    a: 'Les conditions d\'annulation dépendent du périmètre de chaque mission et sont précisées dans le devis. À titre indicatif, une annulation intervenant moins de 30 jours avant l\'événement entraîne le règlement de 60% du montant total de la prestation, notamment pour couvrir les engagements déjà pris auprès des intervenants et prestataires.',
+  },
+  {
+    q: 'BAKASAB gère-t-il la logistique (lieu, traiteur, prestataires techniques) ?',
+    a: "BAKASAB peut coordonner des prestataires logistiques (lieu, traiteur, technique) dans le cadre d'une mission, mais ce n'est pas son cœur de métier&nbsp;: la valeur BAKASAB réside dans la conception et l'animation de l'expérience, pas dans la gestion logistique pure — à la différence d'une agence événementielle traditionnelle.",
+  },
+  {
+    q: 'Comment BAKASAB protège-t-il les données des participants ?',
+    a: 'BAKASAB applique les règles standard du RGPD&nbsp;: les données des participants (nom, email, réponses aux outils digitaux utilisés en mission) ne sont collectées que pour les besoins de l\'événement, ne sont jamais revendues à des tiers, et sont conservées uniquement le temps nécessaire à la mission et à son suivi. Chaque participant ou entreprise cliente peut exercer ses droits en écrivant à BAKASAB — voir nos <a href="/mentions-legales">mentions légales</a>.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact — Parlons de votre projet | BAKASAB"
+  description="Un projet de séminaire, de digitalisation d'événement ou de formation sur mesure ? Contactez BAKASAB par email ou formulaire — réponse sous 48h ouvrées."
+>
+  <PageHero
+    eyebrow="Parlons-en"
+    title="Prêts à créer votre prochaine expérience ?"
+    subtitle="Un projet, une question, une idée encore floue&nbsp;? On répond vite."
+  />
+
+  <section class="contact-main section">
+    <div class="container contact-grid">
+      <div class="contact-coords" data-reveal>
+        <div>
+          <p class="contact-label">Adresse</p>
+          <p>{org.address.street}<br />{org.address.postalCode} {org.address.city}</p>
+        </div>
+        <div>
+          <p class="contact-label">Email</p>
+          <p><a href={`mailto:${org.email}`}>{org.email}</a></p>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" data-reveal>
+        <div class="contact-field">
+          <label for="name">Nom complet</label>
+          <input type="text" id="name" name="name" placeholder="Jean Dupont" required data-fs-field />
+        </div>
+        <div class="contact-field">
+          <label for="company">Entreprise</label>
+          <input type="text" id="company" name="company" placeholder="Nom de votre entreprise" required data-fs-field />
+        </div>
+        <div class="contact-field">
+          <label for="email">Email professionnel</label>
+          <input type="email" id="email" name="email" placeholder="vous@entreprise.com" required data-fs-field />
+        </div>
+        <div class="contact-field">
+          <label for="phone">Téléphone <span>(optionnel)</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78" data-fs-field />
+        </div>
+        <div class="contact-field">
+          <label for="project-type">Type de projet</label>
+          <select id="project-type" name="project-type" data-fs-field>
+            <option>Expérience Collective</option>
+            <option>Expérience Digitale</option>
+            <option>Expérience Apprenante</option>
+            <option>Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="contact-field">
+          <label for="message">Votre message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Dites-nous en quelques mots ce que vous avez en tête." required data-fs-field></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" data-fs-submit-btn>Envoyer ma demande</button>
+        <p class="contact-form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="contact-alt section">
+    <div class="container contact-alt-inner">
+      <h2 data-reveal-text>Envie d'un échange direct plutôt qu'un formulaire&nbsp;?</h2>
+      <p data-reveal>
+        Écrivez-nous directement à <a href={`mailto:${org.email}`}>{org.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <Faq eyebrow="Avant de nous écrire" title="Questions fréquentes sur nos missions" items={faqItems} />
+</BaseLayout>
+
+<script>
+  import { initForm } from '@formspree/ajax';
+
+  const form = document.getElementById('contact-form');
+  const status = document.querySelector('.contact-form-status');
+
+  const showStatus = (text, isError) => {
+    if (!status) return;
+    status.textContent = text;
+    status.classList.toggle('is-error', isError);
+    status.classList.add('is-visible');
+  };
+
+  if (form) {
+    initForm({
+      formElement: '#contact-form',
+      formId: 'xbgrbkwb',
+      onSuccess: () => {
+        showStatus('Message reçu. On revient vers vous sous 48h.', false);
+        form.reset();
+      },
+      onError: () => {
+        showStatus('Un champ manque à l\'appel — vérifiez et renvoyez.', true);
+      },
+      onFailure: () => {
+        showStatus('Un souci de notre côté — écrivez-nous directement par email en attendant.', true);
+      },
+      // We render our own status message instead of the library's default DOM injection.
+      renderFieldErrors: () => {},
+      renderFormError: () => {},
+      renderSuccess: () => {},
+    });
+  }
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-2xl);
+  }
+
+  .contact-coords {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .contact-label {
+    font-weight: 600;
+    font-size: var(--text-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .contact-coords a:hover {
+    color: var(--orange);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .contact-field label {
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .contact-field label span {
+    font-weight: 400;
+    opacity: 0.55;
+  }
+
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea {
+    font-family: inherit;
+    font-size: var(--text-sm);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid color-mix(in srgb, var(--ink) 20%, transparent);
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .contact-field input:focus,
+  .contact-field select:focus,
+  .contact-field textarea:focus {
+    outline: 2px solid var(--orange);
+    outline-offset: 1px;
+  }
+
+  .contact-field input::placeholder,
+  .contact-field textarea::placeholder {
+    font-style: italic;
+    color: color-mix(in srgb, var(--ink) 45%, transparent);
+  }
+
+  .contact-form .btn {
+    align-self: flex-start;
+    margin-top: var(--space-sm);
+  }
+
+  .contact-form-status {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--ink);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .contact-form-status.is-visible {
+    opacity: 1;
+  }
+
+  .contact-form-status.is-error {
+    color: var(--bordeaux);
+  }
+
+  .contact-field input[aria-invalid='true'],
+  .contact-field textarea[aria-invalid='true'] {
+    border-color: var(--bordeaux);
+  }
+
+  .contact-alt-inner {
+    text-align: center;
+    padding-block: var(--space-2xl);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+
+  .contact-alt-inner h2 {
+    font-size: var(--text-h3);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-alt-inner a {
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow" data-reveal>Experience Creator</p>
+
+    <h1 class="hero-title" data-reveal-text>BAKASAB</h1>
+
+    <div class="hero-body">
+      <div class="hero-copy">
+        <p class="hero-subtitle" data-reveal>
+          On conçoit et on anime les temps forts qui font avancer les entreprises.
+        </p>
+        <p class="hero-text" data-reveal>
+          Séminaires — Digital — Formation. Une agence d'expériences pour les entreprises,
+          en France et à l'international.
+        </p>
+        <a href="/contact" class="btn btn-primary" data-reveal>Parlons de votre projet</a>
+      </div>
+
+      <div class="hero-stat" data-reveal>
+        <p class="hero-stat-numbers">
+          <span>15</span>
+          <span class="hero-stat-arrow">→</span>
+          <span data-counter data-counter-from="15" data-counter-to="3500">15</span>
+        </p>
+        <p class="hero-stat-label">participants accompagnés par mission</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 88svh;
+    display: flex;
+    align-items: center;
+    padding-block: 120px var(--space-2xl);
+    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
+    color: var(--cream);
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
+
+  .hero .eyebrow {
+    color: var(--cream);
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 1.5vw + 7vw, 8rem);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    margin-block: var(--space-sm) var(--space-lg);
+    color: var(--cream);
+  }
+
+  .hero-body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-2xl);
+    align-items: end;
+    padding-top: var(--space-lg);
+    border-top: 1px solid color-mix(in srgb, var(--cream) 25%, transparent);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.4rem, 0.9rem + 1.4vw, 2.1rem);
+    font-weight: 800;
+    line-height: var(--lh-snug);
+    max-width: 32ch;
+  }
+
+  .hero-text {
+    margin-top: var(--space-sm);
+    max-width: 42ch;
+    opacity: 0.85;
+    font-size: var(--text-sm);
+  }
+
+  .btn.btn-primary {
+    margin-top: var(--space-md);
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  .btn.btn-primary:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .hero-stat {
+    border-left: 2px solid var(--cream);
+    padding-left: var(--space-lg);
+  }
+
+  .hero-stat-numbers {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 800;
+    color: var(--cream);
+  }
+
+  .hero-stat-arrow {
+    opacity: 0.7;
+  }
+
+  .hero-stat-label {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 900px) {
+    .hero-title {
+      font-size: clamp(3.25rem, 5vw + 8vw, 6rem);
+    }
+    .hero-body {
+      grid-template-columns: 1fr;
+    }
+    .hero-stat {
+      border-left: none;
+      border-top: 2px solid var(--cream);
+      padding-left: 0;
+      padding-top: var(--space-md);
+    }
+  }
+</style>

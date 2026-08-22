@@ -1,0 +1,112 @@
+---
+const pro = {
+  label: 'PRO',
+  lead: "Cadrage rigoureux, gestion de projet, réseau d'experts multi-disciplinaires. Un partenaire au niveau de vos enjeux.",
+  points: ['Résultats mesurables', 'Delivery fiable, à toute échelle', 'Interlocuteur unique de bout en bout'],
+};
+
+const fun = {
+  label: 'FUN',
+  lead: 'Une énergie qui embarque vraiment les participants. Ni corporate ennuyeux, ni team-building gadget.',
+  points: ['Facilitation vivante, jamais scolaire', 'Formats qui surprennent', 'Des équipes qui en reparlent après'],
+};
+---
+
+<section class="pro-fun section">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Notre différence</p>
+    <h2 data-reveal-text>Pro & Fun. Pas l'un sans l'autre.</h2>
+
+    <div class="pro-fun-grid" data-reveal-parent>
+      <article class="pro-fun-card is-pro" data-reveal data-reveal-group="profun">
+        <span class="pro-fun-label">{pro.label}</span>
+        <p class="pro-fun-lead">{pro.lead}</p>
+        <ul>
+          {pro.points.map((p) => <li>{p}</li>)}
+        </ul>
+      </article>
+
+      <article class="pro-fun-card is-fun" data-reveal data-reveal-group="profun">
+        <span class="pro-fun-label">{fun.label}</span>
+        <p class="pro-fun-lead">{fun.lead}</p>
+        <ul>
+          {fun.points.map((p) => <li>{p}</li>)}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pro-fun h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 18ch;
+  }
+
+  .pro-fun-grid {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .pro-fun-card {
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .pro-fun-card.is-pro {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .pro-fun-card.is-fun {
+    background: var(--orange);
+    color: var(--cream);
+  }
+
+  .pro-fun-label {
+    display: block;
+    font-weight: 800;
+    font-size: var(--text-h3);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+
+  .pro-fun-lead {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    max-width: 36ch;
+    margin-bottom: var(--space-lg);
+  }
+
+  .pro-fun-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .pro-fun-card li {
+    padding-left: var(--space-md);
+    position: relative;
+    opacity: 0.9;
+  }
+
+  .pro-fun-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  @media (max-width: 767px) {
+    .pro-fun-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page introuvable — BAKASAB"
+  description="La page que vous cherchez n'existe pas ou plus."
+>
+  <section class="not-found">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1>Ce temps fort n'existe pas (encore).</h1>
+      <p>
+        La page que vous cherchez a disparu, ou n'a jamais existé. Retournez à l'accueil, ou
+        dites-nous ce que vous cherchiez.
+      </p>
+      <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding-top: 90px;
+  }
+
+  .not-found h1 {
+    font-size: var(--text-h2);
+    margin-block: var(--space-md) var(--space-lg);
+    max-width: 18ch;
+  }
+
+  .not-found p {
+    font-size: var(--text-lg);
+    max-width: 50ch;
+    opacity: 0.75;
+    margin-bottom: var(--space-xl);
+  }
+</style>

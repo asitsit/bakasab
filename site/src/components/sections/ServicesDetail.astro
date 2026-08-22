@@ -1,0 +1,179 @@
+---
+const experiences = [
+  {
+    n: '01',
+    name: 'Expériences Collectives',
+    title: 'Des moments qui rassemblent pour de vrai.',
+    text: 'Séminaires, journées d\'équipe, teambuildings, soirées, événements de marque et offsites — partout dans le monde.',
+    includes: [
+      "Séminaires et conventions d'entreprise",
+      "Journées d'équipe et teambuildings",
+      'Soirées et événements de marque',
+      "Offsites, en France et à l'international",
+    ],
+    format: 'de 15 à 3500 participants, présentiel ou hybride.',
+    accent: 'var(--orange)',
+    image: 'services/experiences-collectives.jpg',
+  },
+  {
+    n: '02',
+    name: 'Expériences Digitales',
+    title: 'Vos temps forts, digitalisés sans perdre leur âme.',
+    text: "Digitalisation des temps forts de l'entreprise&nbsp;: hybridation, outils interactifs, animation digitale en direct.",
+    includes: [
+      "Hybridation d'événements existants",
+      'Mise en place d\'outils digitaux interactifs (Klaxoon et équivalents)',
+      'Animation digitale en direct le jour J',
+      'Formats 100% digitaux pour des équipes dispersées',
+    ],
+    format: 'de 30 à 500 participants, digital ou hybride.',
+    accent: 'var(--bordeaux)',
+    image: 'services/experiences-digitales.jpg',
+  },
+  {
+    n: '03',
+    name: 'Expériences Apprenantes',
+    title: "Des formations qui s'ancrent dans le réel.",
+    text: 'Formations sur mesure, montée en compétences des équipes et des managers, ancrées dans le réel — pas de catalogue, que du sur-mesure.',
+    includes: [
+      'Formations managériales sur mesure',
+      "Initiation à l'IA générative et aux outils digitaux",
+      "Kick-offs et parcours d'intégration pour nouveaux managers",
+      'Ateliers de montée en compétences en continu',
+    ],
+    format: 'de 10 à 200 participants, présentiel, digital ou hybride.',
+    accent: 'var(--ink)',
+    image: 'services/experiences-apprenantes.jpg',
+  },
+];
+---
+
+<section class="services-detail">
+  {experiences.map((exp) => (
+    <article class="services-detail-item">
+      <div class="container services-detail-inner">
+        <div class="services-detail-copy">
+          <span class="services-detail-n" style={`color:${exp.accent}`}>{exp.n}</span>
+          <p class="eyebrow" data-reveal>{exp.name}</p>
+          <h2 data-reveal>{exp.title}</h2>
+          <p class="services-detail-text" data-reveal set:html={exp.text} />
+          <ul class="services-detail-includes" data-reveal-parent>
+            {exp.includes.map((item) => (
+              <li data-reveal data-reveal-group={`inc-${exp.n}`}>{item}</li>
+            ))}
+          </ul>
+          <p class="services-detail-format" data-reveal>
+            <strong>Format&nbsp;:</strong> {exp.format}
+          </p>
+        </div>
+        <div class="services-detail-media" style={`background: linear-gradient(160deg, ${exp.accent}, color-mix(in srgb, ${exp.accent} 35%, var(--cream)))`} data-reveal>
+          <span>
+            [Photo — {exp.name.toLowerCase()} BAKASAB en action]
+            <span class="placeholder-filename">→ à uploader : src/assets/{exp.image}</span>
+          </span>
+        </div>
+      </div>
+    </article>
+  ))}
+</section>
+
+<style>
+  .services-detail-item {
+    padding-block: var(--section-pad);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+
+  .services-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .services-detail-item:nth-child(even) .services-detail-inner {
+    direction: rtl;
+  }
+
+  .services-detail-item:nth-child(even) .services-detail-copy,
+  .services-detail-item:nth-child(even) .services-detail-media {
+    direction: ltr;
+  }
+
+  .services-detail-n {
+    display: block;
+    font-weight: 800;
+    font-size: var(--text-h3);
+    opacity: 0.3;
+    margin-bottom: var(--space-sm);
+  }
+
+  .services-detail-copy h2 {
+    font-size: var(--text-h3);
+    margin-block: var(--space-sm) var(--space-md);
+    max-width: 16ch;
+  }
+
+  .services-detail-text {
+    font-size: var(--text-lg);
+    max-width: 46ch;
+    opacity: 0.8;
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-detail-includes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-detail-includes li {
+    padding-left: var(--space-md);
+    position: relative;
+  }
+
+  .services-detail-includes li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .services-detail-format {
+    font-size: var(--text-sm);
+    opacity: 0.7;
+  }
+
+  .services-detail-media {
+    height: clamp(280px, 32vw, 440px);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .services-detail-media span {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 900px) {
+    .services-detail-inner,
+    .services-detail-item:nth-child(even) .services-detail-inner {
+      direction: ltr;
+      grid-template-columns: 1fr;
+    }
+    .services-detail-item:nth-child(even) .services-detail-inner {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+</style>

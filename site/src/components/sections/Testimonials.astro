@@ -1,0 +1,243 @@
+---
+const quotes = [
+  {
+    name: 'Pia Hernandez',
+    role: 'VP Global HR Development & Community',
+    company: 'Safran',
+    text: "Alex a le parfait mélange de compétences et d'état d'esprit pour développer de nouvelles façons de travailler de manière ludique, efficace et très professionnelle.",
+    dark: false,
+    lift: 10,
+    rotate: -4,
+    accent: 'var(--orange)',
+  },
+  {
+    name: 'Florence Laly',
+    role: 'Chief Process & Transformation Treasury Officer',
+    company: "L'Oréal",
+    text: 'Son expertise et son approche dynamique ont véritablement transformé notre session en une expérience enrichissante et productive pour tous.',
+    dark: true,
+    lift: -22,
+    rotate: 3,
+    accent: 'var(--bordeaux)',
+  },
+  {
+    name: 'Thierry Sicard',
+    role: 'Responsable R&D',
+    company: 'Virax',
+    text: 'Mille mercis Alexandre pour ton support pour l\'organisation de notre séminaire ! Tu as fait preuve de beaucoup de professionnalisme.',
+    dark: false,
+    lift: 18,
+    rotate: -3,
+    accent: 'var(--ink)',
+  },
+  {
+    name: 'Lucile Charpentier',
+    role: 'Director Talent Development',
+    company: 'Saint-Gobain',
+    text: 'Alexandre est un professionnel aux multiples talents dans les domaines de la conception, production et facilitation d\'événements en ligne et présentiels.',
+    dark: true,
+    lift: -8,
+    rotate: 5,
+    accent: 'var(--orange-dim)',
+  },
+];
+
+const initials = (name) =>
+  name
+    .split(' ')
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+---
+
+<section class="testimonials section">
+  <div class="container">
+    <div class="testimonials-heading">
+      <h2 data-reveal>
+        Ils en parlent <span class="heading-badge-wrap">mieux<span class="heading-badge">Paroles vérifiées</span></span> que nous.
+      </h2>
+    </div>
+
+    <div class="testimonial-deck" data-reveal-parent>
+      {quotes.map((q, i) => (
+        <div
+          class="testimonial-reveal"
+          data-reveal
+          data-reveal-group="testimonials"
+          style={`z-index:${i + 1};`}
+        >
+          <div class="testimonial-position" style={`--lift:${q.lift}px; --rot:${q.rotate}deg;`}>
+            <figure class:list={['testimonial-card', { 'is-dark': q.dark }]}>
+              <div class="testimonial-stars" aria-hidden="true">
+                {Array.from({ length: 5 }).map(() => (
+                  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.5 0L9.29 4.91L14.5 5.35L10.51 8.74L11.76 13.85L7.5 11.06L3.24 13.85L4.49 8.74L0.5 5.35L5.71 4.91L7.5 0Z" fill="currentColor"/>
+                  </svg>
+                ))}
+              </div>
+              <blockquote>“{q.text}”</blockquote>
+              <figcaption>
+                <span class="testimonial-avatar" style={`background:${q.accent}`}>{initials(q.name)}</span>
+                <span class="testimonial-who">
+                  <span class="testimonial-name">{q.name}</span>
+                  <span class="testimonial-role">{q.role} · {q.company}</span>
+                </span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-heading h2 {
+    font-size: var(--text-h2);
+    max-width: 22ch;
+  }
+
+  .heading-badge-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .heading-badge {
+    position: absolute;
+    top: -0.9em;
+    left: 50%;
+    transform: translateX(-50%) rotate(-6deg);
+    background: var(--orange);
+    color: var(--cream);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  .testimonial-deck {
+    margin-top: var(--space-3xl);
+    display: flex;
+    justify-content: center;
+    padding-block: var(--space-2xl);
+  }
+
+  .testimonial-reveal {
+    width: 300px;
+    flex-shrink: 0;
+    margin-left: -104px;
+  }
+
+  .testimonial-reveal:first-child {
+    margin-left: 0;
+  }
+
+  .testimonial-reveal:hover {
+    z-index: 20 !important;
+  }
+
+  /* Kept separate from .testimonial-reveal (which GSAP animates for the
+     scroll-in entrance) so the static tilt/offset is never at risk of being
+     clobbered by an inline transform the reveal animation sets. */
+  .testimonial-position {
+    transform: translateY(var(--lift)) rotate(var(--rot));
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .testimonial-reveal:hover .testimonial-position {
+    transform: translateY(calc(var(--lift) - 14px)) rotate(0deg) scale(1.04);
+  }
+
+  .testimonial-card {
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-height: 340px;
+    box-shadow: 0 24px 48px -20px color-mix(in srgb, var(--ink) 40%, transparent);
+  }
+
+  .testimonial-card.is-dark {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    color: var(--orange);
+  }
+
+  .testimonial-card blockquote {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: var(--lh-snug);
+    flex: 1;
+  }
+
+  .testimonial-card figcaption {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  }
+
+  .testimonial-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    font-weight: 800;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+  }
+
+  .testimonial-who {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .testimonial-name {
+    font-weight: 800;
+    font-size: var(--text-sm);
+  }
+
+  .testimonial-role {
+    font-size: var(--text-xs);
+    opacity: 0.65;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .testimonial-deck {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+    .testimonial-reveal {
+      margin-left: 0;
+      width: 100%;
+      max-width: 360px;
+    }
+    .testimonial-position,
+    .testimonial-reveal:hover .testimonial-position {
+      transform: none;
+    }
+  }
+</style>
