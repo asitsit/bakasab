@@ -19,6 +19,12 @@ const logos = [
       {logos.map((logo) => <span class="trusted-logo">{logo}</span>)}
     </div>
   </div>
+
+  <div class="container">
+    <p class="trusted-transition" data-reveal>
+      Grands groupes ou structures en croissance, l'exigence ne change pas.
+    </p>
+  </div>
 </section>
 
 <style>
@@ -56,5 +62,13 @@ const logos = [
     letter-spacing: -0.01em;
     white-space: nowrap;
     opacity: 0.45;
+  }
+
+  .trusted-transition {
+    margin-top: var(--space-xl);
+    text-align: center;
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--bordeaux);
   }
 </style>

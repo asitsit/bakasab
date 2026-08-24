@@ -34,7 +34,7 @@ const serviceSchemas = services.map((s) => ({
 const faqItems = [
   {
     q: "Qu'est-ce qu'une « expérience collective » chez BAKASAB ?",
-    a: 'Une expérience collective BAKASAB désigne un temps fort qui rassemble physiquement ou en hybride une équipe ou une organisation&nbsp;: séminaire, journée d\'équipe, teambuilding, soirée d\'entreprise, événement de marque ou offsite. BAKASAB conçoit et anime ces moments pour des groupes de 15 à 3500 personnes, en France comme à l\'international.',
+    a: 'Une expérience collective BAKASAB désigne un temps fort qui rassemble physiquement ou en hybride une équipe ou une organisation&nbsp;: séminaire, journée d\'équipe, teambuilding, soirée d\'entreprise, événement de marque ou offsite. BAKASAB conçoit et anime ces moments pour des groupes de 15 à 1000 personnes, en France comme à l\'international.',
   },
   {
     q: "Qu'est-ce qu'une « expérience digitale » chez BAKASAB ?",
@@ -42,7 +42,7 @@ const faqItems = [
   },
   {
     q: "Qu'est-ce qu'une « expérience apprenante » chez BAKASAB ?",
-    a: "Une expérience apprenante BAKASAB est une formation sur mesure — jamais issue d'un catalogue — conçue pour la montée en compétences d'équipes ou de managers. Cela inclut la formation managériale, l'initiation à l'IA générative et aux outils digitaux, ainsi que les kick-offs de formation pour de nouveaux managers.",
+    a: "Une expérience apprenante BAKASAB est une formation sur mesure, jamais issue d'un catalogue, conçue pour la montée en compétences d'équipes ou de managers. Cela inclut la formation managériale, l'initiation à l'IA générative et aux outils digitaux, ainsi que les kick-offs de formation pour de nouveaux managers.",
   },
   {
     q: 'Peut-on combiner plusieurs types d\'expériences sur une même mission ?',
@@ -58,11 +58,11 @@ const faqItems = [
   },
   {
     q: 'Quels formats gérez-vous : présentiel, digital, hybride ?',
-    a: 'BAKASAB gère les trois formats — présentiel, digital et hybride — souvent au sein d\'une même mission. L\'agence a par exemple animé une convention en présentiel sur 360 participants (<a href="/missions/vinci-building-solutions">Vinci Building Solutions</a>) et un accompagnement hybride sur 6 mois pour des équipes internationales (<a href="/missions/safran-carpe-diem">Safran Carpe Diem</a>).',
+    a: 'BAKASAB gère les trois formats, présentiel, digital et hybride, souvent au sein d\'une même mission. L\'agence a par exemple animé une convention en présentiel sur 360 participants (<a href="/missions/vinci-building-solutions">Vinci Building Solutions</a>) et un accompagnement hybride sur 6 mois pour des équipes internationales (<a href="/missions/safran-carpe-diem">Safran Carpe Diem</a>).',
   },
   {
     q: 'Quel est le nombre de participants minimum et maximum géré par BAKASAB ?',
-    a: 'BAKASAB a conçu et animé des missions allant de 15 à 3500 participants. Le format et la méthode d\'animation s\'adaptent à la taille du groupe et à ses objectifs, du petit atelier de travail à la convention grand groupe multi-rounds.',
+    a: 'BAKASAB a conçu et animé des missions allant de 15 à 1000 participants. Le format et la méthode d\'animation s\'adaptent à la taille du groupe et à ses objectifs, du petit atelier de travail à la convention grand groupe multi-rounds.',
   },
   {
     q: 'Comment se déroule une mission avec BAKASAB ?',
@@ -70,21 +70,25 @@ const faqItems = [
   },
   {
     q: 'Combien de temps à l\'avance faut-il réserver BAKASAB ?',
-    a: 'Le plus tôt possible&nbsp;: réserver BAKASAB en amont permet de sécuriser les bons intervenants, de bloquer le lieu souhaité et de disposer du temps nécessaire pour affiner le format avec vous. Il n\'y a pas de délai minimum strict, mais plus la réservation est anticipée, plus les options restent ouvertes — notamment pour les conventions et événements de grande ampleur.',
+    a: "Le plus tôt possible, sans minimum imposé. Plus vous anticipez, plus on a de marge pour caler les bons intervenants et le bon lieu. Pour un atelier d'équipe, quelques semaines suffisent. Pour une convention, mieux vaut s'y prendre plusieurs mois avant.",
   },
   {
     q: 'Qui anime réellement le jour J de l\'événement ?',
-    a: "L'animation est assurée par BAKASAB — le fondateur Alexandre Sitbon et/ou un membre du réseau d'experts BAKASAB sélectionné selon les besoins spécifiques de la mission (facilitation, technologie et IA, gestion de projet, design). Le ou les intervenants sont définis dès la phase de préparation, pas improvisés le jour même.",
+    a: "Alexandre Sitbon, et/ou un membre du réseau BAKASAB choisi pour votre mission (facilitation, tech, IA, gestion de projet, design). Les intervenants sont fixés dès la préparation, jamais improvisés le jour J.",
   },
   {
     q: 'BAKASAB propose-t-il une restitution après l\'événement ?',
     a: "Oui, chaque mission BAKASAB se termine par une phase de restitution&nbsp;: take-aways formalisés et pistes concrètes de suite, pour que chaque temps fort ait un prolongement au-delà du jour J plutôt que de rester un moment isolé.",
   },
+  {
+    q: 'Quel budget prévoir pour une mission BAKASAB ?',
+    a: "Pas de tarif plancher chez BAKASAB. Le budget dépend du format, du nombre de participants et des prestations incluses&nbsp;: un atelier d'équipe d'une journée n'a rien à voir avec une convention internationale. Chaque mission est chiffrée sur mesure après un premier échange, quelle que soit son échelle.",
+  },
 ];
 ---
 
 <BaseLayout
-  title="Séminaires, digital, formation — Services BAKASAB"
+  title="Séminaires, digital, formation - Services BAKASAB"
   description="Les trois expériences BAKASAB : Expériences Collectives (séminaires, teambuildings), Expériences Digitales (hybridation, outils interactifs) et Expériences Apprenantes (formations sur mesure)."
 >
   <Fragment slot="schema">
@@ -96,7 +100,8 @@ const faqItems = [
   <PageHero
     eyebrow="Ce qu'on fait"
     title="Trois expériences. Un seul partenaire."
-    subtitle="On combine les trois selon vos objectifs — c'est ça, la valeur BAKASAB : un seul interlocuteur pour concevoir l'ensemble."
+    subtitle="On combine les trois selon vos objectifs, c'est ça, la valeur BAKASAB : un seul interlocuteur pour concevoir l'ensemble."
+    intro="Chaque mission est chiffrée sur-mesure selon vos objectifs, votre format et votre budget, d'un séminaire d'équipe ponctuel à une convention internationale récurrente."
     gradient="orange-beige"
   />
 

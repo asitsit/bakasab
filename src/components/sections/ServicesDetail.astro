@@ -4,14 +4,17 @@ const experiences = [
     n: '01',
     name: 'Expériences Collectives',
     title: 'Des moments qui rassemblent pour de vrai.',
-    text: 'Séminaires, journées d\'équipe, teambuildings, soirées, événements de marque et offsites — partout dans le monde.',
+    text: 'Séminaires, journées d\'équipe, teambuildings, soirées, événements de marque et offsites, partout dans le monde.',
     includes: [
       "Séminaires et conventions d'entreprise",
       "Journées d'équipe et teambuildings",
       'Soirées et événements de marque',
       "Offsites, en France et à l'international",
     ],
-    format: 'de 15 à 3500 participants, présentiel ou hybride.',
+    formatFrom: '15',
+    formatTo: '1000',
+    formatSuffix: 'participants, présentiel ou hybride.',
+    reassure: "Que vous soyez une équipe de 15 ou une convention de 1000, la méthode ne change pas.",
     accent: 'var(--orange)',
     image: 'services/experiences-collectives.jpg',
   },
@@ -26,7 +29,10 @@ const experiences = [
       'Animation digitale en direct le jour J',
       'Formats 100% digitaux pour des équipes dispersées',
     ],
-    format: 'de 30 à 500 participants, digital ou hybride.',
+    formatFrom: '30',
+    formatTo: '500',
+    formatSuffix: 'participants, digital ou hybride.',
+    reassure: "Que vous soyez 30 en visio ou 500 répartis sur plusieurs sites, la méthode ne change pas.",
     accent: 'var(--bordeaux)',
     image: 'services/experiences-digitales.jpg',
   },
@@ -34,14 +40,17 @@ const experiences = [
     n: '03',
     name: 'Expériences Apprenantes',
     title: "Des formations qui s'ancrent dans le réel.",
-    text: 'Formations sur mesure, montée en compétences des équipes et des managers, ancrées dans le réel — pas de catalogue, que du sur-mesure.',
+    text: 'Formations sur mesure, montée en compétences des équipes et des managers, ancrées dans le réel, pas de catalogue, que du sur-mesure.',
     includes: [
       'Formations managériales sur mesure',
       "Initiation à l'IA générative et aux outils digitaux",
       "Kick-offs et parcours d'intégration pour nouveaux managers",
       'Ateliers de montée en compétences en continu',
     ],
-    format: 'de 10 à 200 participants, présentiel, digital ou hybride.',
+    formatFrom: '10',
+    formatTo: '200',
+    formatSuffix: 'participants, présentiel, digital ou hybride.',
+    reassure: "Que vous soyez 10 en atelier ou 200 en promotion managériale, la méthode ne change pas.",
     accent: 'var(--ink)',
     image: 'services/experiences-apprenantes.jpg',
   },
@@ -63,12 +72,14 @@ const experiences = [
             ))}
           </ul>
           <p class="services-detail-format" data-reveal>
-            <strong>Format&nbsp;:</strong> {exp.format}
+            <span class="services-detail-from" style={`color:${exp.accent}`}>Dès {exp.formatFrom}</span>
+            <span class="services-detail-to">jusqu'à {exp.formatTo} {exp.formatSuffix}</span>
           </p>
+          <p class="services-detail-reassure" data-reveal>{exp.reassure}</p>
         </div>
         <div class="services-detail-media" style={`background: linear-gradient(160deg, ${exp.accent}, color-mix(in srgb, ${exp.accent} 35%, var(--cream)))`} data-reveal>
           <span>
-            [Photo — {exp.name.toLowerCase()} BAKASAB en action]
+            [Photo, {exp.name.toLowerCase()} BAKASAB en action]
             <span class="placeholder-filename">→ à uploader : src/assets/{exp.image}</span>
           </span>
         </div>
@@ -144,8 +155,28 @@ const experiences = [
   }
 
   .services-detail-format {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xs);
+  }
+
+  .services-detail-from {
+    font-weight: 800;
+    font-size: var(--text-h4);
+  }
+
+  .services-detail-to {
     font-size: var(--text-sm);
-    opacity: 0.7;
+    opacity: 0.6;
+  }
+
+  .services-detail-reassure {
+    margin-top: var(--space-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    opacity: 0.75;
+    max-width: 40ch;
   }
 
   .services-detail-media {

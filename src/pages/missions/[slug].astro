@@ -26,8 +26,8 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout
-  title={`${mission.client} — Étude de cas BAKASAB`}
-  description={mission.summary}
+  title={`${mission.client} - ${mission.type} | Étude de cas BAKASAB`}
+  description={`${mission.type} · ${mission.format}. ${mission.summary}`}
 >
   <Fragment slot="schema">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -46,7 +46,7 @@ const breadcrumbSchema = {
     <div class="container">
       <div class="mission-media" style={`background: linear-gradient(150deg, ${mission.accent}, color-mix(in srgb, ${mission.accent} 35%, var(--cream)))`} data-reveal>
         <span>
-          [Photo — {mission.client}, moment fort en action]
+          [Photo, {mission.client}, moment fort en action]
           <span class="placeholder-filename">→ à uploader : src/assets/{mission.image}</span>
         </span>
       </div>

@@ -7,30 +7,30 @@ import { org } from '../data/organization.js';
 const faqItems = [
   {
     q: 'Comment sont calculés les tarifs de BAKASAB ?',
-    a: 'Le budget d\'une mission BAKASAB dépend du format choisi (journée, soirée, séminaire, offsite…), du nombre de participants, des prestations incluses (transport, hébergement, restauration, activités) et du temps de travail des équipes BAKASAB. Chaque mission fait l\'objet d\'un devis sur mesure établi après un premier échange de cadrage — il n\'existe pas de grille tarifaire fixe, le format s\'adaptant à chaque organisation.',
+    a: "Pas de grille tarifaire fixe, pas de tarif plancher non plus. Le budget dépend du format, du nombre de participants et des prestations incluses (transport, hébergement, restauration, activités). Un atelier d'équipe ponctuel est chiffré en conséquence, pas au tarif d'une convention grand groupe. Devis sur mesure après un premier échange de cadrage.",
   },
   {
     q: 'Puis-je modifier une mission BAKASAB après signature ?',
-    a: 'Oui, dans la limite de ce que permet le calendrier de préparation. BAKASAB précise dès le cadrage initial ce qui reste ajustable (contenu, format, intervenants) et ce qui ne l\'est plus une fois la logistique engagée, pour éviter toute ambiguïté en cours de projet.',
+    a: "Oui, dans la limite du calendrier de préparation. BAKASAB précise dès le cadrage initial ce qui reste ajustable (contenu, format, intervenants) et ce qui ne l'est plus une fois la logistique engagée, pour ne rien laisser dans le flou en cours de route.",
   },
   {
     q: "Quelles sont les conditions d'annulation de BAKASAB ?",
-    a: 'Les conditions d\'annulation dépendent du périmètre de chaque mission et sont précisées dans le devis. À titre indicatif, une annulation intervenant moins de 30 jours avant l\'événement entraîne le règlement de 60% du montant total de la prestation, notamment pour couvrir les engagements déjà pris auprès des intervenants et prestataires.',
+    a: "Elles dépendent du périmètre de la mission et sont précisées dans le devis. À titre indicatif, une annulation à moins de 30 jours de l'événement entraîne le règlement de 60% du montant total, pour couvrir les engagements déjà pris auprès des intervenants et prestataires.",
   },
   {
     q: 'BAKASAB gère-t-il la logistique (lieu, traiteur, prestataires techniques) ?',
-    a: "BAKASAB peut coordonner des prestataires logistiques (lieu, traiteur, technique) dans le cadre d'une mission, mais ce n'est pas son cœur de métier&nbsp;: la valeur BAKASAB réside dans la conception et l'animation de l'expérience, pas dans la gestion logistique pure — à la différence d'une agence événementielle traditionnelle.",
+    a: "BAKASAB peut coordonner des prestataires logistiques dans le cadre d'une mission, mais ce n'est pas le cœur du métier&nbsp;: la valeur BAKASAB est dans la conception et l'animation de l'expérience, pas dans la réservation de salle. Ce qui est inclus et ce qui ne l'est pas est clarifié dès le devis, pour éviter toute mauvaise surprise après signature.",
   },
   {
     q: 'Comment BAKASAB protège-t-il les données des participants ?',
-    a: 'BAKASAB applique les règles standard du RGPD&nbsp;: les données des participants (nom, email, réponses aux outils digitaux utilisés en mission) ne sont collectées que pour les besoins de l\'événement, ne sont jamais revendues à des tiers, et sont conservées uniquement le temps nécessaire à la mission et à son suivi. Chaque participant ou entreprise cliente peut exercer ses droits en écrivant à BAKASAB — voir nos <a href="/mentions-legales">mentions légales</a>.',
+    a: 'BAKASAB applique les règles standard du RGPD&nbsp;: les données des participants (nom, email, réponses aux outils digitaux utilisés en mission) ne sont collectées que pour les besoins de l\'événement, jamais revendues à des tiers, et conservées uniquement le temps nécessaire à la mission et à son suivi. Chaque participant ou entreprise cliente peut exercer ses droits en écrivant à BAKASAB, voir nos <a href="/mentions-legales">mentions légales</a>.',
   },
 ];
 ---
 
 <BaseLayout
-  title="Contact — Parlons de votre projet | BAKASAB"
-  description="Un projet de séminaire, de digitalisation d'événement ou de formation sur mesure ? Contactez BAKASAB par email ou formulaire — réponse sous 48h ouvrées."
+  title="Contact - Parlons de votre projet | BAKASAB"
+  description="Un projet de séminaire, de digitalisation d'événement ou de formation sur mesure ? Contactez BAKASAB par email ou formulaire, réponse sous 48h ouvrées."
 >
   <PageHero
     eyebrow="Parlons-en"
@@ -74,14 +74,17 @@ const faqItems = [
             <option>Expérience Collective</option>
             <option>Expérience Digitale</option>
             <option>Expérience Apprenante</option>
-            <option>Je ne sais pas encore</option>
+            <option>Je ne sais pas encore / à discuter</option>
           </select>
         </div>
         <div class="contact-field">
           <label for="message">Votre message</label>
           <textarea id="message" name="message" rows="4" placeholder="Dites-nous en quelques mots ce que vous avez en tête." required data-fs-field></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" data-fs-submit-btn>Envoyer ma demande</button>
+        <div class="contact-submit-row">
+          <button type="submit" class="btn btn-primary" data-fs-submit-btn>Envoyer ma demande</button>
+          <span class="contact-response-time">Réponse sous 48h ouvrées</span>
+        </div>
         <p class="contact-form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -121,10 +124,10 @@ const faqItems = [
         form.reset();
       },
       onError: () => {
-        showStatus('Un champ manque à l\'appel — vérifiez et renvoyez.', true);
+        showStatus('Un champ manque à l\'appel, vérifiez et renvoyez.', true);
       },
       onFailure: () => {
-        showStatus('Un souci de notre côté — écrivez-nous directement par email en attendant.', true);
+        showStatus('Un souci de notre côté, écrivez-nous directement par email en attendant.', true);
       },
       // We render our own status message instead of the library's default DOM injection.
       renderFieldErrors: () => {},
@@ -207,9 +210,19 @@ const faqItems = [
     color: color-mix(in srgb, var(--ink) 45%, transparent);
   }
 
-  .contact-form .btn {
-    align-self: flex-start;
+  .contact-submit-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
     margin-top: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .contact-response-time {
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    color: var(--bordeaux);
   }
 
   .contact-form-status {

@@ -3,41 +3,25 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SimpleCta from '../../components/SimpleCta.astro';
 import { missions } from '../../data/missions.js';
-
-const types = ['Tous', 'Expérience Collective', 'Expérience Digitale', 'Expérience Apprenante'];
 ---
 
 <BaseLayout
-  title="Missions — Études de cas BAKASAB"
-  description="Conventions, groupes de travail DRH, kick-offs de formation : les missions BAKASAB menées pour Vinci, Safran et d'autres grands comptes, de 15 à 3500 participants."
+  title="Missions - Études de cas BAKASAB"
+  description="Conventions, groupes de travail DRH, kick-offs de formation : les missions BAKASAB menées pour Vinci, Safran et d'autres organisations exigeantes, de 15 à 1000 participants."
 >
   <PageHero
     eyebrow="Nos références"
     title="La preuve par le terrain."
-    subtitle="Des grands groupes qui n'ont pas droit à l'à-peu-près — et qui reviennent."
+    subtitle="Des organisations exigeantes, grands groupes ou en croissance, qui reviennent."
   />
 
   <section class="missions-intro section">
     <div class="container">
       <p class="missions-intro-text" data-reveal>
-        On a conçu et animé des conventions de 3500 personnes, des groupes de travail DRH sur 6
+        On a conçu et animé des conventions de plusieurs centaines de personnes, des groupes de travail DRH sur 6
         mois, des kick-offs de formation pour de nouveaux managers. Chaque mission ci-dessous est
-        une combinaison différente de nos trois expériences — collective, digitale, apprenante.
+        une combinaison différente de nos trois expériences&nbsp;: collective, digitale, apprenante.
       </p>
-
-      <div class="missions-filters" role="tablist" aria-label="Filtrer les missions">
-        {types.map((t, i) => (
-          <button
-            class="missions-filter"
-            class:list={{ 'is-active': i === 0 }}
-            data-filter={t === 'Tous' ? 'all' : t}
-            role="tab"
-            aria-selected={i === 0 ? 'true' : 'false'}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
 
       <div class="missions-grid">
         {missions.map((m) => (
@@ -57,57 +41,12 @@ const types = ['Tous', 'Expérience Collective', 'Expérience Digitale', 'Expér
   <SimpleCta title="Votre prochain temps fort mérite le même traitement." buttonLabel="Parlons-en" />
 </BaseLayout>
 
-<script>
-  const buttons = document.querySelectorAll('.missions-filter');
-  const cards = document.querySelectorAll('.mission-card');
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      buttons.forEach((b) => {
-        b.classList.remove('is-active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('is-active');
-      btn.setAttribute('aria-selected', 'true');
-
-      const filter = btn.getAttribute('data-filter');
-      cards.forEach((card) => {
-        const match = filter === 'all' || card.getAttribute('data-type') === filter;
-        card.style.display = match ? '' : 'none';
-      });
-    });
-  });
-</script>
-
 <style>
   .missions-intro-text {
     font-size: var(--text-lg);
     max-width: 68ch;
     opacity: 0.8;
     margin-bottom: var(--space-2xl);
-  }
-
-  .missions-filters {
-    display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-2xl);
-  }
-
-  .missions-filter {
-    font-weight: 600;
-    font-size: var(--text-sm);
-    padding: 10px 20px;
-    border-radius: var(--radius-pill);
-    border: 1.5px solid color-mix(in srgb, var(--ink) 20%, transparent);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  }
-
-  .missions-filter.is-active,
-  .missions-filter:hover {
-    background: var(--ink);
-    color: var(--cream);
-    border-color: var(--ink);
   }
 
   .missions-grid {

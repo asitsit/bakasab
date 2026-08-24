@@ -17,7 +17,7 @@ export const org = {
   siret: '928 485 242 00012',
   rcs: 'Nanterre, 928 485 242 R.C.S. Nanterre',
   vat: 'FR52 928485242',
-  ape: '70.22Z — Conseil pour les affaires et autres conseils de gestion',
+  ape: '70.22Z - Conseil pour les affaires et autres conseils de gestion',
   president: 'Alexandre Sitbon',
   foundingDate: '2024-05-03',
   founder: {

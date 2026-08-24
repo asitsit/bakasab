@@ -249,6 +249,10 @@ function init() {
     document.querySelectorAll('[data-scrub-text]').forEach((el) => {
       el.style.color = 'var(--ink)';
     });
+    document.querySelectorAll('[data-counter]').forEach((el) => {
+      const to = Number(el.dataset.counterTo) || 0;
+      el.textContent = to.toLocaleString('fr-FR');
+    });
     return;
   }
 
@@ -272,6 +276,13 @@ function init() {
       if (getComputedStyle(el).opacity === '0') {
         el.style.opacity = 1;
         el.style.transform = 'none';
+      }
+    });
+    document.querySelectorAll('[data-counter]').forEach((el) => {
+      const from = Number(el.dataset.counterFrom) || 0;
+      const to = Number(el.dataset.counterTo) || 0;
+      if (Number(String(el.textContent).replace(/\D/g, '')) === from && from !== to) {
+        el.textContent = to.toLocaleString('fr-FR');
       }
     });
   }, 2500);
