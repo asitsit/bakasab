@@ -1,10 +1,10 @@
 ---
 const word = 'BAKASAB';
 const letters = word.split('');
-const letterBaseDelay = 0.25;
-const letterStagger = 0.055;
-const letterDuration = 0.6;
-const holdDuration = 0.45;
+const letterBaseDelay = 0.3;
+const letterStagger = 0.07;
+const letterDuration = 0.7;
+const holdDuration = 1;
 const lastLetterFinish = letterBaseDelay + (letters.length - 1) * letterStagger + letterDuration;
 const curtainDelay = lastLetterFinish + holdDuration;
 ---
@@ -35,7 +35,7 @@ const curtainDelay = lastLetterFinish + holdDuration;
     justify-content: center;
     gap: var(--space-sm);
     animation: preloader-curtain 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-    animation-delay: 1.6s;
+    animation-delay: 2.4s;
   }
 
   .preloader-inner {
@@ -123,8 +123,12 @@ const curtainDelay = lastLetterFinish + holdDuration;
       preloader.style.display = 'none';
     };
 
-    preloader.addEventListener('animationend', finish);
+    preloader.addEventListener('animationend', function (event) {
+      // animationend bubbles from the letter/eyebrow animations too; only
+      // react to the curtain animation on the preloader itself finishing.
+      if (event.target === preloader) finish();
+    });
     // Safety net in case the animation event never fires.
-    window.setTimeout(finish, 3500);
+    window.setTimeout(finish, 4300);
   })();
 </script>
