@@ -1,10 +1,10 @@
 ---
 const word = 'BAKASAB';
 const letters = word.split('');
-const letterBaseDelay = 0.3;
-const letterStagger = 0.07;
-const letterDuration = 0.7;
-const holdDuration = 1;
+const letterBaseDelay = 0.22;
+const letterStagger = 0.055;
+const letterDuration = 0.55;
+const holdDuration = 0.55;
 const lastLetterFinish = letterBaseDelay + (letters.length - 1) * letterStagger + letterDuration;
 const curtainDelay = lastLetterFinish + holdDuration;
 ---
@@ -34,8 +34,8 @@ const curtainDelay = lastLetterFinish + holdDuration;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    animation: preloader-curtain 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-    animation-delay: 2.4s;
+    animation: preloader-curtain 0.75s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    animation-delay: 1.65s;
   }
 
   .preloader-inner {
@@ -129,6 +129,6 @@ const curtainDelay = lastLetterFinish + holdDuration;
       if (event.target === preloader) finish();
     });
     // Safety net in case the animation event never fires.
-    window.setTimeout(finish, 4300);
+    window.setTimeout(finish, 3200);
   })();
 </script>

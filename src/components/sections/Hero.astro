@@ -3,8 +3,6 @@
 
 <section class="hero">
   <div class="container hero-inner">
-    <p class="eyebrow" data-reveal>Experience Creator</p>
-
     <h1 class="hero-title" data-reveal-text>BAKASAB</h1>
 
     <div class="hero-body">
@@ -12,24 +10,13 @@
         <p class="hero-subtitle" data-reveal>
           On conçoit et on anime les temps forts qui font avancer les entreprises.
         </p>
-        <p class="hero-claim" data-reveal>
-          Le niveau d'exigence des grands comptes, du premier brief à la restitution.
-        </p>
-        <p class="hero-text" data-reveal>
-          Séminaires, Digital, Formation. Une agence d'expériences pour les entreprises,
-          en France et à l'international.
-        </p>
         <a href="/contact" class="btn btn-primary" data-reveal>Parlons de votre projet</a>
       </div>
 
-      <div class="hero-stat" data-reveal>
-        <p class="hero-stat-numbers">
-          <span>15</span>
-          <span class="hero-stat-arrow">→</span>
-          <span data-counter data-counter-from="15" data-counter-to="1000">15</span>
-        </p>
-        <p class="hero-stat-label">participants accompagnés par mission</p>
-      </div>
+      <p class="hero-text" data-reveal>
+        Séminaires, Digital, Formation. Une agence d'expériences pour les entreprises,
+        en France et à l'international.
+      </p>
     </div>
   </div>
 </section>
@@ -40,7 +27,7 @@
     display: flex;
     align-items: center;
     padding-block: 120px var(--space-2xl);
-    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
+    background: radial-gradient(ellipse at center, var(--orange) 0%, var(--orange-dim) 45%, var(--bordeaux) 100%);
     color: var(--cream);
   }
 
@@ -48,24 +35,20 @@
     width: 100%;
   }
 
-  .hero .eyebrow {
-    color: var(--cream);
-    opacity: 0.85;
-  }
-
   .hero-title {
-    font-size: clamp(3.5rem, 1.5vw + 7vw, 8rem);
-    line-height: 0.86;
+    font-size: clamp(4.5rem, 1vw + 13.5vw, 14rem);
+    line-height: 0.82;
     letter-spacing: -0.03em;
-    margin-block: var(--space-sm) var(--space-lg);
+    margin-block: 0 var(--space-lg);
     color: var(--cream);
+    text-align: center;
   }
 
   .hero-body {
     display: grid;
     grid-template-columns: 1.4fr 1fr;
     gap: var(--space-2xl);
-    align-items: end;
+    align-items: start;
     padding-top: var(--space-lg);
     border-top: 1px solid color-mix(in srgb, var(--cream) 25%, transparent);
   }
@@ -75,22 +58,14 @@
     font-weight: 800;
     line-height: var(--lh-snug);
     max-width: 32ch;
-  }
-
-  .hero-claim {
-    margin-top: var(--space-sm);
-    max-width: 34ch;
-    font-weight: 600;
-    font-size: var(--text-sm);
-    letter-spacing: 0.01em;
-    opacity: 0.9;
+    text-transform: uppercase;
   }
 
   .hero-text {
-    margin-top: var(--space-sm);
     max-width: 42ch;
     opacity: 0.85;
     font-size: var(--text-sm);
+    text-transform: uppercase;
   }
 
   .btn.btn-primary {
@@ -104,43 +79,12 @@
     color: var(--cream);
   }
 
-  .hero-stat {
-    border-left: 2px solid var(--cream);
-    padding-left: var(--space-lg);
-  }
-
-  .hero-stat-numbers {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-size: clamp(1.75rem, 3vw, 2.75rem);
-    font-weight: 800;
-    color: var(--cream);
-  }
-
-  .hero-stat-arrow {
-    opacity: 0.7;
-  }
-
-  .hero-stat-label {
-    margin-top: var(--space-2xs);
-    font-size: var(--text-sm);
-    font-weight: 600;
-    opacity: 0.8;
-  }
-
   @media (max-width: 900px) {
     .hero-title {
       font-size: clamp(3.25rem, 5vw + 8vw, 6rem);
     }
     .hero-body {
       grid-template-columns: 1fr;
-    }
-    .hero-stat {
-      border-left: none;
-      border-top: 2px solid var(--cream);
-      padding-left: 0;
-      padding-top: var(--space-md);
     }
   }
 </style>

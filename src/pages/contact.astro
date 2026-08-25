@@ -4,6 +4,11 @@ import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import { org } from '../data/organization.js';
 
+const phraseTop = 'ÉCRIVEZ-NOUS ';
+const repeatedTop = phraseTop.repeat(6);
+const phraseBottom = `${org.email} `;
+const repeatedBottom = phraseBottom.repeat(6);
+
 const faqItems = [
   {
     q: 'Comment sont calculés les tarifs de BAKASAB ?',
@@ -90,12 +95,23 @@ const faqItems = [
     </div>
   </section>
 
-  <section class="contact-alt section">
-    <div class="container contact-alt-inner">
-      <h2 data-reveal-text>Envie d'un échange direct plutôt qu'un formulaire&nbsp;?</h2>
-      <p data-reveal>
-        Écrivez-nous directement à <a href={`mailto:${org.email}`}>{org.email}</a>.
-      </p>
+  <section class="contact-alt">
+    <div class="contact-alt-marquee-stack">
+      <div class="contact-alt-marquee" data-marquee data-marquee-speed="70" data-marquee-direction="reverse">
+        <div class="contact-alt-row" data-marquee-row><span>{repeatedTop}</span></div>
+        <div class="contact-alt-row" data-marquee-row aria-hidden="true"><span>{repeatedTop}</span></div>
+      </div>
+      <div class="contact-alt-marquee" data-marquee data-marquee-speed="70">
+        <div class="contact-alt-row contact-alt-row-outline" data-marquee-row><span>{repeatedBottom}</span></div>
+        <div class="contact-alt-row contact-alt-row-outline" data-marquee-row aria-hidden="true"><span>{repeatedBottom}</span></div>
+      </div>
+
+      <div class="contact-alt-content" data-reveal>
+        <h2 data-reveal-text>Envie d'un échange direct plutôt qu'un formulaire&nbsp;?</h2>
+        <p>
+          Écrivez-nous directement à <a href={`mailto:${org.email}`}>{org.email}</a>.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -246,20 +262,76 @@ const faqItems = [
     border-color: var(--bordeaux);
   }
 
-  .contact-alt-inner {
-    text-align: center;
-    padding-block: var(--space-2xl);
-    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  .contact-alt {
+    background: var(--ink);
+    color: var(--cream);
+    padding-block: var(--space-3xl);
+    overflow: hidden;
   }
 
-  .contact-alt-inner h2 {
-    font-size: var(--text-h3);
+  .contact-alt-marquee-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contact-alt-marquee {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contact-alt-row {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .contact-alt-row span {
+    font-size: clamp(1.75rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-right: 0.4em;
+  }
+
+  .contact-alt-row-outline span {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--cream);
+    opacity: 0.55;
+  }
+
+  .contact-alt-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    text-align: center;
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-lg);
+    width: min(90vw, 640px);
+  }
+
+  .contact-alt-content h2 {
+    font-size: var(--text-h4);
     margin-bottom: var(--space-sm);
   }
 
-  .contact-alt-inner a {
+  .contact-alt-content a {
     color: var(--orange);
     font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .contact-alt-content {
+      padding: var(--space-md) var(--space-lg);
+    }
   }
 
   @media (max-width: 900px) {

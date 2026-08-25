@@ -29,6 +29,7 @@ au bon endroit avec le bon nom et il n'y a plus qu'à le brancher dans le compos
 | Services — Expériences Digitales | `services/experiences-digitales.jpg` |
 | Services — Expériences Apprenantes | `services/experiences-apprenantes.jpg` |
 | Home — section vidéo/showreel | `hero/showreel.jpg` |
+| Home — section vision (à côté du texte) | `hero/vision.jpg` |
 | À propos — Clémence Macary | `team/clemence-macary.jpg` |
 | À propos — Ronan Broussier | `team/ronan-broussier.jpg` |
 | À propos — Marine Bourgeaud | `team/marine-bourgeaud.jpg` |

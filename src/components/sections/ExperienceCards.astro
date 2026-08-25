@@ -4,18 +4,21 @@ const cards = [
     n: '01',
     title: 'Expériences Collectives',
     text: "Séminaires, journées d'équipe, teambuildings, soirées, événements de marque et offsites, partout dans le monde.",
+    tags: ['Séminaires', 'Teambuildings', 'Soirées', 'Offsites'],
     accent: 'var(--orange)',
   },
   {
     n: '02',
     title: 'Expériences Digitales',
     text: "Digitalisation des temps forts de l'entreprise : hybridation, outils interactifs, animation digitale en direct.",
+    tags: ['Hybridation', 'Outils interactifs', 'Animation live'],
     accent: 'var(--bordeaux)',
   },
   {
     n: '03',
     title: 'Expériences Apprenantes',
     text: 'Formations sur mesure, montée en compétences des équipes et des managers, ancrées dans le réel.',
+    tags: ['Formation sur mesure', 'Montée en compétences', 'Coaching managers'],
     accent: 'var(--ink)',
   },
 ];
@@ -34,6 +37,9 @@ const cards = [
           <span class="experience-n">{card.n}</span>
           <h3>{card.title}</h3>
           <p>{card.text}</p>
+          <ul class="experience-tags">
+            {card.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
         </article>
       ))}
       <div class="experience-spacer" aria-hidden="true"></div>
@@ -98,6 +104,23 @@ const cards = [
     max-width: 40ch;
     opacity: 0.9;
     font-size: var(--text-lg);
+  }
+
+  .experience-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  .experience-tags li {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--cream) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cream) 40%, transparent);
   }
 
   .experience-spacer {

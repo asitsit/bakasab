@@ -3,38 +3,96 @@
 
 <section class="vision section">
   <div class="container vision-inner">
-    <p class="eyebrow" data-reveal>Notre vision</p>
-    <h2 class="vision-title" data-reveal-text>
+    <p class="eyebrow eyebrow-inside" data-reveal>Inside <em>(the)</em> BAKASAB</p>
+    <h2 class="vision-title" data-scrub-text>
       Un bon événement se voit. Un collectif qui tient, ça se sent.
     </h2>
 
-    <p class="vision-text" data-scrub-text>
-      BAKASAB conçoit, anime et digitalise les temps forts collectifs des entreprises.
-      Pas de logistique pure, pas de formation catalogue&nbsp;: une agence d'expériences qui
-      pense chaque moment comme un levier d'engagement, du cadrage stratégique au dernier
-      applaudissement.
-    </p>
+    <div class="vision-content">
+      <div class="vision-copy">
+        <p class="vision-text" data-reveal>
+          BAKASAB conçoit, anime et digitalise les temps forts collectifs des entreprises.
+          Pas de logistique pure, pas de formation catalogue&nbsp;: une agence d'expériences qui
+          pense chaque moment comme un levier d'engagement, du cadrage stratégique au dernier
+          applaudissement.
+        </p>
 
-    <a href="/a-propos" class="btn btn-outline" data-reveal>En savoir plus</a>
+        <a href="/a-propos" class="btn btn-outline" data-reveal>En savoir plus</a>
+      </div>
+
+      <div class="vision-media" data-reveal>
+        <span>
+          [Photo, une expérience BAKASAB en pleine énergie]
+          <span class="placeholder-filename">→ à uploader : src/assets/hero/vision.jpg</span>
+        </span>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
+  .eyebrow-inside {
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: var(--text-md);
+  }
+
+  .eyebrow-inside em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
   .vision-title {
     font-size: var(--text-h2);
     margin-block: var(--space-md) var(--space-2xl);
     max-width: 18ch;
+    color: color-mix(in srgb, var(--ink) 25%, transparent);
+  }
+
+  .vision-content {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    margin-top: var(--space-2xl);
   }
 
   .vision-text {
     font-size: var(--text-h4);
     font-weight: 600;
     line-height: var(--lh-snug);
-    max-width: 26ch;
-    color: color-mix(in srgb, var(--ink) 25%, transparent);
+    max-width: 46ch;
+    opacity: 0.75;
   }
 
-  .vision-inner .btn {
+  .vision-copy .btn {
     margin-top: var(--space-2xl);
+  }
+
+  .vision-media {
+    height: clamp(280px, 30vw, 420px);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, var(--orange), color-mix(in srgb, var(--bordeaux) 45%, var(--orange)));
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-lg);
+  }
+
+  .vision-media span {
+    color: var(--cream);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    background: color-mix(in srgb, var(--ink) 45%, transparent);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 900px) {
+    .vision-content {
+      grid-template-columns: 1fr;
+    }
+    .vision-media {
+      order: -1;
+    }
   }
 </style>

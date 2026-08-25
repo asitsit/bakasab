@@ -57,6 +57,28 @@ h1, h2, h3, h4, h5 {
   font-weight: 800;
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-tight);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* SplitText (GSAP) rewraps these into per-word/per-char spans; balancing on
+   top of that manipulated DOM breaks lines mid-word instead of at spaces. */
+[data-reveal-text],
+[data-scrub-text] {
+  text-wrap: wrap;
+}
+
+/* SplitText forces inline-block + an inline style on every character div,
+   which lets the browser wrap a line between two chars of the same word
+   (adjacent inline-blocks are a valid break point even with no whitespace
+   between them). Chars only need color to animate, not layout, so plain
+   inline restores normal word-wrapping. !important needed to beat the
+   inline style GSAP sets directly on each char element. */
+.scrub-char {
+  display: inline !important;
 }
 
 .container {

@@ -1,10 +1,18 @@
 ---
+import { org } from '../data/organization.js';
+
 const links = [
   { label: 'Accueil', href: '/' },
   { label: 'À propos', href: '/a-propos' },
   { label: 'Missions', href: '/missions' },
   { label: 'Services', href: '/services' },
   { label: 'Contact', href: '/contact' },
+];
+
+// TODO: replace with the real BAKASAB profile URLs once provided.
+const socials = [
+  { label: 'LinkedIn', href: '#' },
+  { label: 'Instagram', href: '#' },
 ];
 ---
 
@@ -29,20 +37,68 @@ const links = [
     </nav>
 
     <button class="nav-menu-btn" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
-      <span>//</span>
+      <span class="nav-menu-icon" aria-hidden="true">
+        <svg class="nav-menu-icon-svg nav-menu-icon-slashes" viewBox="0 0 20 20" fill="none">
+          <path d="M4 15L8 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          <path d="M10 15L14 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          <path d="M16 15L20 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <svg class="nav-menu-icon-svg nav-menu-icon-bars" viewBox="0 0 20 20" fill="none">
+          <path d="M3 6H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          <path d="M3 10H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          <path d="M3 14H17" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <svg class="nav-menu-icon-svg nav-menu-icon-close" viewBox="0 0 20 20" fill="none">
+          <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+      </span>
     </button>
   </div>
 </header>
 
 <div class="nav-overlay" id="nav-overlay">
+  <span class="nav-overlay-bg" aria-hidden="true">BAKASAB</span>
+
   <nav class="nav-overlay-links" aria-label="Navigation mobile">
     {links.map((link, i) => (
       <a class="nav-overlay-link" href={link.href} style={`transition-delay:${i * 0.05}s`}>
-        {link.label}
+        <span class="nav-overlay-link-text-wrap">
+          <span class="nav-overlay-link-text-inner">
+            <span class="nav-overlay-link-text">{link.label}</span>
+            <span class="nav-overlay-link-text nav-overlay-link-text-accent" aria-hidden="true">{link.label}</span>
+          </span>
+        </span>
+        <svg class="nav-overlay-link-arrow" width="28" height="28" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
       </a>
     ))}
   </nav>
-  <a href="/contact" class="btn btn-primary">Parlons de votre projet</a>
+
+  <div class="nav-overlay-footer">
+    <a href={`mailto:${org.email}`} class="nav-overlay-email">{org.email}</a>
+    <div class="nav-overlay-social">
+      <span>Nous suivre</span>
+      <span class="nav-overlay-social-line" aria-hidden="true"></span>
+      {socials.map((social) => (
+        <a href={social.href} class="nav-overlay-social-icon" aria-label={social.label} target="_blank" rel="noopener">
+          {social.label === 'LinkedIn' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
 </div>
 
 <style>
@@ -51,7 +107,7 @@ const links = [
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 110;
     color: var(--cream);
     background: transparent;
     transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
@@ -62,6 +118,13 @@ const links = [
     backdrop-filter: blur(10px);
     color: var(--ink);
     box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  .nav.is-scrolled.menu-open {
+    background: transparent;
+    backdrop-filter: none;
+    color: var(--cream);
+    box-shadow: none;
   }
 
   .nav-inner {
@@ -96,6 +159,10 @@ const links = [
 
   .nav.is-scrolled .nav-logo-mark {
     color: var(--orange);
+  }
+
+  .nav.is-scrolled.menu-open .nav-logo-mark {
+    color: currentColor;
   }
 
   .nav-links {
@@ -144,15 +211,63 @@ const links = [
   }
 
   .nav-menu-btn {
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
     padding-inline: 4px 2px;
-    transition: transform 0.3s var(--ease-out);
+    transition: border-color 0.3s, background-color 0.3s;
   }
 
-  .nav-menu-btn:hover {
-    transform: rotate(90deg);
+  .nav-menu-btn.is-open {
+    align-self: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid color-mix(in srgb, var(--cream) 45%, transparent);
+    border-radius: 50%;
+  }
+
+  .nav-menu-icon {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .nav-menu-icon-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.8) rotate(-8deg);
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  }
+
+  .nav-menu-icon-slashes {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .nav-menu-btn:hover .nav-menu-icon-slashes {
+    opacity: 0;
+    transform: scale(0.8) rotate(20deg);
+  }
+
+  .nav-menu-btn:hover .nav-menu-icon-bars {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  .nav-menu-btn.is-open .nav-menu-icon-slashes,
+  .nav-menu-btn.is-open .nav-menu-icon-bars {
+    opacity: 0;
+    transform: scale(0.8) rotate(-8deg);
+  }
+
+  .nav-menu-btn.is-open .nav-menu-icon-close {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 
   @media (max-width: 900px) {
@@ -165,6 +280,7 @@ const links = [
     position: fixed;
     inset: 0;
     z-index: 105;
+    overflow: hidden;
     background: var(--ink);
     color: var(--cream);
     display: flex;
@@ -182,16 +298,40 @@ const links = [
     pointer-events: auto;
   }
 
+  .nav-overlay-bg {
+    position: absolute;
+    top: -7vw;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
+    font-size: clamp(6rem, 22vw, 18rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: color-mix(in srgb, var(--cream) 6%, transparent);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
   .nav-overlay-links {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
+    width: min(92vw, 720px);
+    margin-top: clamp(2rem, 8vw, 4.5rem);
   }
 
   .nav-overlay-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid color-mix(in srgb, var(--cream) 18%, transparent);
     font-size: clamp(1.75rem, 6vw, 2.75rem);
     font-weight: 800;
+    text-transform: uppercase;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
@@ -200,6 +340,109 @@ const links = [
   .nav-overlay.is-open .nav-overlay-link {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .nav-overlay-link-text-wrap {
+    display: block;
+    overflow: hidden;
+    height: 1.1em;
+  }
+
+  .nav-overlay-link-text-inner {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .nav-overlay-link-text {
+    display: block;
+    line-height: 1.1em;
+    height: 1.1em;
+  }
+
+  .nav-overlay-link-text-accent {
+    color: var(--orange);
+  }
+
+  .nav-overlay-link-arrow {
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translate(-8px, 8px) scale(0.7);
+    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  }
+
+  .nav-overlay-link:hover .nav-overlay-link-text-inner {
+    transform: translateY(-1.1em);
+  }
+
+  .nav-overlay-link:hover .nav-overlay-link-arrow {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  .nav-overlay-footer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out) 0.3s;
+  }
+
+  .nav-overlay.is-open .nav-overlay-footer {
+    opacity: 1;
+  }
+
+  .nav-overlay-email {
+    font-weight: 600;
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .nav-overlay-social {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    font-size: var(--text-sm);
+  }
+
+  .nav-overlay-social-line {
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  .nav-overlay-social-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--cream) 40%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  }
+
+  .nav-overlay-social-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-overlay-social-icon:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--cream);
+  }
+
+  @media (max-width: 600px) {
+    .nav-overlay-link {
+      font-size: clamp(1.5rem, 8vw, 2.25rem);
+    }
   }
 </style>
 
@@ -216,14 +459,20 @@ const links = [
 
   toggle?.addEventListener('click', () => {
     const isOpen = overlay?.classList.toggle('is-open');
+    toggle.classList.toggle('is-open', Boolean(isOpen));
+    nav?.classList.toggle('menu-open', Boolean(isOpen));
     toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+    toggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
   overlay?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       overlay.classList.remove('is-open');
+      toggle?.classList.remove('is-open');
+      nav?.classList.remove('menu-open');
       toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Ouvrir le menu');
       document.body.style.overflow = '';
     });
   });
