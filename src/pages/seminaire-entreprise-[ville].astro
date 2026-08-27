@@ -48,6 +48,8 @@ const faqItems = [
   },
 ];
 
+const isParis = city.slug === 'paris';
+
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -88,6 +90,32 @@ const serviceSchema = {
   </section>
 
   <Faq eyebrow={`Séminaire à ${city.name}`} title="Ce qu'on nous demande le plus souvent" items={faqItems} tone="beige" />
+
+  <section class="section city-honesty">
+    <div class="container city-honesty-box" data-reveal>
+      {isParis ? (
+        <>
+          <p class="eyebrow city-honesty-eyebrow" data-reveal>Précision utile</p>
+          <h2>On est littéralement à côté.</h2>
+          <p>
+            BAKASAB est basé en Île-de-France, aux portes de Paris. Pas de trajet à prévoir pour
+            cette mission-là&nbsp;: l'équipe est sur place.
+          </p>
+        </>
+      ) : (
+        <>
+          <p class="eyebrow city-honesty-eyebrow" data-reveal>Avant de nous écrire</p>
+          <h2>On n'a pas de bureau à {city.name}.</h2>
+          <p>
+            Notre équipe est basée en Île-de-France et se déplace pour chaque mission, à {city.name}{' '}
+            comme dans le reste du pays. Pas de local flambant neuf sur place, juste des gens qui
+            prennent le train pour concevoir et animer votre temps fort. Ce qui compte, ce n'est
+            pas l'adresse sur la carte de visite&nbsp;: c'est ce qui se passe le jour J.
+          </p>
+        </>
+      )}
+    </div>
+  </section>
 
   <CtaMarquee
     topText={`Un projet à ${city.name} ?`}
@@ -131,5 +159,37 @@ const serviceSchema = {
     .city-experiences-grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .city-honesty {
+    padding-top: 0;
+  }
+
+  .city-honesty-box {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl) var(--space-xl);
+    text-align: center;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .city-honesty-eyebrow {
+    justify-content: center;
+    color: var(--orange);
+  }
+
+  .city-honesty-box h2 {
+    font-size: var(--text-h3);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .city-honesty-box p:not(.eyebrow) {
+    max-width: 52ch;
+    margin-inline: auto;
+    opacity: 0.85;
+    line-height: var(--lh-relaxed);
   }
 </style>
