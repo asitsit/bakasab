@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/PageHero.astro';
 import CtaMarquee from '../../components/sections/CtaMarquee.astro';
 import { articles } from '../../data/articles.js';
 import { org } from '../../data/organization.js';
@@ -41,7 +40,13 @@ const articleSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   </Fragment>
 
-  <PageHero eyebrow={article.tag} title={article.title} subtitle={article.excerpt} />
+  <section class="article-hero">
+    <div class="container article-hero-inner">
+      <p class="eyebrow article-hero-eyebrow" data-reveal-text>{article.tag}</p>
+      <h1 data-reveal-text>{article.title}</h1>
+      <p class="article-hero-excerpt" data-reveal-text>{article.excerpt}</p>
+    </div>
+  </section>
 
   <section class="article-body-section section">
     <div class="container article-container">
@@ -86,6 +91,39 @@ const articleSchema = {
 </BaseLayout>
 
 <style>
+  .article-hero {
+    padding-top: 160px;
+    padding-bottom: var(--space-2xl);
+    background: var(--cream-dim);
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .article-hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .article-hero-eyebrow {
+    justify-content: center;
+  }
+
+  .article-hero h1 {
+    font-size: var(--text-h2);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+    margin-block: var(--space-md) var(--space-lg);
+    max-width: 26ch;
+    color: var(--ink);
+  }
+
+  .article-hero-excerpt {
+    font-size: var(--text-lg);
+    max-width: 62ch;
+    opacity: 0.75;
+  }
+
   .article-back {
     display: inline-block;
     font-weight: 600;
@@ -99,7 +137,7 @@ const articleSchema = {
   }
 
   .article-container {
-    max-width: 68ch;
+    max-width: 1020px;
   }
 
   .article-meta {

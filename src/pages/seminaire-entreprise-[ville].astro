@@ -2,6 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
+import Vision from '../components/sections/Vision.astro';
+import Process from '../components/sections/Process.astro';
+import TrustedBy from '../components/sections/TrustedBy.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
 import CtaMarquee from '../components/sections/CtaMarquee.astro';
 import { cities } from '../data/cities.js';
 import { org } from '../data/organization.js';
@@ -73,6 +77,8 @@ const serviceSchema = {
     subtitle={`BAKASAB conçoit et anime les temps forts des entreprises de ${city.name} et de la région ${city.region}.`}
   />
 
+  <Vision />
+
   <section class="section city-experiences">
     <div class="container">
       <p class="eyebrow" data-reveal>Ce qu'on fait à {city.name}</p>
@@ -88,6 +94,12 @@ const serviceSchema = {
       </div>
     </div>
   </section>
+
+  <Process />
+
+  <TrustedBy />
+
+  <Testimonials />
 
   <Faq eyebrow={`Séminaire à ${city.name}`} title="Ce qu'on nous demande le plus souvent" items={faqItems} tone="beige" />
 

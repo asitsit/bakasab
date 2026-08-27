@@ -1,6 +1,5 @@
 ---
 import { org } from '../data/organization.js';
-import { cities } from '../data/cities.js';
 
 const links = [
   { label: 'Accueil', href: '/' },
@@ -45,15 +44,6 @@ const links = [
           <button type="submit">→</button>
         </form>
       </div>
-    </div>
-
-    <div class="footer-cities">
-      <p class="footer-label">Où nous intervenons</p>
-      <ul class="footer-cities-list">
-        {cities.map((city) => (
-          <li><a href={`/seminaire-entreprise-${city.slug}`}>{city.name}</a></li>
-        ))}
-      </ul>
     </div>
   </div>
 
@@ -134,29 +124,6 @@ const links = [
 
   .footer-nav a:hover {
     color: var(--orange);
-  }
-
-  .footer-cities {
-    padding-bottom: var(--space-2xl);
-    border-top: 1px solid color-mix(in srgb, var(--cream) 16%, transparent);
-    padding-top: var(--space-xl);
-  }
-
-  .footer-cities-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-lg);
-    margin-top: var(--space-sm);
-  }
-
-  .footer-cities-list a {
-    font-size: var(--text-sm);
-    opacity: 0.75;
-  }
-
-  .footer-cities-list a:hover {
-    color: var(--orange);
-    opacity: 1;
   }
 
   .footer-newsletter-copy {
