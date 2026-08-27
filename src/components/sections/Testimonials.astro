@@ -52,43 +52,41 @@ const initials = (name) =>
 ---
 
 <section class="testimonials section">
-  <div class="container">
-    <div class="testimonials-heading">
-      <h2 data-reveal>
-        Ils en parlent <span class="heading-badge-wrap">mieux<span class="heading-badge">Paroles vérifiées</span></span> que nous.
-      </h2>
-    </div>
+  <div class="container testimonials-heading">
+    <h2 data-reveal>
+      Ils en parlent <span class="heading-badge-wrap">mieux<span class="heading-badge">Paroles vérifiées</span></span> que nous.
+    </h2>
+  </div>
 
-    <div class="testimonial-deck" data-reveal-parent>
-      {quotes.map((q, i) => (
-        <div
-          class="testimonial-reveal"
-          data-reveal
-          data-reveal-group="testimonials"
-          style={`z-index:${i + 1};`}
-        >
-          <div class="testimonial-position" style={`--lift:${q.lift}px; --rot:${q.rotate}deg;`}>
-            <figure class:list={['testimonial-card', { 'is-dark': q.dark }]}>
-              <div class="testimonial-stars" aria-hidden="true">
-                {Array.from({ length: 5 }).map(() => (
-                  <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.5 0L9.29 4.91L14.5 5.35L10.51 8.74L11.76 13.85L7.5 11.06L3.24 13.85L4.49 8.74L0.5 5.35L5.71 4.91L7.5 0Z" fill="currentColor"/>
-                  </svg>
-                ))}
-              </div>
-              <blockquote>“{q.text}”</blockquote>
-              <figcaption>
-                <span class="testimonial-avatar" style={`background:${q.accent}`}>{initials(q.name)}</span>
-                <span class="testimonial-who">
-                  <span class="testimonial-name">{q.name.split(' ')[0]}</span>
-                  <span class="testimonial-role">{q.role}</span>
-                </span>
-              </figcaption>
-            </figure>
-          </div>
+  <div class="testimonial-deck" data-reveal-parent>
+    {quotes.map((q, i) => (
+      <div
+        class="testimonial-reveal"
+        data-reveal
+        data-reveal-group="testimonials"
+        style={`z-index:${i + 1};`}
+      >
+        <div class="testimonial-position" style={`--lift:${q.lift}px; --rot:${q.rotate}deg;`}>
+          <figure class:list={['testimonial-card', { 'is-dark': q.dark }]}>
+            <div class="testimonial-stars" aria-hidden="true">
+              {Array.from({ length: 5 }).map(() => (
+                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.5 0L9.29 4.91L14.5 5.35L10.51 8.74L11.76 13.85L7.5 11.06L3.24 13.85L4.49 8.74L0.5 5.35L5.71 4.91L7.5 0Z" fill="currentColor"/>
+                </svg>
+              ))}
+            </div>
+            <blockquote>“{q.text}”</blockquote>
+            <figcaption>
+              <span class="testimonial-avatar" style={`background:${q.accent}`}>{initials(q.name)}</span>
+              <span class="testimonial-who">
+                <span class="testimonial-name">{q.name.split(' ')[0]}</span>
+                <span class="testimonial-role">{q.role}</span>
+              </span>
+            </figcaption>
+          </figure>
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
 </section>
 
@@ -119,12 +117,17 @@ const initials = (name) =>
     white-space: nowrap;
   }
 
+  /* Breaks out of the standard container cap so the cards use the full
+     viewport width (only the global side gutter), not just the 1360px
+     content column. */
   .testimonial-deck {
     margin-top: var(--space-3xl);
     display: flex;
     justify-content: space-between;
     gap: var(--space-lg);
-    width: 100%;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding-inline: var(--pad-global);
     padding-block: var(--space-2xl);
   }
 

@@ -22,11 +22,13 @@
 </section>
 
 <style>
+  /* Same height/background formula as PageHero so every page opens on a
+     header of matching height. */
   .hero {
-    min-height: 88svh;
+    min-height: clamp(520px, 58vw, 760px);
     display: flex;
     align-items: center;
-    padding-block: 120px var(--space-2xl);
+    padding-block: 130px var(--space-3xl);
     background: radial-gradient(ellipse at center, var(--orange) 0%, var(--orange-dim) 45%, var(--bordeaux) 100%);
     color: var(--cream);
   }

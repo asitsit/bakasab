@@ -29,8 +29,10 @@
     justify-content: center;
   }
 
-  /* Flanking words that slide in from the sides as the frame settles down
-     to its resting scale — same beat as the Ariyana showreel intro. */
+  /* Flanking words ride in from the sides as the frame grows from small to
+     full size; sitting behind the frame (z-index below it), they end up
+     covered once the video catches up to full width — same beat as the
+     Ariyana showreel intro. */
   .showreel-flank {
     position: absolute;
     top: 50%;
@@ -45,12 +47,17 @@
     pointer-events: none;
   }
 
+  /* Absolute offsets resolve against the container's padding edge, but the
+     frame (a normal flex child) sits inside its content box — inset by
+     --pad-global. Matching that inset here lines the flank text up with
+     the frame's actual edge so it's fully covered once the frame reaches
+     full width, instead of leaving a sliver poking out. */
   .showreel-flank-left {
-    left: 0;
+    left: var(--pad-global);
   }
 
   .showreel-flank-right {
-    right: 0;
+    right: var(--pad-global);
   }
 
   .showreel-frame {

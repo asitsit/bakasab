@@ -244,16 +244,20 @@ function initVideoReveal() {
   const flanks = section.querySelectorAll('[data-video-flank]');
   if (!frame) return;
 
+  // Frame starts small and grows to fill the section as you scroll, while
+  // "Play" / "Reel" (sitting behind the frame, at the width it will reach)
+  // ride in from the sides and end up covered by the video once it catches
+  // up to them — the text arrives "on" the video right as it fills out.
   gsap.fromTo(
     frame,
-    { scale: 1.16 },
+    { scale: 0.42 },
     {
       scale: 1,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top 78%',
-        end: 'top 22%',
+        start: 'top 85%',
+        end: 'top 15%',
         scrub: 0.4,
       },
     }
@@ -263,15 +267,15 @@ function initVideoReveal() {
     const side = flank.dataset.videoFlank === 'left' ? -1 : 1;
     gsap.fromTo(
       flank,
-      { opacity: 0, xPercent: side * 60 },
+      { opacity: 0, xPercent: side * 90 },
       {
         opacity: 1,
         xPercent: 0,
         ease: 'none',
         scrollTrigger: {
           trigger: section,
-          start: 'top 74%',
-          end: 'top 26%',
+          start: 'top 85%',
+          end: 'top 15%',
           scrub: 0.4,
         },
       }
