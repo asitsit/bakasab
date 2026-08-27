@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaMarquee from '../../components/sections/CtaMarquee.astro';
+import { org } from '../../data/organization.js';
+
+const groups = [
+  {
+    title: 'Cadrage',
+    items: [
+      "L'objectif du séminaire est formulé en une phrase, partagée avec toute l'équipe organisatrice",
+      "Le budget global est validé, avec une marge de 10 à 15 % pour les imprévus",
+      'Le nombre de participants et leur répartition (sites, équipes, statuts) sont connus',
+      "La date est fixée en tenant compte du calendrier métier des participants, pas seulement des disponibilités du lieu",
+    ],
+  },
+  {
+    title: 'Lieu & logistique',
+    items: [
+      "Le lieu a une identité propre, pas une salle de conférence interchangeable",
+      "Le mode de transport des participants est arbitré (train prioritaire sur avion quand c'est possible)",
+      'Hébergement, restauration et accessibilité PMR sont confirmés par écrit',
+      'Un plan B est prévu en cas de météo défavorable pour toute activité en extérieur',
+    ],
+  },
+  {
+    title: 'RSE',
+    items: [
+      "L'empreinte déplacement du séminaire est estimée, pas juste évoquée",
+      "L'ancrage local du prestataire (traiteur, lieu, intervenants) est vérifié",
+      'Les engagements RSE affichés par le lieu sont vérifiables, pas seulement déclaratifs',
+      "Le tri et la réduction des déchets sont organisés en amont, pas improvisés sur place",
+    ],
+  },
+  {
+    title: 'Contenu & animation',
+    items: [
+      "Le programme alterne des séquences courtes plutôt qu'un seul bloc continu",
+      "Chaque séquence a un objectif de sortie clair, pas seulement un sujet à couvrir",
+      "Un temps de facilitation dédié est prévu pour les sujets sensibles ou stratégiques",
+      "Un moment de restitution ou de synthèse collective clôture la journée",
+    ],
+  },
+  {
+    title: 'Après le séminaire',
+    items: [
+      'Une synthèse est envoyée à chaud, dans les 48 heures suivant l\'événement',
+      "Les engagements ou actions issus des ateliers sont assignés à des responsables identifiés",
+      "Un point de suivi est calé dans les semaines qui suivent pour vérifier que ça tient",
+      "Les retours des participants sont collectés pour ajuster le prochain temps fort",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Checklist : préparer un séminaire d'entreprise de A à Z | BAKASAB"
+  description="La checklist qu'on utilise en interne avant chaque mission : cadrage, lieu, RSE, contenu et suivi post-séminaire."
+>
+  <PageHero
+    eyebrow="Ressource"
+    title="Préparer un séminaire d'entreprise de A à Z"
+    subtitle="La trame qu'on utilise en interne avant chaque mission, du cadrage au suivi post-événement."
+  />
+
+  <section class="section checklist-section">
+    <div class="container checklist-container">
+      <a href="/ressources" class="checklist-back">← Toutes les ressources</a>
+
+      <p class="checklist-intro" data-reveal>
+        Un séminaire réussi se joue avant le jour J. Cette checklist reprend les points qu'on
+        vérifie systématiquement en préparant une mission&nbsp;: pas une liste exhaustive de tout ce
+        qui peut exister, juste ce qui fait vraiment la différence entre un temps fort qui marque
+        et un événement qu'on oublie la semaine suivante.
+      </p>
+
+      <div class="checklist-groups" data-reveal-parent>
+        {groups.map((group) => (
+          <div class="checklist-group" data-reveal data-reveal-group="checklist">
+            <h2>{group.title}</h2>
+            <ul>
+              {group.items.map((item) => (
+                <li>
+                  <span class="checklist-check" aria-hidden="true">✓</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaMarquee
+    topText="Un séminaire à préparer ?"
+    bottomText={org.email}
+    ctaLabel="Parlons-en"
+  />
+</BaseLayout>
+
+<style>
+  .checklist-back {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin-bottom: var(--space-lg);
+  }
+
+  .checklist-back:hover {
+    opacity: 1;
+  }
+
+  .checklist-container {
+    max-width: 900px;
+  }
+
+  .checklist-intro {
+    font-size: var(--text-lg);
+    max-width: 68ch;
+    opacity: 0.8;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .checklist-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .checklist-group {
+    background: var(--cream-dim);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .checklist-group h2 {
+    font-size: var(--text-h4);
+    color: var(--bordeaux);
+    margin-bottom: var(--space-md);
+  }
+
+  .checklist-group ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .checklist-group li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    line-height: var(--lh-relaxed);
+    opacity: 0.85;
+  }
+
+  .checklist-check {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: var(--cream);
+    font-size: 0.7rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 767px) {
+    .checklist-groups {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

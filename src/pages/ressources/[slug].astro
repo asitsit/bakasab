@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaMarquee from '../../components/sections/CtaMarquee.astro';
+import { articles } from '../../data/articles.js';
+import { org } from '../../data/organization.js';
+
+export function getStaticPaths() {
+  return articles.map((article, i) => ({
+    params: { slug: article.slug },
+    props: { article, index: i },
+  }));
+}
+
+const { article, index } = Astro.props;
+const prev = articles[index - 1];
+const next = articles[index + 1];
+
+const dateLabel = new Date(article.date).toLocaleDateString('fr-FR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: article.title,
+  description: article.excerpt,
+  datePublished: article.date,
+  author: { '@type': 'Person', name: org.founder.name },
+  publisher: { '@type': 'Organization', name: org.name },
+};
+---
+
+<BaseLayout
+  title={`${article.title} | Ressources BAKASAB`}
+  description={article.excerpt}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
+  <PageHero eyebrow={article.tag} title={article.title} subtitle={article.excerpt} />
+
+  <section class="article-body-section section">
+    <div class="container article-container">
+      <a href="/ressources" class="article-back">← Toutes les ressources</a>
+
+      <div class="article-meta" data-reveal>
+        <span>{dateLabel}</span>
+        <span class="article-meta-dot" aria-hidden="true"></span>
+        <span>{article.readTime} de lecture</span>
+      </div>
+
+      <div class="article-body" data-reveal>
+        {article.body.map((block) => {
+          if (block.type === 'h2') return <h2>{block.text}</h2>;
+          if (block.type === 'quote') return <blockquote set:html={block.text} />;
+          if (block.type === 'list')
+            return (
+              <ul>
+                {block.items.map((item) => <li set:html={item} />)}
+              </ul>
+            );
+          return <p set:html={block.text} />;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <nav class="article-nav container" aria-label="Navigation entre articles">
+    {prev ? (
+      <a href={`/ressources/${prev.slug}`}>← {prev.title}</a>
+    ) : <span />}
+    {next ? (
+      <a href={`/ressources/${next.slug}`}>{next.title} →</a>
+    ) : <span />}
+  </nav>
+
+  <CtaMarquee
+    topText="Un projet en tête ?"
+    bottomText={org.email}
+    ctaLabel="Parlons-en"
+  />
+</BaseLayout>
+
+<style>
+  .article-back {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin-bottom: var(--space-lg);
+  }
+
+  .article-back:hover {
+    opacity: 1;
+  }
+
+  .article-container {
+    max-width: 68ch;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--orange);
+    margin-bottom: var(--space-xl);
+  }
+
+  .article-meta-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  .article-body :global(p) {
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    opacity: 0.85;
+    margin-bottom: var(--space-lg);
+  }
+
+  .article-body :global(h2) {
+    font-size: var(--text-h4);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .article-body :global(ul) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .article-body :global(li) {
+    padding-left: var(--space-md);
+    position: relative;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    opacity: 0.85;
+  }
+
+  .article-body :global(li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+  }
+
+  .article-body :global(blockquote) {
+    margin-block: var(--space-xl);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--orange);
+    font-weight: 600;
+    font-size: var(--text-h4);
+    font-style: italic;
+    line-height: var(--lh-snug);
+  }
+
+  .article-body :global(a) {
+    color: var(--orange);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding-block: var(--space-xl);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    font-weight: 700;
+  }
+
+  .article-nav a {
+    max-width: 32ch;
+  }
+
+  .article-nav a:hover {
+    color: var(--orange);
+  }
+
+  @media (max-width: 767px) {
+    .article-nav {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+  }
+</style>

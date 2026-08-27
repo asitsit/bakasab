@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { articles } from '../data/articles.js';
+
+const guides = [
+  {
+    href: '/ressources/checklist-seminaire',
+    title: "Checklist : préparer un séminaire d'entreprise de A à Z",
+    text: "Budget, logistique, RSE, contenu, timing : la trame qu'on utilise en interne avant chaque mission.",
+  },
+  {
+    href: '/ressources/comparatif-outils-digitaux',
+    title: "Comparatif des outils digitaux pour l'animation hybride",
+    text: "Sondage live, tableau blanc collaboratif, prise de notes automatique : ce qu'on recommande selon vos formats.",
+  },
+];
+---
+
+<BaseLayout
+  title="Ressources - Articles et outils pour vos temps forts | BAKASAB"
+  description="Articles de fond et ressources pratiques (checklists, comparatifs d'outils) sur les séminaires, la facilitation, le digital et la formation en entreprise."
+>
+  <PageHero
+    eyebrow="Ressources"
+    title="De quoi nourrir vos prochains temps forts."
+    subtitle="Ce qu'on apprend sur le terrain, en mission, on le partage ici."
+    intro="Articles de fond sur les tendances événementielles, la facilitation et la formation, et des ressources pratiques à garder sous la main&nbsp;: checklists, comparatifs d'outils, trames types."
+  />
+
+  <section class="section resources-blog">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Le blog</p>
+      <h2 data-reveal>Ce qu'on apprend sur le terrain, on le partage.</h2>
+
+      <div class="resource-grid">
+        {articles.map((article) => (
+          <a href={`/ressources/${article.slug}`} class="resource-card" data-reveal>
+            <span class="resource-card-tag">{article.tag}</span>
+            <h3>{article.title}</h3>
+            <p class="resource-card-excerpt">{article.excerpt}</p>
+            <span class="resource-card-meta">{article.readTime} de lecture</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section resources-guides">
+    <div class="container">
+      <p class="eyebrow" data-reveal>À télécharger</p>
+      <h2 data-reveal>Des outils prêts à l'emploi.</h2>
+
+      <div class="guide-grid">
+        {guides.map((guide) => (
+          <a href={guide.href} class="guide-card" data-reveal>
+            <h3>{guide.title}</h3>
+            <p>{guide.text}</p>
+            <span class="guide-card-link">Consulter →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .resources-blog h2,
+  .resources-guides h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 22ch;
+  }
+
+  .resource-grid {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .resource-card {
+    background: var(--cream);
+    border: 1.5px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    min-height: 240px;
+    transition: transform 0.3s var(--ease-out), border-color 0.3s;
+  }
+
+  .resource-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+  }
+
+  .resource-card-tag {
+    display: inline-flex;
+    align-self: flex-start;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--orange);
+    background: color-mix(in srgb, var(--orange) 12%, transparent);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .resource-card h3 {
+    font-size: var(--text-md);
+    line-height: var(--lh-snug);
+  }
+
+  .resource-card-excerpt {
+    font-size: var(--text-sm);
+    opacity: 0.7;
+    flex: 1;
+  }
+
+  .resource-card-meta {
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .resources-guides {
+    background: var(--cream-dim);
+  }
+
+  .guide-grid {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .guide-card {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: transform 0.3s var(--ease-out), background-color 0.3s;
+  }
+
+  .guide-card:hover {
+    transform: translateY(-4px);
+    background: var(--orange);
+  }
+
+  .guide-card h3 {
+    font-size: var(--text-h4);
+  }
+
+  .guide-card p {
+    opacity: 0.75;
+    flex: 1;
+  }
+
+  .guide-card-link {
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  .guide-card:hover .guide-card-link {
+    color: var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .resource-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .guide-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .resource-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

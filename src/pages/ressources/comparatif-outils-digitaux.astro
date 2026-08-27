@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaMarquee from '../../components/sections/CtaMarquee.astro';
+import { org } from '../../data/organization.js';
+
+const categories = [
+  {
+    title: 'Sondages live & quiz',
+    text: "Pour transformer une prise de parole descendante en interaction en temps réel, sur place ou à distance.",
+    tools: [
+      { name: 'Mentimeter', href: 'https://www.mentimeter.com', text: 'Sondages, nuages de mots et Q&A projetés en direct.' },
+      { name: 'Slido', href: 'https://www.slido.com', text: 'Questions-réponses et sondages, pensé pour les grands formats.' },
+      { name: 'AhaSlides', href: 'https://www.ahaslides.com', text: 'Alternative complète avec quiz et jeux interactifs intégrés.' },
+    ],
+  },
+  {
+    title: 'Tableau blanc collaboratif',
+    text: 'Pour faire travailler un groupe sur un même espace visuel, en présentiel comme à distance.',
+    tools: [
+      { name: 'Klaxoon', href: 'https://klaxoon.com', text: "L'outil qu'on utilise en mission pour les boards de travail continu entre deux sessions." },
+      { name: 'Miro', href: 'https://miro.com', text: 'Tableau blanc infini, solide pour les ateliers de co-construction longs.' },
+    ],
+  },
+  {
+    title: 'Notes & synthèse',
+    text: "Pour capter ce qui se dit sans mobiliser un participant sur la prise de notes pendant toute la session.",
+    tools: [
+      { name: 'Otter.ai', href: 'https://otter.ai', text: 'Transcription et synthèse automatique des échanges en réunion.' },
+      { name: 'Notion', href: 'https://www.notion.so', text: 'Pour centraliser comptes-rendus, actions et suivi post-atelier.' },
+    ],
+  },
+  {
+    title: 'Supports visuels',
+    text: "Pour des supports qui accompagnent l'animation sans jamais devenir le centre de l'attention.",
+    tools: [
+      { name: 'Canva', href: 'https://www.canva.com', text: 'Supports visuels rapides à produire, sans designer dédié.' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Comparatif des outils digitaux pour l'animation hybride | BAKASAB"
+  description="Sondages live, tableaux blancs collaboratifs, prise de notes automatique : les outils qu'on recommande selon vos formats d'animation."
+>
+  <PageHero
+    eyebrow="Ressource"
+    title="Les outils digitaux pour l'animation hybride"
+    subtitle="Ce qu'on recommande selon vos formats, testé en mission plutôt que choisi sur catalogue."
+  />
+
+  <section class="section tools-section">
+    <div class="container tools-container">
+      <a href="/ressources" class="tools-back">← Toutes les ressources</a>
+
+      <p class="tools-intro" data-reveal>
+        Le multi-modal, présentiel, distanciel et asynchrone combinés, est devenu la norme plutôt
+        que l'exception. Ces outils ne remplacent jamais la facilitation&nbsp;: ils lui donnent plus
+        de prise sur des groupes dispersés ou des formats hybrides. Voici ceux qu'on utilise ou
+        recommande le plus souvent, selon ce que vous cherchez à faire.
+      </p>
+
+      <div class="tools-groups">
+        {categories.map((category) => (
+          <div class="tools-group" data-reveal>
+            <h2>{category.title}</h2>
+            <p class="tools-group-text">{category.text}</p>
+            <div class="tools-cards">
+              {category.tools.map((tool) => (
+                <a href={tool.href} class="tool-card" target="_blank" rel="noopener">
+                  <span class="tool-card-name">{tool.name}</span>
+                  <span class="tool-card-text">{tool.text}</span>
+                  <span class="tool-card-link" aria-hidden="true">Visiter →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaMarquee
+    topText="Besoin d'aide pour choisir ?"
+    bottomText={org.email}
+    ctaLabel="Parlons-en"
+  />
+</BaseLayout>
+
+<style>
+  .tools-back {
+    display: inline-block;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    opacity: 0.75;
+    margin-bottom: var(--space-lg);
+  }
+
+  .tools-back:hover {
+    opacity: 1;
+  }
+
+  .tools-container {
+    max-width: 1100px;
+  }
+
+  .tools-intro {
+    font-size: var(--text-lg);
+    max-width: 68ch;
+    opacity: 0.8;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .tools-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .tools-group h2 {
+    font-size: var(--text-h4);
+  }
+
+  .tools-group-text {
+    margin-top: var(--space-2xs);
+    opacity: 0.7;
+    max-width: 60ch;
+  }
+
+  .tools-cards {
+    margin-top: var(--space-lg);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    background: var(--cream-dim);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: transform 0.3s var(--ease-out), background-color 0.3s;
+  }
+
+  .tool-card:hover {
+    background: var(--ink);
+    color: var(--cream);
+    transform: translateY(-4px);
+  }
+
+  .tool-card-name {
+    font-weight: 800;
+    font-size: var(--text-md);
+  }
+
+  .tool-card-text {
+    opacity: 0.75;
+    font-size: var(--text-sm);
+    flex: 1;
+  }
+
+  .tool-card-link {
+    font-weight: 600;
+    font-size: var(--text-xs);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+
+  @media (max-width: 900px) {
+    .tools-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tools-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
