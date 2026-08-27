@@ -6,45 +6,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function initReveals() {
-  const groups = new Map();
-
-  document.querySelectorAll('[data-reveal]').forEach((el) => {
-    const groupKey = el.dataset.revealGroup || null;
-    if (groupKey) {
-      if (!groups.has(groupKey)) groups.set(groupKey, []);
-      groups.get(groupKey).push(el);
-    } else {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          once: true,
-        },
-      });
-    }
-  });
-
-  groups.forEach((els) => {
-    gsap.to(els, {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      ease: 'power3.out',
-      stagger: 0.12,
-      scrollTrigger: {
-        trigger: els[0].closest('[data-reveal-parent]') || els[0].parentElement,
-        start: 'top 85%',
-        once: true,
-      },
-    });
-  });
-}
-
 function initRevealText() {
   // Header texts (page hero eyebrow/title/subtitle, home hero title) get a
   // small letter-by-letter reveal rather than the word-by-word one used
@@ -285,10 +246,6 @@ function initVideoReveal() {
 
 function init() {
   if (prefersReducedMotion) {
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      el.style.opacity = 1;
-      el.style.transform = 'none';
-    });
     document.querySelectorAll('[data-scrub-text]').forEach((el) => {
       el.style.color = 'var(--ink)';
     });
@@ -299,7 +256,6 @@ function init() {
     return;
   }
 
-  initReveals();
   initRevealText();
   initMarquees();
   initHorizontalPin();
@@ -310,12 +266,6 @@ function init() {
 
   // Safety net: force everything visible if something above throws.
   window.setTimeout(() => {
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
-      if (getComputedStyle(el).opacity === '0') {
-        el.style.opacity = 1;
-        el.style.transform = 'none';
-      }
-    });
     document.querySelectorAll('.reveal-char').forEach((el) => {
       if (getComputedStyle(el).opacity === '0') {
         el.style.opacity = 1;

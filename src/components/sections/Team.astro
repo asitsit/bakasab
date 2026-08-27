@@ -35,31 +35,29 @@ const team = [
       <div class="founder-copy">
         <h3>Alexandre Sitbon</h3>
         <p class="founder-role">Fondateur, Facilitation & innovation</p>
-        <p class="founder-bio">
-          Diplômé de Centrale Lyon et de l'emlyon business school, Alexandre organisait déjà des
-          événements rassemblant de 750 à 3500 personnes avant de créer BAKASAB. Depuis plus de 5
-          ans, il conçoit et anime séminaires, formations et événements pour des entreprises allant
-          de la start-up au CAC40, en France et à l'international. Formateur en management et
-          outils digitaux, il propose aussi des formats d'initiation à l'IA générative.
-        </p>
-        <blockquote>
-          « J'ai créé BAKASAB pour accompagner au mieux mes clients. C'est l'aboutissement de
-          plusieurs années de contact et de sélection au sein de mon réseau. »
-          <cite>- Alexandre Sitbon</cite>
-        </blockquote>
       </div>
     </div>
 
-    <div class="team-grid" data-reveal-parent>
-      {team.map((member) => (
-        <div class="team-member" data-reveal data-reveal-group="team">
-          <div class="team-member-photo" aria-hidden="true">
-            <span class="placeholder-filename">→ à uploader :<br />src/assets/{member.image}</span>
+    <div class="network">
+      <p class="eyebrow network-eyebrow" data-reveal>Le réseau BAKASAB</p>
+
+      <div class="team-grid" data-reveal-parent>
+        {team.map((member) => (
+          <div class="team-member" data-reveal data-reveal-group="team">
+            <div class="team-member-photo" aria-hidden="true">
+              <span class="placeholder-filename">→ à uploader :<br />src/assets/{member.image}</span>
+            </div>
+            <p class="team-member-name">{member.name}</p>
+            <p class="team-member-role">{member.role}</p>
           </div>
-          <p class="team-member-name">{member.name}</p>
-          <p class="team-member-role">{member.role}</p>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      <blockquote class="network-quote" data-reveal>
+        « Je ne gère pas un carnet d'adresses. Je choisis, mission après mission, le bon profil
+        pour vous. »
+        <cite>— Alexandre Sitbon, fondateur</cite>
+      </blockquote>
     </div>
   </div>
 </section>
@@ -108,37 +106,40 @@ const team = [
     font-weight: 600;
     color: var(--orange);
     margin-top: var(--space-2xs);
+  }
+
+  .network {
+    margin-top: var(--space-3xl);
+  }
+
+  .network-eyebrow {
     margin-bottom: var(--space-md);
   }
 
-  .founder-bio {
-    opacity: 0.8;
-    max-width: 56ch;
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
   }
 
-  .founder-copy blockquote {
-    margin-top: var(--space-lg);
-    padding-left: var(--space-md);
-    border-left: 2px solid var(--orange);
+  .network-quote {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+    max-width: 52ch;
     font-weight: 600;
-    font-size: var(--text-lg);
+    font-size: var(--text-h4);
+    line-height: var(--lh-snug);
     font-style: italic;
   }
 
-  .founder-copy cite {
+  .network-quote cite {
     display: block;
     margin-top: var(--space-sm);
     font-style: normal;
     font-weight: 600;
     font-size: var(--text-sm);
-    opacity: 0.6;
-  }
-
-  .team-grid {
-    margin-top: var(--space-2xl);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-lg);
+    color: var(--orange);
   }
 
   .team-member {

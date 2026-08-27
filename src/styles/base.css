@@ -154,17 +154,6 @@ p {
   border-color: var(--ink);
 }
 
-/* Generic scroll-reveal hook, animated via animations.js / GSAP ScrollTrigger */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(48px);
-}
-
-[data-reveal-fallback-visible] {
-  opacity: 1;
-  transform: none;
-}
-
 /* Letter-by-letter header text reveal (SplitText), animated via animations.js.
    Plain inline (not SplitText's default inline-block, forced via inline
    style on every span) keeps words/chars in the normal text run, so
