@@ -165,15 +165,15 @@ p {
   transform: none;
 }
 
-/* Word-by-word text reveal (SplitText), animated via animations.js */
-.reveal-word-mask {
-  display: inline-block;
-  overflow: clip;
-  vertical-align: top;
-}
-
-.reveal-word {
-  display: inline-block;
+/* Letter-by-letter header text reveal (SplitText), animated via animations.js.
+   Plain inline (not SplitText's default inline-block, forced via inline
+   style on every span) keeps words/chars in the normal text run, so
+   word-wrapping and letter-spacing both stay correct — same reasoning as
+   .scrub-char below. Only opacity animates, which inline elements support
+   fine. */
+.reveal-word,
+.reveal-char {
+  display: inline !important;
 }
 
 /* Sub-line inside a placeholder image caption, naming the file to drop in

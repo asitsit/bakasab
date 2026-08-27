@@ -4,38 +4,35 @@ interface Props {
   title: string;
   subtitle?: string;
   intro?: string;
-  gradient?: 'bordeaux-orange' | 'bordeaux-beige' | 'orange-beige';
 }
 
-const { eyebrow, title, subtitle, intro, gradient = 'bordeaux-orange' } = Astro.props;
+const { eyebrow, title, subtitle, intro } = Astro.props;
 ---
 
-<section class={`page-hero is-${gradient}`}>
+<section class="page-hero">
   <div class="container">
-    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <p class="eyebrow" data-reveal-text>{eyebrow}</p>
     <h1 data-reveal-text>{title}</h1>
-    {subtitle && <p class="page-hero-subtitle" data-reveal>{subtitle}</p>}
+    {subtitle && <p class="page-hero-subtitle" data-reveal-text>{subtitle}</p>}
     {intro && <p class="page-hero-intro" data-reveal>{intro}</p>}
   </div>
 </section>
 
 <style>
+  /* Same background as the home hero, and a fixed height so every page
+     header matches the tallest one (À propos, eyebrow+title+subtitle+intro). */
   .page-hero {
     padding-top: 130px;
     padding-bottom: var(--space-3xl);
+    min-height: clamp(520px, 58vw, 760px);
+    display: flex;
+    align-items: center;
     color: var(--cream);
+    background: radial-gradient(ellipse at center, var(--orange) 0%, var(--orange-dim) 45%, var(--bordeaux) 100%);
   }
 
-  .page-hero.is-bordeaux-orange {
-    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
-  }
-
-  .page-hero.is-bordeaux-beige {
-    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 28%, var(--cream-dim) 100%);
-  }
-
-  .page-hero.is-orange-beige {
-    background: linear-gradient(155deg, var(--orange) 0%, var(--orange-dim) 28%, var(--cream-dim) 100%);
+  .page-hero .container {
+    width: 100%;
   }
 
   .page-hero .eyebrow {

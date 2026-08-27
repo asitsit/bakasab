@@ -36,9 +36,9 @@ const breadcrumbSchema = {
   <section class="mission-hero">
     <div class="container">
       <a href="/missions" class="mission-back">← Toutes les missions</a>
-      <p class="eyebrow" data-reveal>{mission.type}</p>
+      <p class="eyebrow" data-reveal-text>{mission.type}</p>
       <h1 data-reveal-text>{mission.client}</h1>
-      <p class="mission-format" data-reveal>{mission.format}</p>
+      <p class="mission-format" data-reveal-text>{mission.format}</p>
     </div>
   </section>
 
@@ -85,9 +85,16 @@ const breadcrumbSchema = {
 <style>
   .mission-hero {
     padding-top: 130px;
-    padding-bottom: var(--space-2xl);
-    background: linear-gradient(155deg, var(--bordeaux) 0%, var(--bordeaux-dim) 22%, var(--orange) 88%);
+    padding-bottom: var(--space-3xl);
+    min-height: clamp(520px, 58vw, 760px);
+    display: flex;
+    align-items: center;
+    background: radial-gradient(ellipse at center, var(--orange) 0%, var(--orange-dim) 45%, var(--bordeaux) 100%);
     color: var(--cream);
+  }
+
+  .mission-hero .container {
+    width: 100%;
   }
 
   .mission-hero .eyebrow {

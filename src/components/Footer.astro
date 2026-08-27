@@ -16,8 +16,6 @@ const links = [
   </div>
 
   <div class="container footer-inner">
-    <p class="footer-wordmark">BAKASAB</p>
-
     <div class="footer-grid">
       <div class="footer-col">
         <p class="footer-label">Adresse</p>
@@ -47,12 +45,13 @@ const links = [
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <span>/// BAKASAB</span>
-      <span class="footer-bottom-right">
-        <a href="/mentions-legales">Mentions légales</a>
-        <span>© 2026 BAKASAB. Experience Creator.</span>
-      </span>
+  </div>
+
+  <div class="footer-brand-band">
+    <span class="footer-brand-mark">// BAKASAB</span>
+    <div class="footer-brand-meta">
+      <span>© 2026 BAKASAB. Tous droits réservés.</span>
+      <a href="/mentions-legales">Mentions légales</a>
     </div>
   </div>
 </footer>
@@ -68,6 +67,7 @@ const links = [
     background: var(--ink);
     color: var(--cream);
     padding-top: var(--space-xl);
+    overflow: hidden;
   }
 
   .footer-stripes {
@@ -89,14 +89,6 @@ const links = [
 
   .footer-inner {
     padding-bottom: var(--space-xl);
-  }
-
-  .footer-wordmark {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    padding-bottom: var(--space-2xl);
-    border-bottom: 1px solid color-mix(in srgb, var(--cream) 16%, transparent);
   }
 
   .footer-grid {
@@ -174,26 +166,42 @@ const links = [
     color: var(--ink);
   }
 
-  .footer-bottom {
+  .footer-brand-band {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    padding-top: var(--space-xl);
+    gap: var(--space-lg);
+    padding: var(--space-2xl) var(--pad-global) var(--space-xl);
     border-top: 1px solid color-mix(in srgb, var(--cream) 16%, transparent);
+  }
+
+  .footer-brand-mark {
+    font-size: clamp(3rem, 10vw, 9rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    background: linear-gradient(180deg, var(--cream) 0%, color-mix(in srgb, var(--cream) 15%, var(--ink)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+  }
+
+  .footer-brand-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+    gap: 6px;
+    padding-bottom: 0.5em;
     font-size: var(--text-xs);
-    opacity: 0.6;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    opacity: 0.6;
   }
 
-  .footer-bottom-right {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-  }
-
-  .footer-bottom-right a:hover {
+  .footer-brand-meta a:hover {
     color: var(--orange);
   }
 
@@ -208,15 +216,13 @@ const links = [
       grid-template-columns: 1fr;
       gap: var(--space-lg);
     }
-    .footer-bottom {
+    .footer-brand-band {
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--space-2xs);
+      gap: var(--space-md);
     }
-    .footer-bottom-right {
-      flex-direction: column;
+    .footer-brand-meta {
       align-items: flex-start;
-      gap: var(--space-2xs);
     }
   }
 </style>

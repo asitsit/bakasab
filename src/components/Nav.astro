@@ -62,15 +62,7 @@ const socials = [
   <nav class="nav-overlay-links" aria-label="Navigation mobile">
     {links.map((link, i) => (
       <a class="nav-overlay-link" href={link.href} style={`transition-delay:${i * 0.05}s`}>
-        <span class="nav-overlay-link-text-wrap">
-          <span class="nav-overlay-link-text-inner">
-            <span class="nav-overlay-link-text">{link.label}</span>
-            <span class="nav-overlay-link-text nav-overlay-link-text-accent" aria-hidden="true">{link.label}</span>
-          </span>
-        </span>
-        <svg class="nav-overlay-link-arrow" width="28" height="28" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 13L13 3M13 3H5M13 3V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        <span class="nav-overlay-link-text">{link.label}</span>
       </a>
     ))}
   </nav>
@@ -147,7 +139,6 @@ const socials = [
     font-weight: 800;
     font-size: 1.15rem;
     letter-spacing: -0.01em;
-    margin-right: auto;
   }
 
   .nav-logo-mark {
@@ -167,7 +158,9 @@ const socials = [
 
   .nav-links {
     display: flex;
-    gap: var(--space-lg);
+    flex: 1;
+    justify-content: space-between;
+    margin-inline: var(--space-2xl);
   }
 
   .nav-link {
@@ -317,7 +310,7 @@ const socials = [
     position: relative;
     display: flex;
     flex-direction: column;
-    width: min(92vw, 720px);
+    width: 100%;
     margin-top: clamp(2rem, 8vw, 4.5rem);
   }
 
@@ -326,15 +319,16 @@ const socials = [
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-sm);
     padding-block: var(--space-sm);
     border-bottom: 1px solid color-mix(in srgb, var(--cream) 18%, transparent);
     font-size: clamp(1.75rem, 6vw, 2.75rem);
     font-weight: 800;
     text-transform: uppercase;
+    color: color-mix(in srgb, var(--cream) 45%, transparent);
+    overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+    transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), color 0.3s var(--ease-out);
   }
 
   .nav-overlay.is-open .nav-overlay-link {
@@ -342,42 +336,27 @@ const socials = [
     transform: translateY(0);
   }
 
-  .nav-overlay-link-text-wrap {
-    display: block;
-    overflow: hidden;
-    height: 1.1em;
-  }
-
-  .nav-overlay-link-text-inner {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.5s var(--ease-out);
+  .nav-overlay-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
   }
 
   .nav-overlay-link-text {
-    display: block;
-    line-height: 1.1em;
-    height: 1.1em;
+    position: relative;
+    z-index: 1;
   }
 
-  .nav-overlay-link-text-accent {
-    color: var(--orange);
+  .nav-overlay-link:hover {
+    color: var(--cream);
   }
 
-  .nav-overlay-link-arrow {
-    flex-shrink: 0;
-    opacity: 0;
-    transform: translate(-8px, 8px) scale(0.7);
-    transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
-  }
-
-  .nav-overlay-link:hover .nav-overlay-link-text-inner {
-    transform: translateY(-1.1em);
-  }
-
-  .nav-overlay-link:hover .nav-overlay-link-arrow {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
+  .nav-overlay-link:hover::before {
+    transform: scaleX(1);
   }
 
   .nav-overlay-footer {

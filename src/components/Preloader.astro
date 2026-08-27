@@ -4,7 +4,7 @@ const letters = word.split('');
 const letterBaseDelay = 0.22;
 const letterStagger = 0.055;
 const letterDuration = 0.55;
-const holdDuration = 0.55;
+const holdDuration = 0.15;
 const lastLetterFinish = letterBaseDelay + (letters.length - 1) * letterStagger + letterDuration;
 const curtainDelay = lastLetterFinish + holdDuration;
 ---

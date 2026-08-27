@@ -46,32 +46,28 @@ function initReveals() {
 }
 
 function initRevealText() {
+  // Header texts (page hero eyebrow/title/subtitle, home hero title) get a
+  // small letter-by-letter reveal rather than the word-by-word one used
+  // to slide up whole lines.
   document.querySelectorAll('[data-reveal-text]').forEach((el) => {
     let split;
     try {
-      split = new SplitText(el, { type: 'words', wordsClass: 'reveal-word' });
+      // Splitting words too (even though only chars animate) keeps the
+      // natural space text between them intact — chars-only splitting
+      // collapses inter-word whitespace.
+      split = new SplitText(el, { type: 'words, chars', wordsClass: 'reveal-word', charsClass: 'reveal-char' });
     } catch (e) {
       return;
     }
 
-    // Wrap each word in a mask so it can slide up from underneath rather
-    // than the whole line just popping into place.
-    split.words.forEach((word) => {
-      const mask = document.createElement('span');
-      mask.className = 'reveal-word-mask';
-      word.parentNode.insertBefore(mask, word);
-      mask.appendChild(word);
-    });
-
     gsap.fromTo(
-      split.words,
-      { yPercent: 110, opacity: 0 },
+      split.chars,
+      { opacity: 0 },
       {
-        yPercent: 0,
         opacity: 1,
-        duration: 0.85,
-        stagger: 0.045,
-        ease: 'power3.out',
+        duration: 0.4,
+        stagger: 0.018,
+        ease: 'power1.out',
         scrollTrigger: {
           trigger: el,
           start: 'top 88%',
@@ -240,6 +236,49 @@ function initCounter() {
   });
 }
 
+function initVideoReveal() {
+  const section = document.querySelector('[data-video-reveal]');
+  if (!section) return;
+
+  const frame = section.querySelector('[data-video-frame]');
+  const flanks = section.querySelectorAll('[data-video-flank]');
+  if (!frame) return;
+
+  gsap.fromTo(
+    frame,
+    { scale: 1.16 },
+    {
+      scale: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 78%',
+        end: 'top 22%',
+        scrub: 0.4,
+      },
+    }
+  );
+
+  flanks.forEach((flank) => {
+    const side = flank.dataset.videoFlank === 'left' ? -1 : 1;
+    gsap.fromTo(
+      flank,
+      { opacity: 0, xPercent: side * 60 },
+      {
+        opacity: 1,
+        xPercent: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 74%',
+          end: 'top 26%',
+          scrub: 0.4,
+        },
+      }
+    );
+  });
+}
+
 function init() {
   if (prefersReducedMotion) {
     document.querySelectorAll('[data-reveal]').forEach((el) => {
@@ -263,6 +302,7 @@ function init() {
   initStackedCards();
   initScrubText();
   initCounter();
+  initVideoReveal();
 
   // Safety net: force everything visible if something above throws.
   window.setTimeout(() => {
@@ -272,7 +312,7 @@ function init() {
         el.style.transform = 'none';
       }
     });
-    document.querySelectorAll('.reveal-word').forEach((el) => {
+    document.querySelectorAll('.reveal-char').forEach((el) => {
       if (getComputedStyle(el).opacity === '0') {
         el.style.opacity = 1;
         el.style.transform = 'none';
