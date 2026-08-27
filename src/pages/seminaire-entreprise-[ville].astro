@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import CtaMarquee from '../components/sections/CtaMarquee.astro';
+import { cities } from '../data/cities.js';
+import { org } from '../data/organization.js';
+
+export function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { ville: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+
+const experiences = [
+  {
+    title: 'Expériences Collectives',
+    text: `Séminaires, teambuildings et conventions à ${city.name}&nbsp;: on conçoit et on anime le temps fort, du cadrage au dernier applaudissement.`,
+    accent: 'var(--orange)',
+  },
+  {
+    title: 'Expériences Digitales',
+    text: `Vos équipes de ${city.name} et de vos autres sites réunies dans un même format, hybride ou 100&nbsp;% digital, sans perte d'énergie.`,
+    accent: 'var(--bordeaux)',
+  },
+  {
+    title: 'Expériences Apprenantes',
+    text: `Formations sur mesure et montée en compétences pour les équipes de ${city.name}, pensées pour rester en poste après la session.`,
+    accent: 'var(--ink)',
+  },
+];
+
+const faqItems = [
+  {
+    q: `Comment se déroule une mission BAKASAB à ${city.name} ?`,
+    a: `Tout commence par un cadrage de vos objectifs, puis une conception sur mesure du format le plus adapté à vos équipes de ${city.name}&nbsp;: séminaire, formation ou temps fort digital. L'animation est assurée le jour J, avec une restitution derrière quand le format le demande.`,
+  },
+  {
+    q: `Quel budget prévoir pour un séminaire à ${city.name} ?`,
+    a: `Pas de grille tarifaire fixe&nbsp;: le budget dépend du format, du nombre de participants et des prestations incluses (lieu, restauration, activités). Un atelier d'équipe ponctuel n'est pas chiffré comme une convention grand groupe. Devis sur mesure après un premier échange, voir la page <a href="/contact">contact</a>.`,
+  },
+  {
+    q: `Peut-on organiser un format hybride ou digital à ${city.name} ?`,
+    a: `Oui. Beaucoup de missions BAKASAB réunissent des équipes de ${city.name} avec des collègues d'autres sites, en France ou à l'international, via des formats hybrides ou digitaux pensés pour ne rien perdre de l'énergie du présentiel.`,
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Séminaires, formation et digitalisation d\'événements',
+  provider: { '@type': 'Organization', name: org.name },
+  areaServed: { '@type': 'City', name: city.name, containedInPlace: city.region },
+};
+---
+
+<BaseLayout
+  title={`Séminaire d'entreprise à ${city.name} - Formation & digital | BAKASAB`}
+  description={`BAKASAB conçoit et anime les séminaires, formations et temps forts digitaux des entreprises de ${city.name} et de la région ${city.region}.`}
+>
+  <Fragment slot="schema">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
+
+  <PageHero
+    eyebrow={city.region}
+    title={`Vos séminaires, formations et temps forts digitaux à ${city.name}`}
+    subtitle={`BAKASAB conçoit et anime les temps forts des entreprises de ${city.name} et de la région ${city.region}.`}
+  />
+
+  <section class="section city-experiences">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Ce qu'on fait à {city.name}</p>
+      <h2 data-reveal>Trois expériences, un seul interlocuteur.</h2>
+
+      <div class="city-experiences-grid" data-reveal-parent>
+        {experiences.map((exp) => (
+          <article class="city-experience-card" style={`--accent:${exp.accent}`} data-reveal data-reveal-group="city-exp">
+            <h3>{exp.title}</h3>
+            <p set:html={exp.text} />
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Faq eyebrow={`Séminaire à ${city.name}`} title="Ce qu'on nous demande le plus souvent" items={faqItems} tone="beige" />
+
+  <CtaMarquee
+    topText={`Un projet à ${city.name} ?`}
+    bottomText={org.email}
+    ctaLabel="Parlons-en"
+  />
+</BaseLayout>
+
+<style>
+  .city-experiences h2 {
+    font-size: var(--text-h2);
+    margin-top: var(--space-md);
+    max-width: 20ch;
+  }
+
+  .city-experiences-grid {
+    margin-top: var(--space-2xl);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .city-experience-card {
+    --accent: var(--orange);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding: var(--space-xl);
+  }
+
+  .city-experience-card h3 {
+    font-size: var(--text-h4);
+    color: var(--accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  .city-experience-card p {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 900px) {
+    .city-experiences-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
