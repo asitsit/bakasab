@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SimpleCta from '../../components/SimpleCta.astro';
+import CtaMarquee from '../../components/sections/CtaMarquee.astro';
 import { missions } from '../../data/missions.js';
+import { org } from '../../data/organization.js';
 
 export function getStaticPaths() {
   return missions.map((m, i) => ({
@@ -79,7 +80,7 @@ const breadcrumbSchema = {
     ) : <span />}
   </nav>
 
-  <SimpleCta title="Un projet similaire en tête ?" buttonLabel="Discutons-en" />
+  <CtaMarquee topText="Un projet similaire en tête ?" bottomText={org.email} ctaLabel="Discutons-en" />
 </BaseLayout>
 
 <style>

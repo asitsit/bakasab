@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
-import SimpleCta from '../../components/SimpleCta.astro';
+import CtaMarquee from '../../components/sections/CtaMarquee.astro';
 import { missions } from '../../data/missions.js';
+import { org } from '../../data/organization.js';
 ---
 
 <BaseLayout
@@ -38,7 +39,11 @@ import { missions } from '../../data/missions.js';
     </div>
   </section>
 
-  <SimpleCta title="Votre prochain temps fort mérite le même traitement." buttonLabel="Parlons-en" />
+  <CtaMarquee
+    topText="Votre prochain temps fort mérite le même traitement."
+    bottomText={org.email}
+    ctaLabel="Parlons-en"
+  />
 </BaseLayout>
 
 <style>

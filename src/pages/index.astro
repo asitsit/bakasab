@@ -9,6 +9,7 @@ import FeaturedWorks from '../components/sections/FeaturedWorks.astro';
 import TrustedBy from '../components/sections/TrustedBy.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
 import CtaMarquee from '../components/sections/CtaMarquee.astro';
+import { org } from '../data/organization.js';
 ---
 
 <BaseLayout
@@ -23,5 +24,9 @@ import CtaMarquee from '../components/sections/CtaMarquee.astro';
   <FeaturedWorks />
   <TrustedBy />
   <Testimonials />
-  <CtaMarquee />
+  <CtaMarquee
+    topText="Parlons de votre prochain temps fort"
+    bottomText={org.email}
+    ctaLabel="Contactez-nous"
+  />
 </BaseLayout>

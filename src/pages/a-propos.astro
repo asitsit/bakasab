@@ -5,7 +5,7 @@ import ProFun from '../components/sections/ProFun.astro';
 import MethodList from '../components/sections/MethodList.astro';
 import Team from '../components/sections/Team.astro';
 import Faq from '../components/Faq.astro';
-import SimpleCta from '../components/SimpleCta.astro';
+import CtaMarquee from '../components/sections/CtaMarquee.astro';
 import { org } from '../data/organization.js';
 
 const personSchema = {
@@ -101,9 +101,10 @@ const faqItems = [
     tone="beige"
   />
 
-  <SimpleCta
-    title="Envie de nous rencontrer avant de vous lancer ?"
-    buttonLabel="Discutons de votre projet"
+  <CtaMarquee
+    topText="Envie de nous rencontrer avant de vous lancer ?"
+    bottomText={org.email}
+    ctaLabel="Discutons de votre projet"
   />
 </BaseLayout>
 

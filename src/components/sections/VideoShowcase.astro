@@ -30,19 +30,20 @@
   }
 
   /* Flanking words ride in from the sides as the frame grows from small to
-     full size; sitting behind the frame (z-index below it), they end up
-     covered once the video catches up to full width — same beat as the
-     Ariyana showreel intro. */
+     full size, sitting in the foreground (above the frame) in white so they
+     stay legible on top of the video — same beat as the Ariyana showreel
+     intro. */
   .showreel-flank {
     position: absolute;
     top: 50%;
-    z-index: 1;
+    z-index: 3;
     transform: translateY(-50%);
     font-size: clamp(1.75rem, 4.5vw, 4rem);
     font-weight: 800;
     letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--ink) 55%, transparent);
+    color: var(--cream);
+    text-shadow: 0 4px 24px color-mix(in srgb, var(--ink) 45%, transparent);
     white-space: nowrap;
     pointer-events: none;
   }
@@ -50,8 +51,7 @@
   /* Absolute offsets resolve against the container's padding edge, but the
      frame (a normal flex child) sits inside its content box — inset by
      --pad-global. Matching that inset here lines the flank text up with
-     the frame's actual edge so it's fully covered once the frame reaches
-     full width, instead of leaving a sliver poking out. */
+     the frame's edge once it reaches full width. */
   .showreel-flank-left {
     left: var(--pad-global);
   }

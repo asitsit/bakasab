@@ -118,23 +118,29 @@ const initials = (name) =>
   }
 
   /* Breaks out of the standard container cap so the cards use the full
-     viewport width (only the global side gutter), not just the 1360px
-     content column. */
+     viewport width. Cards are fixed-width and wide enough that 4 of them
+     don't fit side by side without overlapping — negative margins pull them
+     into an overlapping fan that stays within the viewport (overflow-x:
+     hidden as a safety net), and hovering one brings it to the front. */
   .testimonial-deck {
     margin-top: var(--space-3xl);
     display: flex;
-    justify-content: space-between;
-    gap: var(--space-lg);
+    justify-content: center;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     padding-inline: var(--pad-global);
     padding-block: var(--space-2xl);
+    overflow-x: hidden;
   }
 
   .testimonial-reveal {
-    width: 100%;
-    flex: 1 1 0;
-    min-width: 0;
+    width: clamp(420px, 40vw, 680px);
+    flex-shrink: 0;
+    margin-left: clamp(-320px, -30vw, -520px);
+  }
+
+  .testimonial-reveal:first-child {
+    margin-left: 0;
   }
 
   .testimonial-reveal:hover {
@@ -234,6 +240,7 @@ const initials = (name) =>
     }
     .testimonial-reveal {
       width: 100%;
+      margin-left: 0;
     }
     .testimonial-position,
     .testimonial-reveal:hover .testimonial-position {

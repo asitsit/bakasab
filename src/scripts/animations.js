@@ -206,9 +206,9 @@ function initVideoReveal() {
   if (!frame) return;
 
   // Frame starts small and grows to fill the section as you scroll, while
-  // "Play" / "Reel" (sitting behind the frame, at the width it will reach)
-  // ride in from the sides and end up covered by the video once it catches
-  // up to them — the text arrives "on" the video right as it fills out.
+  // "Play" / "Reel" (in the foreground, at the width the frame will reach)
+  // ride in from the sides in sync — the text arrives "on" the video right
+  // as it fills out.
   gsap.fromTo(
     frame,
     { scale: 0.42 },

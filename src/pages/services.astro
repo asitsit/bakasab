@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import ServicesDetail from '../components/sections/ServicesDetail.astro';
 import Faq from '../components/Faq.astro';
-import SimpleCta from '../components/SimpleCta.astro';
+import CtaMarquee from '../components/sections/CtaMarquee.astro';
 import { org } from '../data/organization.js';
 
 const services = [
@@ -120,7 +120,7 @@ const faqItems = [
     tone="beige"
   />
 
-  <SimpleCta title="Un projet en tête ?" buttonLabel="Parlons-en" />
+  <CtaMarquee topText="Un projet en tête ?" bottomText={org.email} ctaLabel="Parlons-en" />
 </BaseLayout>
 
 <style>
